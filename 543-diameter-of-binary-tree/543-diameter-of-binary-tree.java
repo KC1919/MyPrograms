@@ -22,12 +22,11 @@ class Solution {
 
         int lh = diameter(root.left);
         int rh = diameter(root.right);
-        int ht = Math.max(lh, rh) + 1;
 
         if(maxDia < (lh + rh))
         maxDia = lh + rh;
 
-        return ht;
+        return Math.max(lh,rh)+1;
     }
     public int diameterOfBinaryTree(TreeNode root) {
         maxDia = 0;
