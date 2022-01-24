@@ -1,7 +1,7 @@
 class Solution {
     public boolean detectCapitalUse(String word) 
     {
-        int cap=0, small=0, c3=0;
+        int cap=0, small=0;
         
         for(int i=0;i<word.length();i++)
         {
