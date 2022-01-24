@@ -15,7 +15,6 @@ class Solution {
                 else
                     return false;
             }
-            
             else
             {
                 if(cap<=1 && small>=0)
@@ -26,7 +25,6 @@ class Solution {
                     return false;
             }
         }
-        
         return true;
     }
 }
