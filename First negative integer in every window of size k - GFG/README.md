@@ -1,5 +1,5 @@
 # First negative integer in every window of size k
-##  Easy 
+## Easy 
 <div class="problem-statement" style="user-select: auto;">
                 <p style="user-select: auto;"></p><p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;">Given an array <strong style="user-select: auto;">A[] </strong>of size <strong style="user-select: auto;">N</strong> and a positive integer <strong style="user-select: auto;">K</strong>, find the first negative integer for each and every window(contiguous subarray) of size <strong style="user-select: auto;">K</strong>.</span></p>
 
