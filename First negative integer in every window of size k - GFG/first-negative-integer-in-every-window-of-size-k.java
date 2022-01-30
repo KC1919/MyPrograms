@@ -46,51 +46,42 @@ class Compute {
     
     public long[] printFirstNegativeInteger(long a[], int n, int K)
     {
-        int ni=-1;
         
         long ans[]=new long[n-K+1];
         int k=0;
+        
+        Queue<Long>que=new LinkedList<>();
         
         for(int i=0;i<K;i++)
         {
             if(a[i]<0)
             {
-                ni=i;
-                ans[k++]=a[i];
-                break;
+                que.add(a[i]);
+                if(k==0)
+                    ans[k++]=a[i];
             }
         }
         
         if(k==0)
         k++;
         
-        int si=1, ei=K;
+        int si=0, ei=K;
         
         while(ei<n)
         {
-            if(si<=ni && ni<=ei)
+            if(a[ei]<0)
+            que.add(a[ei]);
+            
+            if(que.size()>0 && que.peek()==a[si])
+                que.remove();
+                
+            if(que.size()>0)
             {
-                ans[k++]=a[ni];
+                ans[k++]=que.peek();
             }
             else
-            {
-                int flag=0;
-                inner:for(int i=si;i<=ei;i++)
-                {
-                    if(a[i]<0)
-                    {
-                        ni=i;
-                        flag=1;
-                        break inner;
-                    }
-                }
-                if(flag==1)
-                {
-                    ans[k++]=a[ni];
-                }
-                else
-                k++;
-            }
+            ans[k++]=0;
+            
             si++;
             ei++;
         }
