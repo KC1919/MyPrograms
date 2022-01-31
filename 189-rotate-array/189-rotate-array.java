@@ -3,6 +3,9 @@ class Solution {
     {
         int n=nums.length;
         
+        if(k==n)
+            return;
+        
         if(k>n)
         {
             k=k%n;
