@@ -16,8 +16,7 @@ class Solution {
             }
             else
             {
-                int profit=a[i]-min;
-                max=Math.max(max,profit);
+                max=Math.max(max,a[i]-min);
             }
         }
         
