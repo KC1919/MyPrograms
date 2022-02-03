@@ -43,27 +43,44 @@ class Solution {
     static ArrayList<Integer> max_of_subarrays(int a[], int n, int k) 
     {
         ArrayList<Integer>list=new ArrayList<>();
-        int c=0;
         
-        Deque<Integer>que=new ArrayDeque<>();
+        Stack<Integer>st=new Stack<>();
         
-        for(int i=0;i<n;i++)
+        int rg[]=new int[n];
+        
+        rg[n-1]=n;
+        st.push(n-1);
+        
+        
+        for(int i=n-2;i>=0;i--)
         {
-            if(!que.isEmpty() && que.peek()==i-k)
-                que.poll();
-            
-            while(!que.isEmpty() && a[que.peekLast()]<a[i])
+            while(st.size()!=0 && a[i]>=a[st.peek()])
             {
-                que.pollLast();
+                st.pop();
             }
             
-            que.offer(i);
-            if(i>=k-1)
+            if(st.size()!=0)
             {
-                list.add(a[que.peek()]);
+                rg[i]=st.peek();
             }
+            else
+            rg[i]=n;
+            
+            st.push(i);
         }
         
+        int j=0;
+        for(int i=0;i<=n-k;i++)
+        {
+            if(j<i)
+            j=i;
+            
+            while(rg[j]<i+k)
+            {
+                j=rg[j];
+            }
+            list.add(a[j]);
+        }
         return list;
     }
 }
