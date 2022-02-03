@@ -17,13 +17,6 @@ class Solution {
             for(int e2:d)
             {
                 int sum=0-(e1+e2);
-                
-                // if(hm.containsKey(sum) && hm.get(sum)!=0)
-                // {
-                //     hm.put(sum,hm.get(sum)-1);
-                //     count++;
-                // }
-                
                 count+=hm.getOrDefault(sum,0);
             }
         }
