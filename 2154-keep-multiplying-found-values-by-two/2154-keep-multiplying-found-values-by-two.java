@@ -1,13 +1,13 @@
 class Solution {
     public int findFinalValue(int[] a, int original) 
     {
-        HashMap<Integer,Integer>hm=new HashMap<>();
+        HashSet<Integer>hm=new HashSet<>();
         int n=a.length;
         
         for(int i=0;i<n;i++)
-            hm.put(a[i],i);
+            hm.add(a[i]);
         
-        while(hm.containsKey(original))
+        while(hm.contains(original))
         {
             original=original*2;
         }
