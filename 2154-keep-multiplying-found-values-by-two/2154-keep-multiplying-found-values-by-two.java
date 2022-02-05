@@ -9,9 +9,6 @@ class Solution {
         
         while(hm.containsKey(original))
         {
-            // if(!hm.containsKey(original))
-            //     return original;
-            
             original=original*2;
         }
         return original;
