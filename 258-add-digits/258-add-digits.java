@@ -3,7 +3,7 @@ class Solution {
     {
         int sum=0;
         
-        while(num>=10)
+        while((num/10)!=0)
         {
             sum=0;
             while(num!=0)
