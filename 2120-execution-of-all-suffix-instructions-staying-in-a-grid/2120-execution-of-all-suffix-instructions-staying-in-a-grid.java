@@ -3,11 +3,14 @@ class Solution {
     {
         int slen=s.length();
         int ans[]=new int[slen];
+        int x=0, y=0;
         
         for(int i=0;i<slen;i++)
         {
-            int count=0, flag=0;
-            int x=startPos[1], y=startPos[0];
+            int count=0;
+            x=startPos[1];
+            y=startPos[0];
+            
             for(int j=i;j<slen;j++)
             {
                 if(s.charAt(j)=='U')y--;
@@ -15,17 +18,13 @@ class Solution {
                 else if(s.charAt(j)=='L')x--;
                 else if(s.charAt(j)=='R')x++;
                 
-                if(y==n || y<0 || x==n || x<0)
-                {
-                    ans[i]=count;
-                    flag=1;
-                    break;
-                }
-                else
+                if(y<n && y>=0 && x<n && x>=0)
                     count++;
+                
+                else
+                    break;
             }
-            if(flag==0)
-                ans[i]=count;
+            ans[i]=count;
         }
         return ans;
     }
