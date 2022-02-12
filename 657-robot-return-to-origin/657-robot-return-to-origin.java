@@ -1,24 +1,22 @@
 class Solution {
     public boolean judgeCircle(String moves) 
     {
-        int cu=0, cd=0, cl=0, cr=0;
+        HashMap<Character,Integer>hm=new HashMap<>();
+        
         for(int i=0;i<moves.length();i++)
         {
             char ch=moves.charAt(i);
             
-            if(ch=='U')
-                cu+=1;
-            
-            else if(ch=='D')
-                cd+=1;
-            
-            else if(ch=='L')
-                cl+=1;
-            
-            else if(ch=='R')
-                cr+=1;
+            hm.put(ch,hm.getOrDefault(ch,0)+1);
         }
-        if(cr==cl && cd==cu)
+        
+        
+        int cu=hm.get('U')==null?0:hm.get('U');
+        int cd=hm.get('D')==null?0:hm.get('D');
+        int cl=hm.get('L')==null?0:hm.get('L');
+        int cr=hm.get('R')==null?0:hm.get('R');
+        
+        if(cu==cd && cl==cr)
             return true;
         
         return false;
