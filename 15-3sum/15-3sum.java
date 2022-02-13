@@ -35,12 +35,8 @@ class Solution {
                 si++;
             
             else
-            {   
-                ArrayList<Integer>list=new ArrayList<>();
-                list.add(a[si]);
-                list.add(a[ei]);
-                res.add(list);
-                
+            {
+                res.add(new ArrayList<>(Arrays.asList(a[si],a[ei])));
                 si++;
                 ei--;
                 
