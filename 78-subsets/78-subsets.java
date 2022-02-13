@@ -10,8 +10,7 @@ class Solution {
     {
         if(ind==n)
         {
-            List<Integer>temp=new ArrayList<>(list);
-            res.add(temp);
+            res.add(new ArrayList<>(list));
             return;
         }
         
