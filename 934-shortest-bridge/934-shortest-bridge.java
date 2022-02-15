@@ -17,7 +17,6 @@ class Solution {
         int n=a.length;
         
         boolean visited[][]=new boolean[n][n];
-        int count=2;
         
         List<List<Pair>>res=new ArrayList<>();
         
@@ -28,14 +27,8 @@ class Solution {
                 if(visited[i][j]==false && a[i][j]==1)
                 {
                     List<Pair>comp=new ArrayList<>();
-                    component(a,i,j,n,visited,count,comp);
+                    component(a,i,j,n,visited,comp);
                     res.add(comp);
-                    // for(int k=0;k<comp.size();k++)
-                    // {
-                    //     System.out.println(comp.get(k).row+","+comp.get(k).col);
-                    // }
-                    // System.out.println();
-                    count++;
                 }
             }
         }
@@ -67,18 +60,17 @@ class Solution {
         return min-1;
     }
     
-    public void component(int a[][], int i, int j, int n, boolean visited[][], int count, List<Pair>comp)
+    public void component(int a[][], int i, int j, int n, boolean visited[][], List<Pair>comp)
     {
         if(i<0 || j<0 || i>=n || j>=n || visited[i][j]==true || a[i][j]==0)
             return;
         
         visited[i][j]=true;
         comp.add(new Pair(i,j));
-        a[i][j]=count;
         
-        component(a,i-1,j,n,visited,count,comp);
-        component(a,i+1,j,n,visited,count,comp);
-        component(a,i,j-1,n,visited,count,comp);
-        component(a,i,j+1,n,visited,count,comp);
+        component(a,i-1,j,n,visited,comp);
+        component(a,i+1,j,n,visited,comp);
+        component(a,i,j-1,n,visited,comp);
+        component(a,i,j+1,n,visited,comp);
     }
 }
