@@ -1,53 +1,76 @@
 class Solution {
-    public int shortestBridge(int[][] A) {
-        int m = A.length, n = A[0].length;
-        boolean[][] visited = new boolean[m][n];
-        int[][] dirs = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        Queue<int[]> q = new LinkedList<>();
-        boolean found = false;
-        // 1. dfs to find an island, mark it in `visited`
-        for (int i = 0; i < m; i++) {
-            if (found) {
-                break;
-            }
-            for (int j = 0; j < n; j++) {
-                if (A[i][j] == 1) {
-                    dfs(A, visited, q, i, j, dirs);
-                    found = true;
-                    break;
-                }
-            }
+    
+    class Pair
+    {
+        int row;
+        int col;
+        
+        Pair(int row, int col)
+        {   
+            this.row=row;
+            this.col=col;
         }
-        // 2. bfs to expand this island
-        int step = 0;
-        while (!q.isEmpty()) {
-            int size = q.size();
-            while (size-- > 0) {
-                int[] cur = q.poll();
-                for (int[] dir : dirs) {
-                    int i = cur[0] + dir[0];
-                    int j = cur[1] + dir[1];
-                    if (i >= 0 && j >= 0 && i < m && j < n && !visited[i][j]) {
-                        if (A[i][j] == 1) {
-                            return step;
-                        }
-                        q.offer(new int[]{i, j});
-                        visited[i][j] = true;
-                    }
-                }
-            }
-            step++;
-        }
-        return -1;
     }
-    private void dfs(int[][] A, boolean[][] visited, Queue<int[]> q, int i, int j, int[][] dirs) {
-        if (i < 0 || j < 0 || i >= A.length || j >= A[0].length || visited[i][j] || A[i][j] == 0) {
+    
+    public int shortestBridge(int[][] a) 
+    {
+        int n=a.length;
+        
+        boolean visited[][]=new boolean[n][n];
+        
+        List<List<Pair>>res=new ArrayList<>();
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(visited[i][j]==false && a[i][j]==1)
+                {
+                    List<Pair>comp=new ArrayList<>();
+                    component(a,i,j,n,visited,comp);
+                    res.add(comp);
+                }
+            }
+        }
+        
+        int min=getDistance(res.get(0), res.get(1));
+        return min;
+    }
+    
+    public int getDistance(List<Pair>l1, List<Pair>l2)
+    {
+        int min=Integer.MAX_VALUE;
+        
+        for(int i=0;i<l1.size();i++)
+        {
+            Pair p=l1.get(i);
+            for(int j=0;j<l2.size();j++)
+            {
+                Pair p1=l2.get(j);
+                int rd=Math.abs(p.row-p1.row);
+                int cd=Math.abs(p.col-p1.col);
+                int td=rd+cd;
+                
+                if(td<min)
+                {
+                    min=td;
+                }
+            }
+        }
+        return min-1;
+    }
+    
+    public void component(int a[][], int i, int j, int n, boolean visited[][], List<Pair>comp)
+    {
+        if(i<0 || j<0 || i>=n || j>=n || visited[i][j]==true || a[i][j]==0)
             return;
-        }
-        visited[i][j] = true;
-        q.offer(new int[]{i, j});
-        for (int[] dir : dirs) {
-            dfs(A, visited, q, i + dir[0], j + dir[1], dirs);
-        }
+        
+        visited[i][j]=true;
+        comp.add(new Pair(i,j));
+        
+        component(a,i-1,j,n,visited,comp);
+        component(a,i+1,j,n,visited,comp);
+        component(a,i,j-1,n,visited,comp);
+        component(a,i,j+1,n,visited,comp);
     }
 }
