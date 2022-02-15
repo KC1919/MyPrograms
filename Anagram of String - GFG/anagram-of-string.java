@@ -40,39 +40,37 @@ class GfG
             large=s2;
         }
         
-        char a[]=large.toCharArray();
-        
         HashMap<Character,Integer>hm=new HashMap<>();
         
-        for(int i=0;i<small.length();i++)
+        for(int i=0;i<large.length();i++)
         {
-            char ch=small.charAt(i);
+            char ch=large.charAt(i);
             hm.put(ch,hm.getOrDefault(ch,0)+1);
         }
         
         int count=0;
         
-        for(int i=0;i<a.length;i++)
+        for(int i=0;i<small.length();i++)
         {
-            if(!hm.containsKey(a[i]))
+            char ch=small.charAt(i);
+            if(hm.containsKey(ch))
             {
-                count++;
-            }
-            else if(hm.containsKey(a[i]))
-            {
-                if(hm.get(a[i])!=0)
-                hm.put(a[i],hm.get(a[i])-1);
+                if(hm.get(ch)!=0)
+                    hm.put(ch,hm.get(ch)-1);
                 
                 else
                 count++;
             }
+            else
+            count++;
         }
         
-        for(int e:hm.values())
+        for(int val:hm.values())
         {
-            if(e!=0)
-            count+=e;
+            count+=val;
         }
+        
+        
         return count;
     }
 }
