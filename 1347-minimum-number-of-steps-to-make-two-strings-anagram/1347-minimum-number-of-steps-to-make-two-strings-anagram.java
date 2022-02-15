@@ -4,7 +4,6 @@ class Solution {
         if(s.length()==0|| t.length()==0)
             return 0;
     
-        char a[]=s.toCharArray();
         
         HashMap<Character,Integer>hm=new HashMap<>();
         
@@ -16,12 +15,13 @@ class Solution {
         
         int count=0;
         
-        for(int i=0;i<a.length;i++)
+        for(int i=0;i<s.length();i++)
         {
-            if(hm.containsKey(a[i]))
+            char ch=s.charAt(i);
+            if(hm.containsKey(ch))
             {
-                if(hm.get(a[i])!=0)
-                    hm.put(a[i],hm.get(a[i])-1);
+                if(hm.get(ch)!=0)
+                    hm.put(ch,hm.get(ch)-1);
                 
                 else
                     count++;
