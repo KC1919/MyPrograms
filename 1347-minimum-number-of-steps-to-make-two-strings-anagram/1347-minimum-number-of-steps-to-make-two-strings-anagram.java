@@ -23,13 +23,18 @@ class Solution {
                 if(hm.get(ch)!=0)
                     hm.put(ch,hm.get(ch)-1);
                 
-                else
-                    count++;
+                // else
+                //     count++;
             }
-            else
-            {
-                count++;
-            }
+            // else
+            // {
+            //     count++;
+            // }
+        }
+        
+        for(int val:hm.values())
+        {
+            count+=val!=0?val:0;
         }
         return count;
     }
