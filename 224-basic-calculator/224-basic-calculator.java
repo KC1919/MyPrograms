@@ -54,7 +54,7 @@ class Solution
                         s2.pop();
                     }
                 }
-                while(s2.size()!=0 && !s2.peek().equals("(") && precedence(s2.peek())>=precedence(ch))
+                while(s2.size()!=0 && !s2.peek().equals("("))
                 {
                     work(s1,s2);
                 }
@@ -104,23 +104,7 @@ class Solution
     {
         if(ch.equals("+"))
             return a+b;
-        else if(ch.equals("-"))
+        else 
             return a-b;
-        else if(ch.equals("*"))
-            return a*b;
-        else
-            return a/b;
-    }
-    
-    public int precedence(String ch)
-    {
-        if(ch.equals("+"))
-            return 1;
-        else if(ch.equals("-"))
-            return 1;
-        else if(ch.equals("*"))
-            return 2;
-        else
-            return 2;
     }
 }
