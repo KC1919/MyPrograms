@@ -1,1 +1,1 @@
-​
+First find the 1st island using DFS. Then apply bfs from the 1st island and as soon as any part of 2nd island is found, that wil be the minimum distance, since we used BFS, so it will give minimum distance.
