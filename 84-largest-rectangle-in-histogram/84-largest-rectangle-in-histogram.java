@@ -1,29 +1,54 @@
-class Solution {
-    public int largestRectangleArea(int[] heights) {
-        int res=0,m=heights.length;
-        int[]prev=new int[m],next=new int[m];
+class Solution 
+{
+    public int largestRectangleArea(int[] heights) 
+    {
+        int n=heights.length;
+        int ls[]=new int[n];
         
-        prev[0]=-1;
-        for(int i=1;i<m;i++){
-            int p=i-1;
-            while(p>=0 && heights[p]>=heights[i]){
-                p=prev[p];
+        ls[0]=-1;
+        
+        for(int i=1;i<n;i++)
+        {
+            int j=i-1;
+            while(j>=0 && heights[j]>=heights[i])
+            {
+                j=ls[j];
             }
-            prev[i]=p;
+            if(j==-1)
+            {
+                ls[i]=-1;
+            }
+            else
+            {
+                ls[i]=j;
+            }
+        }
+        int rs[]=new int[n];
+        rs[n-1]=n;
+        
+        for(int i=n-2;i>=0;i--)
+        {
+            int j=i+1;
+            while(j<n && heights[j]>=heights[i])
+            {
+                j=rs[j];
+            }
+            if(j==n)
+            {
+                rs[i]=n;
+            }
+            else
+            {
+                rs[i]=j;
+            }
         }
         
-        next[m-1]=m;
-        for(int i=m-2;i>=0;i--){
-            int p=i+1;
-            while(p<m && heights[p]>=heights[i]){
-                p=next[p];
-            }
-            
-            next[i]=p;
+        int max=0;
+        for(int i=0;i<n;i++)
+        {
+            int area=(rs[i]-ls[i]-1)*heights[i];
+            max=Math.max(max,area);
         }
-        
-        for(int i=0;i<m;i++) res=Math.max(res,(next[i]-prev[i]-1)*heights[i]);
-        
-        return res;
+        return max;
     }
 }
