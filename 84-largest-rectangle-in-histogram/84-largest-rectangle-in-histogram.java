@@ -1,58 +1,42 @@
-class Solution 
-{
-    class Pair
-    {
-        int ls;
-        int rs;
-        
-        Pair(){}
-        
-        Pair(int ls, int rs)
-        {
-            this.ls=ls;
-            this.rs=rs;
-        }
-    }
-    
+class Solution {
     public int largestRectangleArea(int[] heights) 
     {
-        
-        Stack<Integer>st=new Stack<>();
         int n=heights.length;
         
+        int rs[]=new int[n];
         
-        Pair a[]=new Pair[n];
+        int max=0;
+        Stack<Integer>st=new Stack<>();
         
         for(int i=0;i<n;i++)
-            a[i]=new Pair(-1,n);
-            
-        a[0].ls=-1;
-        
-        st.push(0);
-        
-        for(int i=1;i<n;i++)
         {
-            while(st.size()!=0 && heights[st.peek()]>heights[i])
+            while(st.size()!=0 && heights[i]<heights[st.peek()])
             {
-                a[st.peek()].rs=i;
-                st.pop();
-            }
-            if(st.size()==0)
-            {
-                a[i].ls=-1;
-            }
-            else
-            {
-                a[i].ls=st.peek();
+                int ele=st.pop();
+                rs[ele]=i;
+                int ls=-1;
+                
+                if(st.size()>0)
+                {
+                    ls=st.peek();
+                }
+                
+                max=Math.max(max,(rs[ele]-ls-1)*heights[ele]);
             }
             st.push(i);
         }
         
-        int max=0;
-        for(int i=0;i<n;i++)
+        while(st.size()!=0)
         {
-            int area=(a[i].rs-a[i].ls-1)*heights[i];
-            max=Math.max(max,area);
+            int ele=st.pop();
+            int ls=-1;
+                
+            if(st.size()>0)
+            {
+                ls=st.peek();
+            }
+                
+            max=Math.max(max,(n-ls-1)*heights[ele]);
         }
         return max;
     }
