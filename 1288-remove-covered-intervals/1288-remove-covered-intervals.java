@@ -12,10 +12,10 @@ class Solution {
                 return b[0]-c[0];
         });
         
-        
         int count=0;
         int start=a[0][0];
         int end=a[0][1];
+        
         for(int i=1;i<a.length;i++)
         {
             if(a[i][0]>=start && a[i][1]<=end)
@@ -29,7 +29,6 @@ class Solution {
                 end=a[i][1];
             }
         }
-        
         return a.length-count;
     }
 }
