@@ -5,7 +5,6 @@ class Solution {
             return 1;
         
         Arrays.sort(a,(b,c)->{
-            
             if(b[0]==c[0])
                 return c[1]-b[1];
             
