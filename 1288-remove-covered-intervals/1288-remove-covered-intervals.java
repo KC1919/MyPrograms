@@ -13,8 +13,6 @@ class Solution {
                 return b[0]-c[0];
         });
         
-        for(int i=0;i<a.length;i++)
-            System.out.println(a[i][0]+","+a[i][1]);
         
         int count=0;
         int start=a[0][0];
