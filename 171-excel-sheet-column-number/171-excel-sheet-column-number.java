@@ -1,18 +1,18 @@
 class Solution {
     public int titleToNumber(String s) 
     {
-        return calculate(s);
+        return calculate(s,0);
     }
     
-    public int calculate(String s)
+    public int calculate(String s, int ind)
     {
-        if(s.length()==1)
+        if(ind==s.length()-1)
         {
-            return s.charAt(0)-64;
+            return s.charAt(ind)-64;
         }
         
-        int res=calculate(s.substring(1));
-        res=(int)Math.pow(26,s.length()-1)*(s.charAt(0)-64)+res;
+        int res=calculate(s,ind+1);
+        res=(int)Math.pow(26,s.length()-ind-1)*(s.charAt(ind)-64)+res;
         return res;
     }
 }
