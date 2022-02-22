@@ -22,9 +22,9 @@ class Solution
         
         String key=keys[digits.charAt(ind)-'0'-1];
         
-        for(int i=0;i<key.length();i++)
+        for(char ch:key.toCharArray())
         {
-            char ch=key.charAt(i);
+            // char ch=key.charAt(i);
             ans.append(ch);
             generateSeq(digits,keys,list,ans,ind+1);
             ans.deleteCharAt(ans.length()-1);
