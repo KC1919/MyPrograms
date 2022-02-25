@@ -1,48 +1,31 @@
 class Solution {
-    
-    public int maxi=0;
-    public int getMaximumGold(int[][] a) 
-    {
-        int n=a.length;
-        int m=a[0].length;
-        
-        maxi=0;
-        
-        boolean visited[][]=new boolean[n][m];
-        int dir[][]={{-1,0},{1,0},{0,1},{0,-1}};
-        
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<m;j++)
-            {
-                if(a[i][j]!=0)
-                solve(a,i,j,n,m,visited,dir);
+    int r = 0;
+    int c = 0;
+    int max = 0;
+    public int getMaximumGold(int[][] grid) {
+        r = grid.length;
+        c = grid[0].length;
+        for(int i = 0; i < r; i++) {
+            for(int j = 0; j < c; j++) {
+                if(grid[i][j] != 0) {
+                    dfs(grid, i, j, 0);
+                }
             }
         }
-        return maxi;
+        return max;
     }
     
-    public int solve(int a[][], int i, int j, int n, int m, boolean visited[][], int dir[][])
-    {
-        if(i<0 || i>=n || j<0 || j>=m || a[i][j]==0 || visited[i][j]==true)
-            return 0;
-        
-        int sum=0;
-        int max=0;
-        
-        visited[i][j]=true;
-        
-        for(int k=0;k<dir.length;k++)
-        {
-            int row=i+dir[k][0];
-            int col=j+dir[k][1];
-            
-            if(row>=0 && row<n && col>=0 && col<m)
-            max=Math.max(max,solve(a,row,col,n,m,visited,dir));
+    private void dfs(int[][] grid, int i, int j, int cur) {
+        if(i < 0 || i >= r || j < 0 || j >= c || grid[i][j] == 0) {
+            max = Math.max(max, cur);
+            return;
         }
-        visited[i][j]=false;
-        max+=a[i][j];
-        maxi=Math.max(maxi,max);
-        return max;
+        int val = grid[i][j];
+        grid[i][j] = 0;
+        dfs(grid, i + 1, j, cur + val);
+        dfs(grid, i - 1, j, cur + val);
+        dfs(grid, i, j + 1, cur + val);
+        dfs(grid, i, j - 1, cur + val);
+        grid[i][j] = val;
     }
 }
