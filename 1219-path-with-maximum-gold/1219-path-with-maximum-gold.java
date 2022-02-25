@@ -1,31 +1,27 @@
 class Solution {
-    int r = 0;
-    int c = 0;
-    int max = 0;
+        private static final int[] d = {0, 1, 0, -1, 0};
     public int getMaximumGold(int[][] grid) {
-        r = grid.length;
-        c = grid[0].length;
-        for(int i = 0; i < r; i++) {
-            for(int j = 0; j < c; j++) {
-                if(grid[i][j] != 0) {
-                    dfs(grid, i, j, 0);
+        int ans = 0, m = grid.length, n = grid[0].length;
+        int[][] oneCellTrace = new int[m][n];
+        Queue<int[]> q = new LinkedList<>();
+        for (int i = 0, goldCellId = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (grid[i][j] > 0) {
+                    oneCellTrace[i][j] = 1 << goldCellId++;
+                    q.offer(new int[]{i, j, grid[i][j], oneCellTrace[i][j]});
                 }
             }
         }
-        return max;
-    }
-    
-    private void dfs(int[][] grid, int i, int j, int cur) {
-        if(i < 0 || i >= r || j < 0 || j >= c || grid[i][j] == 0) {
-            max = Math.max(max, cur);
-            return;
+        while (!q.isEmpty()) {
+            int i = q.peek()[0], j = q.peek()[1], sum = q.peek()[2], trace = q.poll()[3];
+            ans = Math.max(sum, ans);
+            for (int k = 0; k < 4; ++k) {
+                int r = i + d[k], c = j + d[k + 1];
+                if (r >= 0 && r < m && c >= 0 && c < n && grid[r][c] > 0 && (trace & oneCellTrace[r][c]) == 0) {
+                    q.offer(new int[]{r, c, sum + grid[r][c], trace | oneCellTrace[r][c]});
+                }
+            }
         }
-        int val = grid[i][j];
-        grid[i][j] = 0;
-        dfs(grid, i + 1, j, cur + val);
-        dfs(grid, i - 1, j, cur + val);
-        dfs(grid, i, j + 1, cur + val);
-        dfs(grid, i, j - 1, cur + val);
-        grid[i][j] = val;
+        return ans;
     }
 }
