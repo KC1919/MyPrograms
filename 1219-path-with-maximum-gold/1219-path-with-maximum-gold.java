@@ -1,27 +1,23 @@
 class Solution {
         private static final int[] d = {0, 1, 0, -1, 0};
     public int getMaximumGold(int[][] grid) {
-        int ans = 0, m = grid.length, n = grid[0].length;
-        int[][] oneCellTrace = new int[m][n];
-        Queue<int[]> q = new LinkedList<>();
-        for (int i = 0, goldCellId = 0; i < m; ++i) {
+        int ans = 0, n = grid[0].length;
+        for (int i = 0; i < grid.length; ++i) {
             for (int j = 0; j < n; ++j) {
-                if (grid[i][j] > 0) {
-                    oneCellTrace[i][j] = 1 << goldCellId++;
-                    q.offer(new int[]{i, j, grid[i][j], oneCellTrace[i][j]});
-                }
-            }
-        }
-        while (!q.isEmpty()) {
-            int i = q.peek()[0], j = q.peek()[1], sum = q.peek()[2], trace = q.poll()[3];
-            ans = Math.max(sum, ans);
-            for (int k = 0; k < 4; ++k) {
-                int r = i + d[k], c = j + d[k + 1];
-                if (r >= 0 && r < m && c >= 0 && c < n && grid[r][c] > 0 && (trace & oneCellTrace[r][c]) == 0) {
-                    q.offer(new int[]{r, c, sum + grid[r][c], trace | oneCellTrace[r][c]});
-                }
+                ans = Math.max(ans, dfs(grid, i, j, n, 0, new HashSet<Integer>()));
             }
         }
         return ans;
+    }
+    private int dfs(int[][] g, int i, int j, int n, int sum, Set<Integer> seen) {
+        if (i < 0 || i >= g.length || j < 0 || j >= n || g[i][j] == 0) return sum;
+        if (!seen.add(i * n + j)) return sum; // mark (i, j) visited.
+        sum += g[i][j];
+        int mx = 0;
+        for (int k = 0; k < 4; ++k) { // traverse 4 neighbors to get max value.
+            mx = Math.max(mx, dfs(g, i + d[k], j + d[k + 1], n, sum, seen));
+        }
+        seen.remove(i * n + j); // reset to unvisited. 
+        return mx;
     }
 }
