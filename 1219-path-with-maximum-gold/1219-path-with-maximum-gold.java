@@ -1,23 +1,49 @@
 class Solution {
-        private static final int[] d = {0, 1, 0, -1, 0};
-    public int getMaximumGold(int[][] grid) {
-        int ans = 0, n = grid[0].length;
-        for (int i = 0; i < grid.length; ++i) {
-            for (int j = 0; j < n; ++j) {
-                ans = Math.max(ans, dfs(grid, i, j, n, 0, new HashSet<Integer>()));
+    
+    public int maxi=0;
+    public int getMaximumGold(int[][] a) 
+    {
+        int n=a.length;
+        int m=a[0].length;
+        
+        maxi=0;
+        
+        boolean visited[][]=new boolean[n][m];
+        int dir[][]={{-1,0},{1,0},{0,1},{0,-1}};
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(a[i][j]!=0)
+                solve(a,i,j,n,m,visited,dir);
             }
         }
-        return ans;
+        return maxi;
     }
-    private int dfs(int[][] g, int i, int j, int n, int sum, Set<Integer> seen) {
-        if (i < 0 || i >= g.length || j < 0 || j >= n || g[i][j] == 0) return sum;
-        if (!seen.add(i * n + j)) return sum; // mark (i, j) visited.
-        sum += g[i][j];
-        int mx = 0;
-        for (int k = 0; k < 4; ++k) { // traverse 4 neighbors to get max value.
-            mx = Math.max(mx, dfs(g, i + d[k], j + d[k + 1], n, sum, seen));
+    
+    public int solve(int a[][], int i, int j, int n, int m, boolean visited[][], int dir[][])
+    {
+        if(i<0 || i>=n || j<0 || j>=m || a[i][j]==0 || visited[i][j]==true)
+            return 0;
+        
+        int max=0;
+        visited[i][j]=true;
+        
+        for(int k=0;k<dir.length;k++)
+        {
+            int row=i+dir[k][0];
+            int col=j+dir[k][1];
+            
+            if(row>=0 && row<n && col>=0 && col<m)
+                max=Math.max(max,solve(a,row,col,n,m,visited,dir));
         }
-        seen.remove(i * n + j); // reset to unvisited. 
-        return mx;
+        
+        visited[i][j]=false;
+        
+        max+=a[i][j];
+        maxi=Math.max(maxi,max);
+        
+        return max;
     }
 }
