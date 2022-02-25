@@ -36,7 +36,9 @@ class Solution {
         {
             int row=i+dir[k][0];
             int col=j+dir[k][1];
-            max=Math.max(max,solve(a,row,col,n,m,visited,dir));
+            
+            if(row>=0 && row<n && col>=0 && col<m)
+                max=Math.max(max,solve(a,row,col,n,m,visited,dir));
         }
         visited[i][j]=false;
         max+=a[i][j];
