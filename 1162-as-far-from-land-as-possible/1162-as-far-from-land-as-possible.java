@@ -7,14 +7,19 @@ class Solution {
                 if(grid[i][j]==1) queue.offer(new int[]{i,j});
             }
         }
+        
         if(queue.size()==0 || queue.size()==m*n ) return -1;
         int[][] dirs={{0,1},{0,-1},{1,0},{-1,0}};
         int max=0;
-        while(!queue.isEmpty()){
+        
+        while(!queue.isEmpty())
+        {
             int size=queue.size();
-            for(int i=0;i<size;i++){
+            for(int i=0;i<size;i++)
+            {
                 int[] point=queue.poll();
-                for(int[] dir:dirs){
+                for(int[] dir:dirs)
+                {
                     int x=point[0]+dir[0];
                     int y=point[1]+dir[1];
                     if(x>=0 && y>=0 && x<m && y<n && grid[x][y]==0){
