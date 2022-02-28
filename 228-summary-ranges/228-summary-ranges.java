@@ -14,12 +14,17 @@ class Solution {
                 end=a[i];
             }
             else{
+                StringBuilder sb=new StringBuilder();
                 
                 if(start!=end){
-                    list.add(start+"->"+end);
+                    sb.append(start);
+                    sb.append("->");
+                    sb.append(end);
+                    list.add(sb.toString());
                 }
                 else{
-                    list.add(start+"");
+                    sb.append(start);
+                    list.add(sb.toString());
                 }
                 start=a[i];
                 end=a[i];
