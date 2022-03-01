@@ -2,9 +2,11 @@ class Solution {
     public int[] countBits(int n) 
     {
         int dp[]=new int[n+1];
-        Arrays.fill(dp,-1);
+        // Arrays.fill(dp,-1);
         
-        for(int i=0;i<=n;i++)
+        dp[0]=0;
+        
+        for(int i=1;i<=n;i++)
         {
             binary(i,dp);
         }
@@ -17,7 +19,7 @@ class Solution {
         
         while(num>0)
         {
-            if(dp[num]>=0){
+            if(dp[num]>0){
                 count+=dp[num];
                 break;
             }
