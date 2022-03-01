@@ -3,17 +3,14 @@ class Solution {
     {
         int n=a.length;
         
-        HashSet<Integer>hm=new HashSet<>();
+        int sum=0;
         
         for(int e:a)
-            hm.add(e);
+            sum+=e;
         
-        for(int i=0;i<=n;i++)
-        {
-            if(!hm.contains(i))
-                return i;
-        }
+        int rs=(n*(n+1))/2;
+            
         
-        return 0;
+        return rs-sum;
     }
 }
