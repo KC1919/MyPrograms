@@ -5,8 +5,8 @@ class Solution {
         
         int sum=0;
         
-        for(int e:a)
-            sum+=e;
+        for(int i=0;i<n;i++)
+            sum+=a[i];
         
         int rs=(n*(n+1))/2;
         
