@@ -6,7 +6,6 @@ class Solution {
             gasInTank += gas[i]-cost[i];
             sum += gas[i]-cost[i];
             
-            System.out.println(gasInTank+","+sum);
             // if we are not able to reach next station from i, 
             if(gasInTank < 0) {
                 start = i+1;
