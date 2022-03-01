@@ -4,22 +4,22 @@ class Solution {
         HashSet<Integer>hm=new HashSet<>();
         int mini=Integer.MAX_VALUE;
         
-        for(int e:a){
-            if(e>0 && e<mini)
-                mini=e;
+        for(int i=0;i<a.length;i++){
+            if(a[i]>0 && a[i]<mini)
+                mini=a[i];
             
-            hm.add(e);
+            hm.add(a[i]);
         }
         
         if(mini>1 || mini==Integer.MAX_VALUE)
             return 1;
         
         int min=Integer.MAX_VALUE;
-        for(int ele:a)
+        for(int i=0;i<a.length;i++)
         {
-            if(ele>=0){
-                int lm=ele-1;
-                int rm=ele+1;
+            if(a[i]>=0){
+                int lm=a[i]-1;
+                int rm=a[i]+1;
                 
                 if(lm>0 && !hm.contains(lm))
                     min=Math.min(min,lm);
