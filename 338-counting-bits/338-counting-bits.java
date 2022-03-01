@@ -1,17 +1,14 @@
 class Solution {
     public int[] countBits(int n) 
     {
-        int ans[]=new int[n+1];
-        
         int dp[]=new int[n+1];
         Arrays.fill(dp,-1);
         
         for(int i=0;i<=n;i++)
         {
-            int res=binary(i,dp);
-            ans[i]=res;
+            binary(i,dp);
         }
-        return ans;
+        return dp;
     }
     
     public int binary(int n, int dp[])
