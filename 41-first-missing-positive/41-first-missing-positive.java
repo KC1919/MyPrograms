@@ -5,7 +5,7 @@ class Solution {
         int mini=Integer.MAX_VALUE;
         
         for(int e:a){
-            if(e>=0 && e<mini)
+            if(e>0 && e<mini)
                 mini=e;
             
             hm.add(e);
