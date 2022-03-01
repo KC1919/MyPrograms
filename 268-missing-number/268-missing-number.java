@@ -9,7 +9,6 @@ class Solution {
             sum+=e;
         
         int rs=(n*(n+1))/2;
-            
         
         return rs-sum;
     }
