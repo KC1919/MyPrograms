@@ -23,11 +23,8 @@ class Solution {
                     hm.remove(s.charAt(j));
                     j++;
                 }
-                if(j<s.length() && hm.size()!=0)
-                {
-                    hm.remove(s.charAt(j));
-                    j++;
-                }
+                hm.remove(s.charAt(j));
+                j++;
                 hm.add(ch);
             }
         }
