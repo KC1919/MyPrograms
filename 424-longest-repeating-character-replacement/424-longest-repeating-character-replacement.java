@@ -17,11 +17,6 @@ class Solution {
             
             maxf=Math.max(maxf,hm.get(ch));
             
-//             for(int freq:hm.values())
-//             {
-//                 maxf=Math.max(freq,maxf);
-//             }
-            
             if((i-j+1)-maxf<=k)
             {
                 max=Math.max(max,i-j+1);
