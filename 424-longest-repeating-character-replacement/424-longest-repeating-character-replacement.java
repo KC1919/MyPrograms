@@ -15,10 +15,12 @@ class Solution {
             
             hm.put(ch,hm.getOrDefault(ch,0)+1);
             
-            for(int freq:hm.values())
-            {
-                maxf=Math.max(freq,maxf);
-            }
+            maxf=Math.max(maxf,hm.get(ch));
+            
+//             for(int freq:hm.values())
+//             {
+//                 maxf=Math.max(freq,maxf);
+//             }
             
             if((i-j+1)-maxf<=k)
             {
