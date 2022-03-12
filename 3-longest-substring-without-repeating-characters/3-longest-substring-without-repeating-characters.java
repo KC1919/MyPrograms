@@ -3,7 +3,7 @@ class Solution {
         
         if(s==null || s.length()==0)return 0;
         
-        HashMap<Character,Integer>hm=new HashMap<>();
+        HashSet<Character>hm=new HashSet<>();
         
         int j=0;
         int max=0;
@@ -11,10 +11,10 @@ class Solution {
         {
             char ch=s.charAt(i);
             
-            if(!hm.containsKey(ch))
+            if(!hm.contains(ch))
             {
-                hm.put(ch,0);
-                max=Math.max(max,hm.size());
+                hm.add(ch);
+                max=Math.max(max,i-j+1);
             }
             else
             {
@@ -28,7 +28,7 @@ class Solution {
                     hm.remove(s.charAt(j));
                     j++;
                 }
-                hm.put(ch,0);
+                hm.add(ch);
             }
         }
         return max;
