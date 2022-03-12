@@ -35,37 +35,31 @@ class Solution {
         Node p = dummy;
 
         while (n != null) {
+            
             int idx = hm.get(n);
             Node nn = null;
-            if (!nhm.containsKey(idx)) {
-                nn = new Node(n.val);;
-            }
-            else{
+            
+            if (!nhm.containsKey(idx))
+                nn = new Node(n.val);
+
+            else
                 nn=nhm.get(idx);
-            }
 
             int ridx = hm.get(n.random);
 
             if (ridx != -1) {
                 
-                if(ridx==idx){
+                if(ridx==idx)
                     nn.random=nn;
-                }
 
-                else if (nhm.containsKey(ridx)) {
+                else if (nhm.containsKey(ridx))
                     nn.random = nhm.get(ridx);
-                } 
                 
                 else {
-                    Node rn = n.random;
-                    nhm.put(ridx, new Node(rn.val));
+                    nhm.put(ridx, new Node(n.random.val));
                     nn.random = nhm.get(ridx);
                 }
             } 
-            
-            else {
-                nn.random = null;
-            }
             
             p.next = nn;
             nhm.put(idx, nn);
