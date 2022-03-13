@@ -43,7 +43,7 @@ class Solution {
                 list.remove(list.size()-1);
             }
             else
-                break;
+                return;
         }
     }
 }
