@@ -12,7 +12,7 @@ class Solution {
         List<Integer>list=new ArrayList<>();
         
         for(int i=0;i<a.length;i++)
-            list.add(0);
+            list.add(null);
         
         permutations(a,list,res,0,hm);
         return res;
