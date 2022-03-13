@@ -2,9 +2,7 @@ class Solution {
     public List<List<Integer>> combinationSum2(int[] a, int target) 
     {
         List<List<Integer>>res=new ArrayList<>();
-        
-        List<Integer>list=new ArrayList<>();
-        
+    
         Arrays.sort(a);
         
         for(int i=0;i<a.length;i++)
@@ -12,8 +10,11 @@ class Solution {
             if(i>0 && a[i]==a[i-1])
                 continue;
             
-            else
-                combinations(a,i,0,target,list,res);
+            else{
+                List<Integer>list=new ArrayList<>();
+                list.add(a[i]);
+                combinations(a,i+1,a[i],target,list,res);
+            }
         }
         
         return res;
@@ -25,8 +26,7 @@ class Solution {
         {
             if(sum==target)
             {
-                if(!res.contains(list))
-                    res.add(new ArrayList<>(list));
+                res.add(new ArrayList<>(list));
             }
             return;
         }
