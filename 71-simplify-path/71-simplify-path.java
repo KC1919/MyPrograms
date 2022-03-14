@@ -9,38 +9,30 @@ class Solution
         st.push("/");
         
         String path[]=s.split("/");
-        
-        
+
         for(int i=0;i<path.length;i++)
         {
             String ch=path[i];
             
-            if(ch.equals(""))
+            if(ch.equals("") || ch.equals("."))
                 continue;
             
-            else if(ch.charAt(0)=='.')
+            else if(ch.equals(".."))
             {
-                if(ch.length()>2)
+                while(st.size()>0 && st.peek().equals("/"))
                 {
-                    st.push(ch);
-                    st.push("/");
-                    continue;
+                    st.pop();
                 }
-                else if(ch.length()==2)
-                {
-                    while(st.size()>0 && st.peek().equals("/"))
-                    {
-                        st.pop();
-                    }
-                    if(st.size()>0)
-                        st.pop();
-                }
-                if(st.size()!=0 && st.peek().equals("/"))
-                    i=i;
-                else
-                    st.push("/");
+                if(st.size()>0)
+                    st.pop();
                 
+                if(st.size()!=0 && st.peek().equals("/"))
+                    continue;
+                
+                else
+                    st.push("/"); 
             }
+        
             else
             {
                 st.push(ch);
@@ -48,7 +40,7 @@ class Solution
             }
         }
         
-        if(st.size()>1 && (st.peek().equals("/") || st.peek().equals(".")))
+        if(st.size()>1 && (st.peek().equals("/")))
             st.pop();
         
         if(st.size()==0)
