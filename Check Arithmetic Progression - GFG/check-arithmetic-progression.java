@@ -20,14 +20,39 @@ class Solution
     {
         if(a.length==2)return true;
         
-        Arrays.sort(a);
+        int min=Integer.MAX_VALUE, smin=Integer.MAX_VALUE;
         
-        int d=a[1]-a[0];
-        
-        for(int i=1;i<n-1;i++)
+        for(int i=0;i<n;i++)
         {
-            if(a[i+1]-a[i]!=d)
-            return false;
+            if(a[i]<min)
+            {
+                smin=min;
+                min=a[i];
+            }
+            else if(a[i]<smin)
+            {
+                smin=a[i];
+            }
+        }
+        
+        int d=smin-min;
+        
+        HashSet<Integer>hm=new HashSet<>();
+        
+        for(int val:a)
+        {
+            hm.add(val);
+        }
+        
+        int sum=min;
+        int count=0;
+        for(int i=0;i<n;i++)
+        {
+            if(hm.contains(sum))
+                sum+=d;
+            
+            else
+                return false;
         }
         return true;
     }
