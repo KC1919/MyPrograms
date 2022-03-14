@@ -44,11 +44,14 @@ class Solution
         int sum=0;
         int count=0;
         
-        hm.put(0,1);
+        // hm.put(0,1);
             
         for(int i=0;i<n;i++)
         {
             sum+=a[i];
+            
+            if(sum==0)
+            count+=1;
             
             if(hm.containsKey(sum))
             {
