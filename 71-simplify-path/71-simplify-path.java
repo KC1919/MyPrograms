@@ -20,9 +20,8 @@ class Solution
             else if(ch.equals(".."))
             {
                 while(st.size()>0 && st.peek().equals("/"))
-                {
                     st.pop();
-                }
+    
                 if(st.size()>0)
                     st.pop();
                 
@@ -32,7 +31,7 @@ class Solution
                 else
                     st.push("/"); 
             }
-        
+            
             else
             {
                 st.push(ch);
@@ -49,9 +48,7 @@ class Solution
         StringBuilder sb=new StringBuilder();
         
         while(st.size()>0)
-        {
             sb.insert(0,st.pop());
-        }
         
         return sb.toString();
     }
