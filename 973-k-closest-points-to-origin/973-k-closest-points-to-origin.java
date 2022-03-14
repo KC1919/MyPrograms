@@ -11,9 +11,9 @@ class Solution {
             this.dist=dist;
         }
     }
+    
     public int[][] kClosest(int[][] points, int k) 
     {
-        
         PriorityQueue<Pair>pq=new PriorityQueue<>((a,b)->{
             if((int)a.dist==(int)b.dist)
             {
