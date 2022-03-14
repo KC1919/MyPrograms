@@ -2,7 +2,7 @@ class Solution {
     public boolean canReorderDoubled(int[] a) 
     {
         HashMap<Integer,Integer>hm=new HashMap<>();
-        
+        int k=0;
         int n=a.length;
         
         for(int ele:a)
@@ -21,8 +21,7 @@ class Solution {
             if(ele==0)
                 continue;
             
-            else
-            {
+            else{
                 if(hm.containsKey(ele) && hm.containsKey(2*ele))
                 {
                     hm.put(ele,hm.get(ele)-1);
