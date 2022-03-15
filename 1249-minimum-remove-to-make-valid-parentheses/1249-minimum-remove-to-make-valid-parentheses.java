@@ -4,7 +4,7 @@ class Solution {
     {
         StringBuilder sb=new StringBuilder();
         
-        Stack<Character>st=new Stack<>();
+        Stack<Integer>st=new Stack<>();
         
         int cc=0;  //closing count
         
@@ -17,7 +17,7 @@ class Solution {
             
             else if(ch=='(')
             {
-                st.push(ch); 
+                st.push(i-cc); 
                 sb.append('#');
             }
             
@@ -49,7 +49,7 @@ class Solution {
                     
                     if(sb.charAt(i)=='#' && st.size()>0)
                     {
-                        sb.deleteCharAt(i);
+                        sb.deleteCharAt(st.peek());
                         st.pop();
                     }
                 }
