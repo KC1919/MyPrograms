@@ -1,22 +1,13 @@
 class Solution {
     
-    class Pair
-    {
-        int idx;
-        
-        Pair(int idx)
-        {
-            this.idx=idx;
-        }
-    }
     public String minRemoveToMakeValid(String s) 
     {
         StringBuilder sb=new StringBuilder();
         
-        Stack<Pair>st=new Stack<>();
+        Stack<Integer>st=new Stack<>();
         
-        int cc=0;
-        int oc=0;
+        int cc=0;  //closing count
+        int oc=0;  //opening count
         
         for(int i=0;i<s.length();i++)
         {
@@ -27,8 +18,8 @@ class Solution {
             
             else if(ch=='(')
             {
-                oc++;
-                st.push(new Pair(oc));
+                oc++;   //counting opening brackets
+                st.push(oc);  //storing o
                 sb.append('#');
             }
             
@@ -59,7 +50,7 @@ class Solution {
                     if(st.size()==0)
                         break;
                     
-                    if(sb.charAt(i)=='#' && oc==st.peek().idx)
+                    if(sb.charAt(i)=='#' && oc==st.peek())
                     {
                         oc--;
                         sb.deleteCharAt(i);
