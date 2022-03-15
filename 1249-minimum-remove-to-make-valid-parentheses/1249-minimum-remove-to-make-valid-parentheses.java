@@ -18,7 +18,7 @@ class Solution {
             else if(ch=='(')
             {
                 st.push(i-cc); 
-                sb.append('#');
+                sb.append(ch);
             }
             
             else
@@ -26,7 +26,7 @@ class Solution {
                 if(st.size()>0)
                 {
                     st.pop();
-                    sb.append('*');
+                    sb.append(ch);
                 }
                     
                 else
@@ -49,19 +49,19 @@ class Solution {
             }
         }
         
-        for(int i=0;i<sb.length();i++)
-        {
-            char ch=sb.charAt(i);
+//         for(int i=0;i<sb.length();i++)
+//         {
+//             char ch=sb.charAt(i);
             
-            if(ch>=97 && ch<=122)
-                continue;
+//             if(ch>=97 && ch<=122)
+//                 continue;
             
-            else if(ch=='#')
-                sb.setCharAt(i,'(');
+//             else if(ch=='#')
+//                 sb.setCharAt(i,'(');
             
-            else if(ch=='*')
-                sb.setCharAt(i,')');
-        }
+//             else if(ch=='*')
+//                 sb.setCharAt(i,')');
+//         }
         return sb.toString();
     }
 }
