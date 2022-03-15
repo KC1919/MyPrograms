@@ -3,12 +3,10 @@ class Solution {
     class Pair
     {
         int idx;
-        char p;
         
-        Pair(int idx, char p)
+        Pair(int idx)
         {
             this.idx=idx;
-            this.p=p;
         }
     }
     public String minRemoveToMakeValid(String s) 
@@ -30,7 +28,7 @@ class Solution {
             else if(ch=='(')
             {
                 oc++;
-                st.push(new Pair(oc,ch));
+                st.push(new Pair(oc));
                 sb.append('#');
             }
             
