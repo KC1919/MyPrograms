@@ -17,7 +17,7 @@ class Solution {
             
             else if(ch=='(')
             {
-                st.push(ch);  
+                st.push(ch); 
                 sb.append('#');
             }
             
@@ -49,28 +49,26 @@ class Solution {
                     
                     if(sb.charAt(i)=='#' && st.size()>0)
                     {
-                        sb.setCharAt(i,'-');
+                        sb.deleteCharAt(i);
                         st.pop();
                     }
                 }
             }
         }
         
-        StringBuilder ans=new StringBuilder();
-        
         for(int i=0;i<sb.length();i++)
         {
             char ch=sb.charAt(i);
             
             if(ch>=97 && ch<=122)
-                ans.append(ch);
+                continue;
             
             else if(ch=='#')
-                ans.append('(');
+                sb.setCharAt(i,'(');
             
             else if(ch=='*')
-                ans.append(')');
+                sb.setCharAt(i,')');
         }
-        return ans.toString();
+        return sb.toString();
     }
 }
