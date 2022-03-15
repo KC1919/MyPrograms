@@ -1,7 +1,7 @@
 class Solution {
     public int arrangeCoins(int n) {
         
-      long l=1, h=Integer.MAX_VALUE-1;
+      long l=1, h=n;
       
       long c=Integer.MAX_VALUE;
       long sum=n;
