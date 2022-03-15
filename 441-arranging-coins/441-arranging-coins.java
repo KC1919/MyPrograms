@@ -3,7 +3,7 @@ class Solution {
         
       long l=1, h=n;
       
-      long c=Integer.MAX_VALUE;
+      long c=0;
       long sum=n;
       long mid=0;
       long val=Integer.MIN_VALUE;
