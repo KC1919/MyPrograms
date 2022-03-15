@@ -18,7 +18,7 @@ class Solution {
             
             else if(ch=='(')
             {
-                oc++;   //counting opening brackets
+                oc++;         //counting opening brackets
                 st.push(oc);  //storing o
                 sb.append('#');
             }
@@ -50,7 +50,7 @@ class Solution {
                     if(st.size()==0)
                         break;
                     
-                    if(sb.charAt(i)=='#' && oc==st.peek())
+                    if(sb.charAt(i)=='#' && st.size()>0)
                     {
                         oc--;
                         sb.deleteCharAt(i);
