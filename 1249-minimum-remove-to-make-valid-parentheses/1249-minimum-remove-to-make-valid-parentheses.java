@@ -4,10 +4,9 @@ class Solution {
     {
         StringBuilder sb=new StringBuilder();
         
-        Stack<Integer>st=new Stack<>();
+        Stack<Character>st=new Stack<>();
         
         int cc=0;  //closing count
-        int oc=0;  //opening count
         
         for(int i=0;i<s.length();i++)
         {
@@ -18,8 +17,7 @@ class Solution {
             
             else if(ch=='(')
             {
-                oc++;         //counting opening brackets
-                st.push(oc);  //storing o
+                st.push(ch);  
                 sb.append('#');
             }
             
@@ -27,7 +25,6 @@ class Solution {
             {
                 if(st.size()>0)
                 {
-                    oc--;
                     st.pop();
                     sb.append('*');
                 }
@@ -52,27 +49,28 @@ class Solution {
                     
                     if(sb.charAt(i)=='#' && st.size()>0)
                     {
-                        oc--;
-                        sb.deleteCharAt(i);
+                        sb.setCharAt(i,'-');
                         st.pop();
                     }
                 }
             }
         }
         
+        StringBuilder ans=new StringBuilder();
+        
         for(int i=0;i<sb.length();i++)
         {
             char ch=sb.charAt(i);
             
             if(ch>=97 && ch<=122)
-                continue;
+                ans.append(ch);
             
             else if(ch=='#')
-                sb.setCharAt(i,'(');
+                ans.append('(');
             
             else if(ch=='*')
-                sb.setCharAt(i,')');
+                ans.append(')');
         }
-        return sb.toString();
+        return ans.toString();
     }
 }
