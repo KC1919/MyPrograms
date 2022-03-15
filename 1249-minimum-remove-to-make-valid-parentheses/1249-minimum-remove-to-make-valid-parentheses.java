@@ -15,16 +15,16 @@ class Solution {
             if(ch>=97 && ch<=122)
                 sb.append(ch);
             
-            else if(ch=='(')
-            {
+            else if(ch=='('){
+                
                 st.push(i-cc); 
                 sb.append(ch);
             }
             
-            else
-            {
-                if(st.size()>0)
-                {
+            else{
+                
+                if(st.size()>0){
+                    
                     st.pop();
                     sb.append(ch);
                 }
@@ -41,27 +41,9 @@ class Solution {
                 return "";
             
             else
-            {
                 while(st.size()!=0)
-                {
                     sb.deleteCharAt(st.pop());
-                }
-            }
         }
-        
-//         for(int i=0;i<sb.length();i++)
-//         {
-//             char ch=sb.charAt(i);
-            
-//             if(ch>=97 && ch<=122)
-//                 continue;
-            
-//             else if(ch=='#')
-//                 sb.setCharAt(i,'(');
-            
-//             else if(ch=='*')
-//                 sb.setCharAt(i,')');
-//         }
         return sb.toString();
     }
 }
