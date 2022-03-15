@@ -42,16 +42,9 @@ class Solution {
             
             else
             {
-                for(int i=sb.length()-1;i>=0;i--)
+                while(st.size()!=0)
                 {
-                    if(st.size()==0)
-                        break;
-                    
-                    if(sb.charAt(i)=='#' && st.size()>0)
-                    {
-                        sb.deleteCharAt(st.peek());
-                        st.pop();
-                    }
+                    sb.deleteCharAt(st.pop());
                 }
             }
         }
