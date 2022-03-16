@@ -22,14 +22,11 @@ class Solution {
                 hm.put(temp,hm.get(temp)+1);
             }
                 
-            else{
+            else
                 hm.put(temp,hm.getOrDefault(temp,0)+1);
-            }
-                
             
             j++;
         }
-        
         return ans;
     }
 }
