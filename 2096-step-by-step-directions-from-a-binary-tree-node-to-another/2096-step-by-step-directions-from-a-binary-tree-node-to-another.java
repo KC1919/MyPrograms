@@ -1,47 +1,29 @@
 class Solution {
     
-    public String getDirections(TreeNode root, int startValue, int destValue) 
-    {
-        StringBuilder sp=new StringBuilder();
-        StringBuilder dp=new StringBuilder();
-        
-        if(getPath(root,startValue,sp)==false)return "";
-        if(getPath(root,destValue,dp)==false)return "";
-        
-        int i=sp.length()-1;
-        int j=dp.length()-1;
-        
-        int count=0;
-        
-        while(i>=0 && j>=0 && sp.charAt(i)==dp.charAt(j)){
-            count++; i--; j--;
-        }
-            
-        String sPath = "U".repeat(sp.length() - count);
-        String dPath = dp.reverse().toString().substring(count, dp.length());
-        
-        return sPath+dPath;
+    private boolean DFS(TreeNode currNode, StringBuilder path, int destVal) {
+        if(currNode == null) return false;
+        if(currNode.val == destVal) return true;
+        if(DFS(currNode.left, path, destVal)) path.append("L");
+        else if(DFS(currNode.right, path, destVal)) path.append("R");
+        return path.length() > 0;
     }
     
-    public boolean getPath(TreeNode node, int target, StringBuilder path)
-    {
-        if(node==null)
-            return false;
+    public String getDirections(TreeNode root, int startValue, int destValue) {
+        StringBuilder startToRoot = new StringBuilder();
+        StringBuilder endToRoot = new StringBuilder();
         
-        if(node.val==target) return true;
+        DFS(root, startToRoot, startValue);
+        DFS(root, endToRoot, destValue);
         
-        boolean lres=getPath(node.left,target,path);
-        
-        if(lres==true){
-            path.append('L');
-            return true;
+        int i = startToRoot.length(), j = endToRoot.length();
+        int cnt = 0;
+        while(i > 0 && j > 0 && startToRoot.charAt(i-1) == endToRoot.charAt(j-1)) {
+            cnt++; i--; j--;
         }
-        boolean rres=getPath(node.right,target,path);
         
-        if(rres==true){
-            path.append('R');
-            return true;
-        }
-        return false;
+        String sPath = "U".repeat(startToRoot.length() - cnt);
+        String ePath = endToRoot.reverse().toString().substring(cnt, endToRoot.length());
+        
+        return sPath + ePath;
     }
 }
