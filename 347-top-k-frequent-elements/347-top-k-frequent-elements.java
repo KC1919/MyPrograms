@@ -12,15 +12,13 @@ class Solution {
         List<List<Integer>>list=new ArrayList<>();
         
         for(int i=0;i<=n;i++)
-        {
             list.add(null);
-        }
         
         int ans[]=new int[k];
         
-        for(Map.Entry<Integer, Integer> entry : hm.entrySet()){
-            int number = entry.getKey();
-            int count = entry.getValue();
+        for(int key : hm.keySet()){
+            int number =key;
+            int count = hm.get(key);
             
             if(list.get(count) == null)
                 list.set(count, new ArrayList<>());
@@ -40,7 +38,6 @@ class Solution {
                     return ans;
             }
         }
-        
         return ans;
     }
 }
