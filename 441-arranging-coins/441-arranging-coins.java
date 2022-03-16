@@ -12,7 +12,7 @@ class Solution {
       {
         mid=(l+h)/2;
         
-        c=(long)Math.pow(mid,2)+mid-(sum*2);
+        c=(long)((mid*(mid+1))/2-sum);
         
         
         if(c==0){
