@@ -4,18 +4,23 @@ class Solution {
         if(s.length()<10)
             return new ArrayList<>();
         
-        int j=1;
         int k=10;
         
         List<String>ans=new ArrayList<>();
-        
         HashMap<String,Integer>hm=new HashMap<>();
+        StringBuilder sb=new StringBuilder();
         
-        hm.put(s.substring(0,k),1);
+        for(int i=0;i<k;i++)
+            sb.append(s.charAt(i));
         
-        for(int i=k+1;i<=s.length();i++)
+        hm.put(sb.toString(),1);
+        
+        for(int i=k;i<s.length();i++)
         {
-            String temp=s.substring(j,i);
+            sb.append(s.charAt(i));
+            sb.deleteCharAt(0);
+            
+            String temp=sb.toString();
             if(hm.containsKey(temp) && hm.get(temp)==1)
             {
                 ans.add(temp);
@@ -24,8 +29,6 @@ class Solution {
                 
             else
                 hm.put(temp,hm.getOrDefault(temp,0)+1);
-            
-            j++;
         }
         return ans;
     }
