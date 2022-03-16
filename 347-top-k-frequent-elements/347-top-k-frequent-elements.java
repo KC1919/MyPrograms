@@ -13,22 +13,28 @@ class Solution {
         
         for(int i=0;i<=n;i++)
         {
-            list.add(new ArrayList<>());
+            list.add(null);
         }
         
         int ans[]=new int[k];
         
-        for(Map.Entry<Integer,Integer>pair:hm.entrySet())
-        {
-            list.get(pair.getValue()).add(pair.getKey());
-        }
+        for(Map.Entry<Integer, Integer> entry : hm.entrySet()){
+            int number = entry.getKey();
+            int count = entry.getValue();
+            
+            if(list.get(count) == null)
+                list.set(count, new ArrayList<>());
+            
+            list.get(count).add(number);
+            }
         
         int p=0;
         for(int i=n;i>=0;i--)
         {
-            for(int ele:list.get(i))
-            {
-                ans[p++]=ele;
+            if(list.get(i) == null)
+                continue;
+            for(int j = list.get(i).size() - 1; j >= 0; j--){
+                ans[p++] = list.get(i).get(j);
                 k--;
                 if(k==0)
                     return ans;
