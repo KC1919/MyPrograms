@@ -51,8 +51,8 @@ class Solution {
         }
         
         while(st.size()>0)
-            sb.insert(0,st.pop());
+            sb.append(st.pop());
         
-        return sb.toString();
+        return sb.reverse().toString();
     }
 }
