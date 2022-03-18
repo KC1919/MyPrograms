@@ -20,11 +20,13 @@ class Solution {
                 if(st.peek()=='('){
                     st.pop();
                     sst.push(1);
+                    
                     if(st.size()>0)
                         st.push('@');
                 }
                    
                 else{
+                    
                     int sum=0;
                     while(sst.size()>0 && st.peek()!='(')
                     {
