@@ -1,7 +1,6 @@
 class Solution {
     public List<Integer> partitionLabels(String s) 
     {
-        
         HashMap<Character,Integer>hm=new HashMap<>();
         
         for(int i=s.length()-1;i>=0;i--){
@@ -20,8 +19,7 @@ class Solution {
         {
             char ch=s.charAt(i);
             
-            if(hm.get(ch)>end)
-                end=hm.get(ch);
+            end=Math.max(end,hm.get(ch));
             
             if(i==end)
             {
