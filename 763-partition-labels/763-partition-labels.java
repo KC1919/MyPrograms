@@ -1,7 +1,6 @@
 class Solution {
     public List<Integer> partitionLabels(String s) 
     {
-        
         HashMap<Character,Integer>hm=new HashMap<>();
         
         for(int i=0;i<s.length();i++)
@@ -24,7 +23,6 @@ class Solution {
                 start=i+1;
             }
         }
-        
         return list;
     }
 }
