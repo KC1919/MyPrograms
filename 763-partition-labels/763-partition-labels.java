@@ -5,10 +5,7 @@ class Solution {
         HashMap<Character,Integer>hm=new HashMap<>();
         
         for(int i=0;i<s.length();i++)
-        {
-            char ch=s.charAt(i);
-            hm.put(ch,i);
-        }
+            hm.put(s.charAt(i),i);
         
         List<Integer>list=new ArrayList<>();
         int start=0, end=0;
