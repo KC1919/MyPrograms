@@ -17,20 +17,21 @@ class Solution {
 		    {
 		        hm.put(ch,hm.get(ch)+1);
 		        
-		        
-		        if(que.size()>0){
-		            
-		            if(s.charAt(que.peek())==ch){
+		        if(que.size()>0)
+                {
+		            if(s.charAt(que.peek())==ch)
 		                que.remove();
-		                hm.put(ch,hm.get(ch)-1);
-		            }
-		            
-		            while(que.size()>0 && hm.get(s.charAt(que.peek()))>1){
-		                    hm.put(s.charAt(que.peek()),hm.get(s.charAt(que.peek()))-1);
-		                    que.remove();
-		                }
+	
+                    else if(hm.get(s.charAt(que.peek()))>1)
+		                que.remove();
 		        }
 		    }
+		}
+        
+        while(que.size()>0 && hm.get(s.charAt(que.peek()))>1)
+        {
+		    hm.put(s.charAt(que.peek()),hm.get(s.charAt(que.peek()))-1);
+		    que.remove();
 		}
         
         if(que.size()==0)
