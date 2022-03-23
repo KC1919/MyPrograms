@@ -19,11 +19,16 @@ class Solution {
 		        
 		        if(que.size()>0)
                 {
-		            if(s.charAt(que.peek())==ch)
+		            if(s.charAt(que.peek())==ch){
 		                que.remove();
+                        hm.put(ch,hm.get(ch)-1);
+                    }
 	
                     else if(hm.get(s.charAt(que.peek()))>1)
+		            {
+		                hm.put(s.charAt(que.peek()),hm.get(s.charAt(que.peek()))-1);
 		                que.remove();
+		            }
 		        }
 		    }
 		}
