@@ -24,36 +24,31 @@ class Solution {
     public int longestkSubstr(String s, int k) 
     {
         HashMap<Character,Integer>hm=new HashMap<>();
-        
-        int j=0, sum=0;
-        int max=Integer.MIN_VALUE;
+        int max=0;
+        int j=0;
         
         for(int i=0;i<s.length();i++)
         {
             char ch=s.charAt(i);
+            
             hm.put(ch,hm.getOrDefault(ch,0)+1);
             
             if(hm.size()==k)
+                max=Math.max(i-j+1,max);
+            
+            while(j<i && hm.size()>k)
             {
-                max=Math.max(max,i-j+1);
-            }
-            else if(hm.size()>k)
-            {
-                while(hm.size()>k)
-                {
-                    char rem=s.charAt(j);
-                    if(hm.containsKey(rem))
-                    {
-                        hm.put(rem,hm.get(rem)-1);
-                        
-                        if(hm.get(rem)==0)
-                        hm.remove(rem);
-                        
-                        j++;
-                    }
-                }
+                char rem=s.charAt(j);
+                
+                hm.put(rem,hm.get(rem)-1);
+                
+                if(hm.get(rem)==0)
+                    hm.remove(rem);
+                
+                j++;
             }
         }
-        return max==Integer.MIN_VALUE?-1:max;
+        
+        return max==0?-1:max;
     }
 }
