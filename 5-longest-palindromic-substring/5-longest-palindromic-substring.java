@@ -1,47 +1,49 @@
 class Solution {
     public String longestPalindrome(String s) {
-         int left=0, right=0, max=0;
-        int li=-1, ri=-1;
         
+        int li=0, ri=0, max=0;
         for(int i=0;i<s.length();i++)
         {
-            left=i;
-            right=i;
+            int a1[]=palindrome(s,i,i);
             
-            while(left>=0 && right<s.length() && s.charAt(left)==s.charAt(right))
+            if(a1[0]!=-1 && a1[1]!=-1 && a1[1]-a1[0]+1>max)
             {
-                if(s.charAt(left)==s.charAt(right))
-                {
-                    if((right-left+1)>max){
-                        li=left;
-                        ri=right;
-                        max=right-left+1;
-                    }
-                    left--;
-                    right++;
-                }
+                max=a1[1]-a1[0]+1;
+                li=a1[0];
+                ri=a1[1];
             }
-            
-            left=i;
-            right=i+1;
-            
-            while(left>=0 && right<s.length() && s.charAt(left)==s.charAt(right))
+            int a2[]=palindrome(s,i,i+1);
+            if(a2[0]!=-1 && a2[1]!=-1 && a2[1]-a2[0]+1>max)
             {
-                if(s.charAt(left)==s.charAt(right))
-                {
-                    if((right-left+1)>max){
-                        li=left;
-                        ri=right;
-                        max=right-left+1;
-                    }
-                    left--;
-                    right++;
-                }
+                max=a2[1]-a2[0]+1;
+                li=a2[0];
+                ri=a2[1];
             }
         }
         
-        if(li==-1 || ri==-1)return "";
+        if(li==-1 || ri==-1)
+            return "";
         
         return s.substring(li,ri+1);
+    }
+    
+    public int[] palindrome(String s, int left, int right)
+    {
+        int li=-1, ri=-1, max=0;
+        while(left>=0 && right<s.length() && s.charAt(left)==s.charAt(right))
+        {
+            if(s.charAt(left)==s.charAt(right))
+            {
+                if((right-left+1)>max)
+                {
+                    li=left;
+                    ri=right;
+                    max=right-left+1;
+                }
+                left--;
+                right++;
+            }  
+        }
+        return new int[]{li,ri};
     }
 }
