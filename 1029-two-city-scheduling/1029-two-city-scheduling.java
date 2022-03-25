@@ -1,43 +1,18 @@
 class Solution {
-    
-    class Pair
-    {
-        int val;
-        int idx;
-        
-        Pair(int val, int idx)
-        {
-            this.val=val;
-            this.idx=idx;
+    public int twoCitySchedCost(int[][] costs) {
+        int N = costs.length / 2;
+        int[][] dp = new int[N + 1][N + 1];
+        for (int i = 1; i <= N; i++) {
+            dp[i][0] = dp[i - 1][0] + costs[i - 1][0];
         }
-    }
-    public int twoCitySchedCost(int[][] a) {
-        
-        Pair diff[]=new Pair[a.length];
-        
-        for(int i=0;i<a.length;i++)
-        {
-            diff[i]=new Pair(a[i][1]-a[i][0],i);
+        for (int j = 1; j <= N; j++) {
+            dp[0][j] = dp[0][j - 1] + costs[j - 1][1];
         }
-        
-        Arrays.sort(diff,(b,c)->{
-            return b.val-c.val;
-        });
-        
-        int k=a.length/2;
-        
-        int sum=0;
-        
-        for(int i=0;i<k;i++)
-        {
-            sum+=a[diff[i].idx][1];
+        for (int i = 1; i <= N; i++) {
+            for (int j = 1; j <= N; j++) {
+                dp[i][j] = Math.min(dp[i - 1][j] + costs[i + j - 1][0], dp[i][j - 1] + costs[i + j - 1][1]);
+            }
         }
-        
-        for(int i=k;i<a.length;i++)
-        {
-            sum+=a[diff[i].idx][0];
-        }
-        
-        return sum;
+        return dp[N][N];
     }
 }
