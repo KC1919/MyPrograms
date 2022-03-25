@@ -1,18 +1,36 @@
 class Solution {
     public int twoCitySchedCost(int[][] costs) {
-        int N = costs.length / 2;
-        int[][] dp = new int[N + 1][N + 1];
-        for (int i = 1; i <= N; i++) {
-            dp[i][0] = dp[i - 1][0] + costs[i - 1][0];
-        }
-        for (int j = 1; j <= N; j++) {
-            dp[0][j] = dp[0][j - 1] + costs[j - 1][1];
-        }
-        for (int i = 1; i <= N; i++) {
-            for (int j = 1; j <= N; j++) {
-                dp[i][j] = Math.min(dp[i - 1][j] + costs[i + j - 1][0], dp[i][j - 1] + costs[i + j - 1][1]);
-            }
-        }
-        return dp[N][N];
+        int n = costs.length; // number of people
+        int[][] memo = new int[(n/2) + 1][(n/2) + 1]; // n/2 is capacity of each city
+        return dfs(n - 1, n / 2, n / 2, costs, memo);
     }
+    
+    int dfs(int index, int num_a, int num_b, int[][] costs, int[][] memo) {
+        // terminate
+        if (index < 0) {
+            return 0;
+        }
+        
+        if (memo[num_a][num_b] > 0) return memo[num_a][num_b];
+
+        int[] currCosts = costs[index];
+        int ans = 0;
+        
+        // constraints
+        if (num_a == 0) {
+            ans = currCosts[1] + dfs(index - 1, num_a, num_b - 1, costs, memo); 
+        } else if (num_b == 0) {
+            ans = currCosts[0] + dfs(index - 1, num_a - 1, num_b, costs, memo);
+        } else {
+            int min_b = currCosts[1] + dfs(index - 1, num_a, num_b - 1, costs, memo);
+            int min_a = currCosts[0] + dfs(index - 1, num_a - 1, num_b, costs, memo);
+            ans = Math.min(min_b, min_a);
+        }
+        
+        memo[num_a][num_b] = ans;
+        return memo[num_a][num_b];
+    }
+    
+    
+    
 }
