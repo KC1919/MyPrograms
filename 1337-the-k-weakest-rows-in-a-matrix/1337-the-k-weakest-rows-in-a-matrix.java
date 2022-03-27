@@ -1,5 +1,4 @@
-class Solution 
-{
+class Solution {
     public int[] kWeakestRows(int[][] mat, int k) 
     {
         class Pair
@@ -13,8 +12,8 @@ class Solution
             }
         }
         PriorityQueue<Pair>pq=new PriorityQueue<>((a,b)->{
-            int c1=a.count;
-            int c2=b.count;
+            int c1=a.count, i1=a.row;
+            int c2=b.count, i2=b.row;
             
             if(c1==c2)
                 return b.row-a.row;
@@ -24,15 +23,19 @@ class Solution
         for(int i=0;i<mat.length;i++)
         {
             int c=0;
-            for(int j=0;j<mat[i].length;j++)
-            {
-                if(mat[i][j]==1)
-                    c++;
-                else
-                    break;
-            }
+            int j=0, m=mat[i].length-1;
             
-            pq.add(new Pair(c,i));
+            while(j<=m && mat[i][j]!=mat[i][m])
+            {
+                c++;
+                m--;
+                j++;
+            }
+            if(mat[i][j]==0)
+                pq.add(new Pair(c,i));
+            else if(mat[i][m]==1)
+                pq.add(new Pair(m+1,i));
+            
             if(pq.size()>k)
                 pq.remove();
         }
@@ -41,7 +44,9 @@ class Solution
         int p=k-1;
         
         while(pq.size()>0)
+        {
             res[p--]=pq.remove().row;
+        }
         
         return res;
     }
