@@ -18,6 +18,9 @@ class Solution {
         
         int cand=-1;
         
+        //whichever candidates count is greater, that is selected as
+        //the potential candidate
+        
         if(ca>=top.length)
             cand=a;
         
@@ -30,6 +33,7 @@ class Solution {
         int tc=0;
         int bc=0;
         
+        //Loop to check at how many places the candidate is not present
         for(int i=0;i<top.length;i++)
         {
             if(top[i]!=cand)
@@ -38,6 +42,10 @@ class Solution {
             else if(bot[i]!=cand)
                 bc++;
         }
+        
+        //so we count the places int top array and the bottom array
+        //and we return minimum of the two, since we have to tell the minimum domino
+        //rotation(swapping)
         
         return Math.min(tc,bc);
     }
