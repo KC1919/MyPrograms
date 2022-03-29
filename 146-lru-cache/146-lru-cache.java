@@ -86,9 +86,9 @@ class LRUCache {
             if(node==this.head)
                 return node.value;
             
-            else{
+            else
                 remove(key);
-            }
+            
             addFirst(key,node.value);
             return node.value;
         }
