@@ -28,9 +28,6 @@ class Solution {
             
             else if(target<a[row][mid])
                 h=mid-1;
-            
-            else
-                break;
         }
         return false;
     }
