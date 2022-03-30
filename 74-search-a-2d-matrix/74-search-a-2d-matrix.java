@@ -1,16 +1,28 @@
 class Solution {
     public boolean searchMatrix(int[][] a, int target) {
         
-        int m=a[0].length;
-        
+        int j=a[0].length-1;
         for(int i=0;i<a.length;i++)
         {
-            if(target==a[i][m-1] || target==a[i][0])
-                return true;
+            if(target>a[i][j])
+            {
+                continue;
+            }
             
-            else if(target<a[i][m-1] && target>a[i][0])
-                return bsearch(a,i,0,m-1,target);
+            else if(target<a[i][j])
+            {
+                if(bsearch(a,i,0,j,target))
+                {
+                    return true;
+                    
+                }
+            }
+            else
+            {
+                return true;
+            }
         }
+        
         return false;
     }
     
