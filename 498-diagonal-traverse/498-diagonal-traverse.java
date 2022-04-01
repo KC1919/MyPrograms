@@ -13,9 +13,7 @@ class Solution {
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
-            {
                 list.get(i+j).add(a[i][j]);
-            }
         }
         
         int k=0;
@@ -26,16 +24,12 @@ class Solution {
             if(i%2==0)
             {
                 for(int j=list.get(i).size()-1;j>=0;j--)
-                {
                     ans[k++]=list.get(i).get(j);
-                }
             }
             else
             {
                 for(int j=0;j<list.get(i).size();j++)
-                {
                     ans[k++]=list.get(i).get(j);
-                }
             }
         }
         return ans;
