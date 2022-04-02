@@ -1,39 +1,31 @@
 class Solution {
-    public boolean validPalindrome(String s) {
-        int i=0, j=s.length()-1;
-        
-        if(isPalin(s,i,j))
-            return true;
-        
-        while(i<=j)
-        {
-            if(s.charAt(i)==s.charAt(j))
-            {
-                i++;
-                j--;
+    private boolean checkPalindrome(String s, int i, int j) {
+        while (i < j) {
+            if (s.charAt(i) != s.charAt(j)) {
+                return false;
             }
-            else
-            {
-                if(isPalin(s,i+1,j) || isPalin(s,i,j-1))
-                    return true;
-                
-                else
-                    return false;
-            }
+            
+            i++;
+            j--;
         }
+        
         return true;
     }
     
-    public boolean isPalin(String s, int left, int right)
-    {
-        while(left<right)
-        {
-            if(s.charAt(left)!=s.charAt(right))
-                return false;
+    public boolean validPalindrome(String s) {
+        int i = 0;
+        int j = s.length() - 1;
+        
+        while (i < j) {
+            // Found a mismatched pair - try both deletions
+            if (s.charAt(i) != s.charAt(j)) {
+                return (checkPalindrome(s, i, j - 1) || checkPalindrome(s, i + 1, j));
+            }
             
-            left++;
-            right--;
+            i++;
+            j--;
         }
+        
         return true;
     }
 }
