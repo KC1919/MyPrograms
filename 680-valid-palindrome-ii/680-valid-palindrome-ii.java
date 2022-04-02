@@ -1,10 +1,9 @@
 class Solution {
     public boolean validPalindrome(String s) {
-        
-        if(isPalin(s))
-            return true;
-        
         int i=0, j=s.length()-1;
+        
+        if(isPalin(s,i,j))
+            return true;
         
         while(i<=j)
         {
@@ -15,7 +14,7 @@ class Solution {
             }
             else
             {
-                if(isPalin(s.substring(i,j)) || isPalin(s.substring(i+1,j+1))==true)
+                if(isPalin(s,i+1,j) || isPalin(s,i,j-1))
                     return true;
                 
                 else
@@ -25,9 +24,8 @@ class Solution {
         return true;
     }
     
-    public boolean isPalin(String s)
+    public boolean isPalin(String s, int left, int right)
     {
-        int left=0, right=s.length()-1;   
         while(left<right)
         {
             if(s.charAt(left)!=s.charAt(right))
