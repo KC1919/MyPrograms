@@ -31,9 +31,9 @@ class Solution {
                 rc=0;
             }
             
-            if(lc>0 && rc>0)max=Math.max(lc+rc+1,max);
+            if(lc>0 && rc>0)
+                max=Math.max(lc+rc+1,max);
         }
-        
         return max<3?0:max;
     }
 }
