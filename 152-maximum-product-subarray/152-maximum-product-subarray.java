@@ -29,6 +29,11 @@ class Solution {
                 dp[i]=new Pair(prev,a[i]);
             }
             
+            else if((p.prev<0 && p.curr>0) || (p.prev>0 && p.curr<0))
+            {
+                dp[i]=new Pair(p.prev*a[i],p.curr*a[i]);
+            }
+            
             else if(p.prev==0 || p.curr==0)
             {
                 if(p.prev==0 && p.curr==0)
