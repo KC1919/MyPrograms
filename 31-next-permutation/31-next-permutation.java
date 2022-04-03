@@ -21,10 +21,10 @@ class Solution {
         
         for(int i=a.length-1;i>ind;i--)
         {
-            if(a[i]>a[ind] && (a[i]-a[ind])<min)
+            if(a[i]>a[ind])
             {
-                min=a[i]-a[ind];
                 idx=i;
+                break;
             }
         }
         int temp=a[ind];
