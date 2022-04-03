@@ -15,43 +15,60 @@ class Solution {
         
         int max=0;
         
-        Pair dp[]=new Pair[a.length];
+        // Pair dp[]=new Pair[a.length];
         
-        dp[0]=new Pair(0,a[0]);
+        // dp[0]=new Pair(0,a[0]);
         max=a[0];
+        int oldPrev=0, oldCurr=a[0];
         
         for(int i=1;i<a.length;i++)
         {
-            Pair p=dp[i-1];
-            if(p.prev<0 && p.curr<0)
+            // Pair p=dp[i-1];
+            int newPrev=0, newCurr=0;
+            
+            if(oldPrev<0 && oldCurr<0)
             {
-                int prev=Math.min(p.prev,p.curr)*a[i];
-                dp[i]=new Pair(prev,a[i]);
+                newPrev=Math.min(oldPrev,oldCurr)*a[i];
+                newCurr=a[i];
             }
             
-            else if((p.prev<0 && p.curr>0) || (p.prev>0 && p.curr<0))
+            else if((oldPrev<0 && oldCurr>0) || (oldPrev>0 && oldCurr<0))
             {
-                dp[i]=new Pair(p.prev*a[i],p.curr*a[i]);
+                newPrev=oldPrev*a[i];
+                newCurr=oldCurr*a[i];
+                // dp[i]=new Pair(p.prev*a[i],p.curr*a[i]);
             }
             
-            else if(p.prev==0 || p.curr==0)
+            else if(oldPrev==0 || oldCurr==0)
             {
-                if(p.prev==0 && p.curr==0)
-                    dp[i]=new Pair(a[i],a[i]);
+                if(oldPrev==0 && oldCurr==0){
+                    newPrev=a[i];
+                    newCurr=a[i];
+                    // dp[i]=new Pair(a[i],a[i]);
+                }
+                    
+                else if(oldPrev==0){
+                    newPrev=oldCurr*a[i];
+                    newCurr=a[i];
+                    // dp[i]=new Pair(oldCurr*a[i],a[i]);
+                }
                 
-                else if(p.prev==0)
-                    dp[i]=new Pair(p.curr*a[i],a[i]);
-                
-                else if(p.curr==0)
-                    dp[i]=new Pair(p.prev*a[i],a[i]);
+                else if(oldCurr==0){
+                    newPrev=oldPrev*a[i];
+                    newCurr=a[i];
+                    // dp[i]=new Pair(p.prev*a[i],a[i]);
+                }
                     
             }
             else
             {
-                dp[i]=new Pair(p.prev*a[i],p.curr*a[i]);
+                newPrev=oldPrev*a[i];
+                newCurr=oldCurr*a[i];
+                // dp[i]=new Pair(p.prev*a[i],p.curr*a[i]);
             }
-            
-            max=Math.max(max,Math.max(dp[i].curr,dp[i].prev));
+            oldPrev=newPrev;
+            oldCurr=newCurr;
+            max=Math.max(max,Math.max(newCurr,newPrev));
         }
         return max;
     }
