@@ -42,14 +42,16 @@ class Solution
                 cand=a[i];
                 count=1;
             }
+            
             else if(cand==a[i])
             {
                 count+=1;
             }
-            else
+            else if(a[i]!=cand)
             {
                 count--;
             }
+            
         }
         
         for(int i=0;i<size;i++)
