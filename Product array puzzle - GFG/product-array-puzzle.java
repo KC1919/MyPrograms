@@ -38,14 +38,13 @@ class Solution
 { 
 	public static long[] productExceptSelf(int a[], int n) 
 	{ 
-        long pre[]=new long[n];
-        long post[]=new long[n];
+        long ans[]=new long[n];
         
         long prefix=1;
         
         for(int i=0;i<n;i++)
         {
-            pre[i]=prefix;
+            ans[i]=prefix;
             prefix*=a[i];
         }
         
@@ -53,15 +52,8 @@ class Solution
         
         for(int i=n-1;i>=0;i--)
         {
-            post[i]=postfix;
+            ans[i]*=postfix;
             postfix*=a[i];
-        }
-        
-        long ans[]=new long[n];
-        
-        for(int i=0;i<n;i++)
-        {
-            ans[i]=pre[i]*post[i];
         }
         
         return ans;
