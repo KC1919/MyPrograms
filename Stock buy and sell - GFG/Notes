@@ -1,0 +1,20 @@
+The intuition behind the approach of this problem is that,
+
+We take a start pointer and an end pointer.
+
+Start pointer to mark the purchase of a stock.
+
+And the end pointer to mark the sell of a the stock.
+
+So as long as we get increasing prices every consecutive days.(prices[i]>prices[i-1]).
+
+In this case we keep on changing the end to the ith position i.e the price greater than the previous day price.
+
+And the point we encounter a day which has less price than the previous day, and the end pointer is not -1.
+We add the start index and the end index.
+
+And now reinitialize the start pointer with the ith index and end pointer with -1, since its price is less than the previous all days, so its is a potential buying price.
+
+No we again start traversing and updating our end pointer till we get increasing prices consecutively.
+
+And again we get less price than the previous day, again we do the same process as aboce, we store the start and end point and reinitialize them for new sequence.
