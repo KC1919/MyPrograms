@@ -1,0 +1,17 @@
+The intuition behind the approach, is that.
+
+We satrt from the 2nd last position and we try all possible jumps from that position,
+If any jump we take from the ith position, make us reach the destination point or a point from where we can reach the destination.
+So we put -1 at the ithindex, which indicates from this index we can reach the destination.
+So if anyone can reach a point where -1 is lying so from there destination can be reached.
+And this is how this becomes a dynamic programming question.
+We chek from all the ith positions trying all possible jumps we can take from there, and we store -1 if at any point we find that we can reach the destiantion from the ith position.
+
+And break from the current iteration.
+
+Then check this for all the indeices.
+
+And in the end we check the value we got at the 0th index.
+If we got 01 at the 0th index, that means we can reach the destination starting from the source point.
+
+If its not -1 , that means we cant reach the destination from the sourece point.
