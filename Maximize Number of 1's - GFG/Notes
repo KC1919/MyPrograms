@@ -1,0 +1,11 @@
+The intuition behind this approach is that.
+We start from the 0th index and we take 2 pointers, i and j.
+We take a count variable to count the length of the subarray length with maximum 1's.
+We also take a variable to count the number of 0's present in out subarray.
+If at any point the number of 0's exceed's the value of M.
+We start to remove them till our count of zero comes in range of M.
+And accordingly we keep decrementing our count also, till we reach the limit of 0's count.
+So basically its a sliding window approach.
+
+We have a max variable in which we store the max length of subarray with maximum number of 1's.
+At the end of the iteration we have in out max the maximum count of 1's that can we generated after flipping at most M 0's.
