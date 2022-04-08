@@ -9,11 +9,11 @@ class KthLargest {
         for(int i=0;i<a.length;i++){
             
             if(pq.size()<k)
-                pq.add(a[i]);
+                pq.offer(a[i]);
             
             else if(pq.size()==k && a[i]>pq.peek()){
-                pq.add(a[i]);
-                pq.remove();
+                pq.offer(a[i]);
+                pq.poll();
             }
         }
     }
@@ -21,14 +21,14 @@ class KthLargest {
     public int add(int val) {
         
         while(pq.size()>k)
-            pq.remove();
+            pq.poll();
         
         if(pq.size()<k)
-            pq.add(val);
+            pq.offer(val);
             
         else if(pq.size()==k && val>pq.peek()){
-            pq.add(val);
-            pq.remove();
+            pq.offer(val);
+            pq.poll();
         }
         return pq.size()>0?pq.peek():-1;
     }
