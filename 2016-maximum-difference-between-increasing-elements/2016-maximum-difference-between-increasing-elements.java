@@ -7,12 +7,10 @@ class Solution {
         for(int i=1;i<a.length;i++)
         {
             if(a[i]<=min)
-            {
                 min=a[i];
-            }
-            else
+    
+            else if(a[i]-min>max)
                 max=Math.max(a[i]-min,max);
-                
         }
         
         return max;
