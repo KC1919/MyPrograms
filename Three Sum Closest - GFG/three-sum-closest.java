@@ -43,9 +43,7 @@ class Solution
             
             int comp=target-a[i];
             
-            if(comp>=0)
-            {
-                //getting target or closest to the target two sum
+            //getting target or closest to the target two sum
                 int res=twoSum(a,i+1,a.length-1,comp);
                 int fres=res+a[i];  //adding current element to make three sum(triplet)
                 
@@ -64,8 +62,6 @@ class Solution
     	            else if(close==Math.abs(target-fres) && fres>max)
     	                max=fres;
                 }
-                
-            }
         }
         return max;
 	}
