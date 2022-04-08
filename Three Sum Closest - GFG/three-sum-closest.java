@@ -38,7 +38,7 @@ class Solution
         for(int i=0;i<a.length-2;i++)
         {
             if(i>0 && a[i]==a[i-1])
-            continue;
+                continue;
             
             int comp=target-a[i];
             
@@ -47,9 +47,8 @@ class Solution
                 int res=twoSum(a,i+1,a.length-1,comp);
                 int fres=res+a[i];
                 
-                // System.out.println(fres);
-                
-                if(fres==target)return fres;
+                if(fres==target)
+                    return fres;
                 
                 else
                 {
@@ -60,7 +59,7 @@ class Solution
 	                }
 	           
     	            else if(close==Math.abs(target-fres) && fres>max)
-    	            max=fres;
+    	                max=fres;
                 }
                 
             }
@@ -88,15 +87,15 @@ class Solution
 	            }
 	           
 	            else if(diff==Math.abs(target-sum) && sum>max)
-	            max=sum;
+	                max=sum;
 	        }
 	        
 	        if(sum<target)
-	        start++;
+	            start++;
 	        
 	        
 	        else if(sum>target)
-	        end--;
+	            end--;
 	    }
 	    return max;
 	}
