@@ -46,8 +46,8 @@ class GFG {
 class Solution {
     public long kthElement( int a1[], int a2[], int n, int m, int k) {
         
-        if(a1.length>a2.length)
-            return kthElement(a2,a1,m,n,k);
+        // if(a1.length>a2.length)
+        //     return kthElement(a2,a1,m,n,k);
         
         int l1=-1, l2=-1, r1=Integer.MAX_VALUE, r2=Integer.MAX_VALUE;
         int c1=0, c2=0;
