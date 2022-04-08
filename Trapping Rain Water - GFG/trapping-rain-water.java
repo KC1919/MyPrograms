@@ -39,62 +39,36 @@ class Solution{
     // Function to find the trapped water between the blocks.
     static long trappingWater(int a[], int n) { 
         
-        Stack<Integer>st=new Stack<>();
+        int lmax=a[0];
+        int rmax=a[a.length-1];
+        long res=0;
+        int r=a.length-1;
+        int l=0;
         
-        int rg[]=new int[n];
-        
-        rg[n-1]=-1;
-        
-        st.push(n-1);
-        
-        for(int i=n-2;i>=0;i--)
+        while(l<=r)                       //[0,1,0,2,1,0,1,3,2,1,2,1]
         {
-            while(st.size()>0 && a[st.peek()]<=a[i])
-                st.pop();
-            
-            if(st.size()==0){
-                rg[i]=-1;
-                st.push(i);
-            }
-            else
-            rg[i]=st.peek();
-        }
-        
-        st.clear();
-        
-        int lg[]=new int[n];
-        
-        lg[0]=-1;
-        
-        st.push(0);
-        
-        for(int i=1;i<n;i++)
-        {
-            while(st.size()>0 && a[st.peek()]<=a[i])
-                st.pop();
-            
-            if(st.size()==0){
-                lg[i]=-1;
-                st.push(i);
-            }
-            else
-            lg[i]=st.peek();
-        }
-
-        long water=0;
-        
-        for(int i=0;i<n;i++)
-        {
-            int lb=lg[i];
-            int rb=rg[i];
-            
-            if(lb!=-1 && rb!=-1)
+            if(a[l]<=rmax)
             {
-                long area=Math.min(a[lb],a[rb])-a[i];
-                water+=area;
+                if(a[l]<lmax) 
+                    res+=lmax-a[l];
+                
+                else 
+                    lmax=a[l];
+    
+                l++;
+            }
+            else
+            {
+                if(a[r]<rmax) 
+                    res+=rmax-a[r];
+                
+                else 
+                    rmax=a[r];
+                
+                r--;
             }
         }
-        return water;
+        return res;
     } 
 }
 
