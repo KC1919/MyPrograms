@@ -6,9 +6,14 @@ class KthLargest {
         this.k=k;
         
         for(int i=0;i<a.length;i++){
-            pq.add(a[i]);
-            if(pq.size()>k)
+            
+            if(pq.size()<k)
+                pq.add(a[i]);
+            
+            else if(pq.size()==k && a[i]>pq.peek()){
+                pq.add(a[i]);
                 pq.remove();
+            }
         }
     }
     
