@@ -48,16 +48,16 @@ class Solution
         {
             mid=(l+h)/2;
             
-            if(k>a[mid])
-            l=mid+1;
+            if(k>a[mid]) //if the mid element is smaller than the target
+            l=mid+1;     //we shift our lower index to mid+1, to search in the right half
             
-            else if(k<a[mid])
-            h=mid-1;
+            else if(k<a[mid]) //if the mid element is greater than the target,
+            h=mid-1;          //we shift the higher index to mid-1, so search in the left half
             
-            else
+            else    //if we get the exact target we return the target index.
             return mid;
         }
-        
-        return l;
+        return l; //else the left pointer after the search would always point to the index,
+                  //where the target element should be inserted.
     }
 }
