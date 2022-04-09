@@ -2,6 +2,7 @@ class Solution {
    
     public int[] topKFrequent(int[] a, int k) {
         
+        int n=a.length;
         HashMap<Integer,Integer>hm=new HashMap<>();
         
         PriorityQueue<Integer>pq=new PriorityQueue<>((b,c)->{
@@ -13,28 +14,39 @@ class Solution {
             hm.put(a[i],hm.getOrDefault(a[i],0)+1);
         }
         
+        ArrayList<Integer>bucket[]=new ArrayList[n+1];
+        
         for(int key:hm.keySet())
         {
-            if(pq.size()<k)
-                pq.add(key);
+            int freq=hm.get(key);
             
-            else if(pq.size()==k)
+            if(bucket[freq]==null)
             {
-               if(hm.get(key)>hm.get(pq.peek())){
-                   pq.remove();
-                   pq.add(key);
-               }
+                bucket[freq]=new ArrayList<>();
             }
+            bucket[freq].add(key);
+
         }
         
         int ans[]=new int[k];
         int idx=0;
         
-        while(pq.size()>0)
+        for(int i=n;i>=0;i--)
         {
-            ans[idx++]=pq.remove();
+            if(bucket[i]!=null)
+            {
+                for(int j=bucket[i].size()-1;j>=0;j--)
+                {
+                    ans[idx++]=bucket[i].get(j);
+                    k--;
+                    
+                    if(k==0)
+                        return ans;
+                }
+                if(k==0)
+                    return ans;
+            }
         }
-        
         return ans;
     }
 }
