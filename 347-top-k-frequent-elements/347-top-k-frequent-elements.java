@@ -1,43 +1,52 @@
 class Solution {
-    public int[] topKFrequent(int[] a, int k) 
+    
+    class Pair
     {
-        int n=a.length;
+        int freq;
+        int val;
+        
+        Pair(int val, int freq)
+        {
+            this.val=val;
+            this.freq=freq;
+        }
+    }
+    public int[] topKFrequent(int[] a, int k) {
         
         HashMap<Integer,Integer>hm=new HashMap<>();
         
-        for(int i=0;i<n;i++)
-            hm.put(a[i],hm.getOrDefault(a[i],0)+1);
+        PriorityQueue<Pair>pq=new PriorityQueue<>((b,c)->{
+            return b.freq-c.freq;
+        });
         
-        
-        List<List<Integer>>list=new ArrayList<>();
-        
-        for(int i=0;i<=n;i++)
-            list.add(null);
-        
-        int ans[]=new int[k];
-        
-        for(int key : hm.keySet()){
-            int number =key;
-            int count = hm.get(key);
-            
-            if(list.get(count) == null)
-                list.set(count, new ArrayList<>());
-            
-            list.get(count).add(number);
-            }
-        
-        int p=0;
-        for(int i=n;i>=0;i--)
+        for(int i=0;i<a.length;i++)
         {
-            if(list.get(i) == null)
-                continue;
-            for(int j = list.get(i).size() - 1; j >= 0; j--){
-                ans[p++] = list.get(i).get(j);
-                k--;
-                if(k==0)
-                    return ans;
+            hm.put(a[i],hm.getOrDefault(a[i],0)+1);
+        }
+        
+        for(int key:hm.keySet())
+        {
+            if(pq.size()<k)
+                pq.add(new Pair(key,hm.get(key)));
+            
+            else if(pq.size()==k)
+            {
+                if(hm.get(pq.peek().val)<hm.get(key))
+                {
+                    pq.remove();
+                    pq.add(new Pair(key,hm.get(key)));
+                }
             }
         }
+        
+        int ans[]=new int[k];
+        int idx=0;
+        
+        while(pq.size()>0)
+        {
+            ans[idx++]=pq.remove().val;
+        }
+        
         return ans;
     }
 }
