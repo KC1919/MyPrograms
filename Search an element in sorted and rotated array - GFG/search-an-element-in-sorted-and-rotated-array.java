@@ -51,7 +51,7 @@ class Solution
                 l=mid+1;
             }
             
-            else if(a[h]>=a[mid])
+            else
             {
                 if(target<=a[h] && target>a[mid])
                 l=mid+1;
