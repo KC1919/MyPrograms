@@ -54,16 +54,8 @@ class Solution{
         
         for(int i=0;i<n;i++)
         {
-            sum+=a[i];
-            
-            if(sum>max){
-                max=sum;
-            }
-
-            if(sum<=0)
-            {
-                sum=0;
-            }
+            sum=Math.max(sum + a[i], a[i]);
+            max = Math.max(max, sum);
         }
         return max;
     }
@@ -76,7 +68,6 @@ class Solution{
         for(int i=1;i<n;i++)
         {
             sum=Math.min(sum + a[i], a[i]);
-            
             min = Math.min(min, sum);
         }
         return min;
