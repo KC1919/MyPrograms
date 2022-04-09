@@ -1,22 +1,11 @@
 class Solution {
-    
-    class Pair
-    {
-        int freq;
-        int val;
-        
-        Pair(int val, int freq)
-        {
-            this.val=val;
-            this.freq=freq;
-        }
-    }
+   
     public int[] topKFrequent(int[] a, int k) {
         
         HashMap<Integer,Integer>hm=new HashMap<>();
         
-        PriorityQueue<Pair>pq=new PriorityQueue<>((b,c)->{
-            return b.freq-c.freq;
+        PriorityQueue<Integer>pq=new PriorityQueue<>((b,c)->{
+            return hm.get(b)-hm.get(c);
         });
         
         for(int i=0;i<a.length;i++)
@@ -27,15 +16,14 @@ class Solution {
         for(int key:hm.keySet())
         {
             if(pq.size()<k)
-                pq.add(new Pair(key,hm.get(key)));
+                pq.add(key);
             
             else if(pq.size()==k)
             {
-                if(hm.get(pq.peek().val)<hm.get(key))
-                {
-                    pq.remove();
-                    pq.add(new Pair(key,hm.get(key)));
-                }
+               if(hm.get(key)>hm.get(pq.peek())){
+                   pq.remove();
+                   pq.add(key);
+               }
             }
         }
         
@@ -44,7 +32,7 @@ class Solution {
         
         while(pq.size()>0)
         {
-            ans[idx++]=pq.remove().val;
+            ans[idx++]=pq.remove();
         }
         
         return ans;
