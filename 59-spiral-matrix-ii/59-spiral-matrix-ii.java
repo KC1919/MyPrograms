@@ -9,10 +9,11 @@ class Solution {
         while(sr<=er && sc<=ec)
         {
             travSpiral(a,sc,ec,sr,er);
-            sc++;
-            sr++;
-            ec--;
-            er--;
+            //moving inwards
+            sc++;  //start column
+            sr++;  //start row
+            ec--;  //end column
+            er--;  //end row
         }
         return a;
     }
