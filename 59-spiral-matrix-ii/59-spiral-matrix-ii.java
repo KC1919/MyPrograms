@@ -22,37 +22,24 @@ class Solution {
     {
         //traversing the top row of the square
         for(int j=sc;j<=ec;j++)
-        {
-            // if(a[sr][j]==0){
-                a[sr][j]=val++;
-            // }
-            
-        }
+            a[sr][j]=val++;
         
         //traversing the last column of the square, from below the last cell of top row
         for(int i=sr+1;i<=er;i++)
-        {
-            // if(a[i][ec]==0){
-                a[i][ec]=val++;
-            // }
-        }
+            a[i][ec]=val++;
         
         //traversing the last row of the square, from after the last cell of the right column
         // of the square
-        for(int j=ec-1;j>=sc && sr<=er;j--)
-        {
-            // if(a[er][j]==0){
+        if(sr<=er){
+            for(int j=ec-1;j>=sc;j--)
                 a[er][j]=val++;
-            // }
         }
         
         //traversing the 1st column of the square starting from above the 1st cell of 
         // bottom row of the square
-        for(int i=er-1;i>sr && sc<=ec;i--)
-        {
-            // if(a[i][sc]==0){
+        if(sc<=ec){
+            for(int i=er-1;i>sr;i--)
                 a[i][sc]=val++;
-            // }
         }
     }
 }
