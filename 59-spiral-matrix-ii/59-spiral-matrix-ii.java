@@ -1,25 +1,57 @@
 class Solution {
+    public int val=1;
     public int[][] generateMatrix(int n) {
-        int[][] result = new int[n][n];
-        int cnt = 1;
-        for (int layer = 0; layer < (n + 1) / 2; layer++) {
-            // direction 1 - traverse from left to right
-            for (int ptr = layer; ptr < n - layer; ptr++) {
-                result[layer][ptr] = cnt++;
+        int a[][]=new int[n][n];
+        
+        int sr=0,er=n-1, sc=0, ec=n-1;
+        val=1;
+        
+        while(sr<=er && sc<=ec)
+        {
+            travSpiral(a,sc,ec,sr,er);
+            sc++;
+            sr++;
+            ec--;
+            er--;
+        }
+        return a;
+    }
+    
+    public void travSpiral(int a[][], int sc, int ec, int sr, int er)
+    {
+        //traversing the top row of the square
+        for(int j=sc;j<=ec;j++)
+        {
+            if(a[sr][j]==0){
+                a[sr][j]=val++;
             }
-            // direction 2 - traverse from top to bottom
-            for (int ptr = layer + 1; ptr < n - layer; ptr++) {
-                result[ptr][n - layer - 1] = cnt++;
-            }
-            // direction 3 - traverse from right to left
-            for (int ptr = layer + 1; ptr < n - layer; ptr++) {
-                result[n - layer - 1][n - ptr - 1] = cnt++;
-            }
-            // direction 4 - traverse from bottom to top
-            for (int ptr = layer + 1; ptr < n - layer - 1; ptr++) {
-                result[n - ptr - 1][layer] = cnt++;
+            
+        }
+        
+        //traversing the last column of the square, from below the last cell of top row
+        for(int i=sr+1;i<=er;i++)
+        {
+            if(a[i][ec]==0){
+                a[i][ec]=val++;
             }
         }
-        return result;
+        
+        //traversing the last row of the square, from after the last cell of the right column
+        // of the square
+        for(int j=ec-1;j>=sc && sr!=er;j--)
+        {
+            if(a[er][j]==0){
+                a[er][j]=val++;
+            }
+        }
+        
+        //traversing the 1st column of the square starting from above the 1st cell of 
+        // bottom row of the square
+        for(int i=er-1;i>sr;i--)
+        {
+            if(a[i][sc]==0){
+                a[i][sc]=val++;
+            }
+        }
     }
 }
