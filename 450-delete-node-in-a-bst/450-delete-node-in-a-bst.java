@@ -32,28 +32,25 @@ class Solution {
             
             else
             {
-                int max=findMax(node.left);
+                int max=findMax(node.right);
                 node.val=max;
-                node.left=deleteNode(node.left,max);
+                node.right=deleteNode(node.right,max);
             }
         }
         
         else if(key<node.val)
-        {
             node.left=deleteNode(node.left,key);
-        }
         
         else
-        {
             node.right=deleteNode(node.right,key);
-        }
+        
         return node;
     }
     
     public int findMax(TreeNode node)
     {
-        if(node.right!=null)
-            return findMax(node.right);
+        if(node.left!=null)
+            return findMax(node.left);
         else
             return node.val;
     }
