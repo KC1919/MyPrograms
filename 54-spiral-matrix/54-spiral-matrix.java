@@ -5,6 +5,7 @@ class Solution {
         int n=a.length;
         int m=a[0].length;
         
+        //handling the case of matrix with either single column or single row.
         if(n==1 || m==1)
         {
             for(int i=0;i<n;i++)
@@ -33,12 +34,6 @@ class Solution {
     
     public void travSpiral(int a[][], int sc, int ec, int sr, int er, int n, int m, List<Integer>list)
     {
-        if(sc==ec && sr==er)
-        {
-            list.add(a[sr][sc]);
-            return;
-        }
-        
         for(int j=sc;j<=ec;j++)
         {
             if(a[sr][j]!=-101){
