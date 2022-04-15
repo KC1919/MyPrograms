@@ -19,11 +19,11 @@ class Solution {
         if (node == null) 
             return node;
         
-        if (node.val > high) 
-            return trimBST(node.left, low, high);
-        
-        if (node.val < low) 
+        if (node.val < low) //if the current node value is greater than high, we move left
             return trimBST(node.right, low, high);
+        
+        if (node.val > high) //if the current node value is smaller than low, we move right
+            return trimBST(node.left, low, high);
 
         node.left = trimBST(node.left, low, high);
         node.right = trimBST(node.right, low, high);
