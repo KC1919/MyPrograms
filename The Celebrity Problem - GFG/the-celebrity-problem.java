@@ -41,6 +41,8 @@ class Solution
     	
     	int cand=potentialCand(st,a);
     	
+    	if(cand==-1)return -1;
+    	
     	for(int i=0;i<n;i++)
     	{
     	    if(i!=cand && (a[i][cand]!=1 || a[cand][i]!=0))
@@ -49,22 +51,28 @@ class Solution
     	return cand;
     }
     
+    //here we find the potential candidate
     int potentialCand(Stack<Integer>st, int mat[][])
     {
-        int cand=-1;
-        while(st.size()!=1)
+        while(st.size()!=1) //we check till we are left with only one candidate int the stack
         {
-            int a=st.pop();
+            //we take out two elements from the stack
+            int a=st.pop(); 
             int b=st.pop();
             
-            if(mat[a][b]==1){
+            if(mat[a][b]==1 && mat[b][a]==1)
+            continue;
+            
+            //check if a knows b, if true means a is not a celebrity b might be
+            if(mat[a][b]==1){ //so we push b back to the stack
                 st.push(b);
             }
             
-            else if(mat[b][a]==1){
+            //check if b knows a, if true means b is not a celebrity a might be
+            else if(mat[b][a]==1){//so we push a to the stack
                 st.push(a);
             }
         }
-        return st.peek();
+        return st.size()==0?-1:st.peek(); //returning the last candidate left
     }
 }
