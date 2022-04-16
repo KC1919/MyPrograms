@@ -43,8 +43,13 @@ class Solution
     	
     	if(cand==-1)return -1;
     	
+    	//we confirm with all cases , whether the potential candidate we selected 
+    	//is actually a celebrity or not
     	for(int i=0;i<n;i++)
     	{
+    	    //if some person does not know candidate or candidate knows some person,
+    	    //then we break, since the candidate then cannot be a celebrity if someone 
+    	   // does not know him and the cand knows someone
     	    if(i!=cand && (a[i][cand]!=1 || a[cand][i]!=0))
     	    return -1;
     	}
