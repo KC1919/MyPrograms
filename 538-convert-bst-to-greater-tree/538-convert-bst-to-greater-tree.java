@@ -19,12 +19,13 @@ class Solution {
         List<Integer>list=new ArrayList<>();
         inorder(node,list);
         
-        for(int i=list.size()-2;i>=0;i--)
-        {
+        //postfix sum
+        for(int i=list.size()-2;i>=0;i--){
             list.set(i,list.get(i+1)+list.get(i));
         }
         
         count=0;
+        //setting all nodes value with its postfix sum
         rightSum(node,list);
         
         return node;
