@@ -14,39 +14,16 @@
  * }
  */
 class Solution {
-    int count=0;
+    int sum=0;
     public TreeNode convertBST(TreeNode node) {
-        List<Integer>list=new ArrayList<>();
-        inorder(node,list);
         
-        //postfix sum
-        for(int i=list.size()-2;i>=0;i--){
-            list.set(i,list.get(i+1)+list.get(i));
+        if(node!=null)
+        {
+            convertBST(node.right);
+            sum+=node.val;
+            node.val=sum;
+            convertBST(node.left);
         }
-        
-        count=0;
-        //setting all nodes value with its postfix sum
-        rightSum(node,list);
-        
         return node;
-    }
-    
-    public void inorder(TreeNode node, List<Integer>list)
-    {
-        if(node==null)return;
-        
-        inorder(node.left,list);
-        list.add(node.val);
-        inorder(node.right,list);
-    }
-    
-    public void rightSum(TreeNode node, List<Integer>list)
-    {
-        if(node==null)return;
-        
-        rightSum(node.left,list);
-        node.val=list.get(count);
-        count++;
-        rightSum(node.right,list);
     }
 }
