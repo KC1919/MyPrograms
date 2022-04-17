@@ -14,32 +14,26 @@
  * }
  */
 class Solution {
+    public TreeNode temp;
     public TreeNode increasingBST(TreeNode node) {
         
         if(node==null)
             return node;
         
-        List<TreeNode>list=new ArrayList<>();
-        inorder(node,list);
-        for(int i=list.size()-1;i>=0;i--)
-        {
-            TreeNode n=list.get(i);
-            n.left=null;
-            n.right=null;
-            
-            if(i<list.size()-1){
-                n.right=list.get(i+1);
-            }
-        }
-        return list.get(0);
+        temp=null;
+        inorder(node);
+        
+        return temp;
     }
-    public void inorder(TreeNode node, List<TreeNode>list)
+    public void inorder(TreeNode node)
     {
         if(node==null)
             return;
         
-        inorder(node.left,list);
-        list.add(node);
-        inorder(node.right,list);
+        inorder(node.right);
+        node.right=temp;
+        temp=node;
+        inorder(node.left);
+        node.left=null;
     }
 }
