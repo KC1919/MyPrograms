@@ -14,27 +14,33 @@
  * }
  */
 class Solution {
-    public int c=0;
+   
     public int kthSmallest(TreeNode node, int k) {
-        c=k;
-        return kthSmall(node);
-    }
-    
-    public int kthSmall(TreeNode node)
-    {
-        if(node==null)return -1;
+        Stack<TreeNode>st=new Stack<>();
         
-        int lres=kthSmall(node.left);
-        if(lres!=-1)return lres;
+        st.push(node);
         
-        c-=1;
-        if(c==0)return node.val;
-        
-        int rres=kthSmall(node.right);
-        
-        if(rres!=-1)
-            return rres;
-        
-        return -1;
+        while(true)
+        {
+            while(node!=null)
+            {
+                node=st.peek();
+                
+                if(node.left!=null)
+                    st.push(node.left);
+                
+                node=node.left;
+            }
+            
+            node=st.pop();
+            
+            if(k--==1){
+                return node.val;
+            }
+            if(node.right!=null)
+                st.push(node.right);
+            
+            node=node.right;
+        }
     }
 }
