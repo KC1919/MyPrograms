@@ -2,18 +2,20 @@ class Solution {
     public int[] sortArrayByParity(int[] a) 
     {
         int n=a.length;
-        int ans[]=new int[n];
+        int i=0, j=n-1;
         
-        int ev=0, od=n-1;
-        for(int i=0;i<n;i++)
+        while(i<j)
         {
-            if(a[i]%2==0)
-                ans[ev++]=a[i];
+            if(a[i]%2 > a[j]%2)
+            {
+                int temp=a[i];
+                a[i]=a[j];
+                a[j]=temp;
+            }
             
-            else
-                ans[od--]=a[i];
+            if(a[i]%2==0)i++;
+            if(a[j]%2==1)j--;
         }
-        
-        return ans;
+        return a;
     }
 }
