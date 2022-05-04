@@ -1,25 +1,42 @@
-class Solution {
-    public int maxOperations(int[] a, int k) {
-        
-        Arrays.sort(a);
-        
-        int i=0, j=a.length-1;
+class Solution 
+{
+    public int maxOperations(int[] a, int k) 
+    {
+        HashMap<Integer,Integer>hm=new HashMap<>();
+        int n=a.length;
+            
+        for(int i=0;i<n;i++)
+        {
+            hm.put(a[i],hm.getOrDefault(a[i],0)+1);
+        }
         
         int count=0;
-        
-        while(i<j)
+        for(int i=0;i<n;i++)
         {
-            if(a[i]+a[j]<k)
-                i++;
+            int comp=k-a[i];
             
-            else if(a[i]+a[j]>k)
-                j--;
-            
+            if(a[i]==comp)
+            {
+                int freq=hm.get(a[i]);
+                if(freq>1)
+                {
+                    count++;
+                    hm.put(a[i],freq-2);
+                }
+            }
             else
             {
-                count++;
-                i++;
-                j--;
+                if(hm.get(a[i])>0 && hm.containsKey(comp))
+                {
+                    int cFreq=hm.get(comp);
+                    int freq=hm.get(a[i]);
+                    
+                    if(cFreq>0){
+                        count++;
+                        hm.put(a[i],freq-1);
+                        hm.put(comp,cFreq-1);
+                    }
+                }
             }
         }
         return count;
