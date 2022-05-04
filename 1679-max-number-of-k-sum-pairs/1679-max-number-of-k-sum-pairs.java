@@ -38,24 +38,6 @@ class Solution
                     }
                 }
             }
-            
-//             if(a[i]==comp)
-//             {
-//                 int freq=hm.get(a[i]);
-                
-//             }
-//             else
-//             {
-//                 if(hm.get(a[i])>0 && hm.containsKey(comp))
-//                 {
-//                     int cFreq=hm.get(comp);
-//                     int freq=hm.get(a[i]);
-                    
-//                     if(cFreq>0){
-                        
-//                     }
-//                 }
-//             }
         }
         return count;
     }
