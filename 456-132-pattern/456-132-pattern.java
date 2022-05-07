@@ -1,18 +1,18 @@
 class Solution {
-    public boolean find132pattern(int[] nums) {
+    public boolean find132pattern(int[] a) {
         
         Stack<Integer> st = new Stack<>();
         
         int thirdElement = Integer.MIN_VALUE;
         
-        for(int i = nums.length - 1; i >= 0; i--)
+        for(int i = a.length - 1; i >= 0; i--)
         {
-            if(nums[i] < thirdElement) return true;
+            if(a[i] < thirdElement) return true;
             
-            while(!st.isEmpty() && st.peek() < nums[i]) 
+            while(!st.isEmpty() && st.peek() < a[i]) 
                 thirdElement = st.pop();
             
-            st.push(nums[i]);
+            st.push(a[i]);
         }
         return false;
     }
