@@ -5,7 +5,6 @@ class Solution {
         int n=a.length;
         HashMap<Integer,Integer>hm=new HashMap<>();
         
-        
         for(int i=0;i<a.length;i++)
             hm.put(a[i],hm.getOrDefault(a[i],0)+1);
     
@@ -17,9 +16,8 @@ class Solution {
             int freq=hm.get(key);
             
             if(bucket[freq]==null)
-            {
                 bucket[freq]=new ArrayList<>();
-            }
+            
             bucket[freq].add(key);
 
         }
@@ -39,8 +37,8 @@ class Solution {
                     if(k==0)
                         return ans;
                 }
-                if(k==0)
-                    return ans;
+                // if(k==0)
+                //     return ans;
             }
         }
         return ans;
