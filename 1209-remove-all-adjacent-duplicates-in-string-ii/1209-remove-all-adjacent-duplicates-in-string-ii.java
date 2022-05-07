@@ -37,8 +37,8 @@ class Solution {
         
         while(st.size()>0){
             Pair p=st.pop();    
-            sb.insert(0,p.ch);
+            sb.append(p.ch);
         }
-        return sb.toString();
+        return sb.reverse().toString();
     }
 }
