@@ -18,36 +18,27 @@ class Solution {
         {
             char ch=s.charAt(i);
             
-            if(st.size()>0)
-            {
-                if(st.peek().ch==ch){
-                    st.push(new Pair(ch,st.peek().count+1));
+            if(st.size()>0 && st.peek().ch==ch){
+                st.push(new Pair(ch,st.peek().count+1));
                     
-                    if(st.peek().count==k){
-                        int c=k;
+                if(st.peek().count==k){
+                    int c=k;
                         
-                        while(c>0){
-                            st.pop();
-                            c--;
-                        }
+                    while(c>0){
+                        st.pop();
+                        c--;
                     }
                 }
-                else
-                    st.push(new Pair(ch,1));
             }
-            
             else
                 st.push(new Pair(ch,1));
         }
-        
         StringBuilder sb=new StringBuilder();
         
         while(st.size()>0){
-            Pair p=st.pop();
-            
+            Pair p=st.pop();    
             sb.insert(0,p.ch);
         }
-        
         return sb.toString();
     }
 }
