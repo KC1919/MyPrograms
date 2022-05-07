@@ -14,14 +14,16 @@ class Solution {
             Arrays.sort(sortWord);
             String val=String.valueOf(sortWord);
             
-            if(hm.containsKey(val)){
+            if(hm.containsKey(val))
                 list.get(hm.get(val)).add(word);
-            }
-            else{
+            
+            else
+            {
                 hm.put(val,count);
-                if(count==list.size()){
+                
+                if(count==list.size())
                     list.add(new ArrayList<>());
-                }
+                
                 list.get(count).add(word);
                 count++;
             }
