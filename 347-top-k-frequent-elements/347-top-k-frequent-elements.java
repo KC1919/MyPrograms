@@ -5,14 +5,10 @@ class Solution {
         int n=a.length;
         HashMap<Integer,Integer>hm=new HashMap<>();
         
-        PriorityQueue<Integer>pq=new PriorityQueue<>((b,c)->{
-            return hm.get(b)-hm.get(c);
-        });
         
         for(int i=0;i<a.length;i++)
-        {
             hm.put(a[i],hm.getOrDefault(a[i],0)+1);
-        }
+    
         
         ArrayList<Integer>bucket[]=new ArrayList[n+1];
         
