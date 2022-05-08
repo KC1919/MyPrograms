@@ -3,8 +3,8 @@ class Solution {
         
         HashSet<Integer>hm=new HashSet<>();
         
-        for(int i=0;i<a.length;i++)
-            hm.add(a[i]);
+        for(int num:a)
+            hm.add(num);
         
         int max=0;
         for(int ele:hm)
