@@ -5,17 +5,23 @@ class Solution {
         int right=a.length-1;
         
         int max=0;
+        int lh=a[left];
+        int rh=a[right];
         
         while(left<right)
         {
+            lh=a[left];
+            rh=a[right];
+            
             int wid=right-left;
             int area=Math.min(a[left],a[right])*wid;
             max=Math.max(max,area);
             
-            if(a[left]<=a[right])left++;
+            if(lh<rh)
+                while(left<right && a[left]<=lh)left++;
             
             else
-                right--;
+                while(right>left && a[right]<=rh)right--;
         }
         return max;
     }
