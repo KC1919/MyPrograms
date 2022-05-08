@@ -29,6 +29,7 @@ class Solution {
         return checkSub(a,0,0);
     }
     
+    //function to check if the subgrid of 3*3 is valid or not
     public boolean checkSub(char a[][], int row, int col)
     {
         HashSet<Character>hm=new HashSet<>();
