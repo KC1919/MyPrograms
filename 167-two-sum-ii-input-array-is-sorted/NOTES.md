@@ -5,6 +5,7 @@ As the array is sorted,
 we keep a left pointer at the start of array, and a right pointer at the end of the array.
 ​
 Then we sum the elements at the two pointers.
+​
 if the sum is greaterthan the target, that measn we need to reduce the sum,
 so as the array is sorted, to reduce the sum we need smaller number, so we reduce our right pointer by 1
 ​
