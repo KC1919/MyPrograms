@@ -16,13 +16,12 @@ class Solution {
         }
         
         int max=0;
-        for(Map.Entry<Integer,Integer>pair:hm.entrySet())
+        for(int i=0;i<a.length;i++)
         {
-            if(pair.getValue()==1)
+            if(hm.get(a[i])==1)
             {
-                int key=pair.getKey();
                 int count=0;
-                while(hm.containsKey(key+count))
+                while(hm.containsKey(a[i]+count))
                     count++;
                 
                 max=Math.max(count,max);
