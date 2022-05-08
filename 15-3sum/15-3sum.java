@@ -1,50 +1,59 @@
-class Solution 
-{
+class Solution {
     public List<List<Integer>> threeSum(int[] a) 
     {
+        int n=a.length;
         Arrays.sort(a);
         
-        List<List<Integer>>ans=new ArrayList<>();
+        List<List<Integer>>res=new ArrayList<>();
         
-        for(int i=0;i<a.length;i++)
+        for(int i=0;i<n;i++)
         {
-            if(i!=0 && a[i]==a[i-1])
+            if(i>0 && a[i]==a[i-1])
                 continue;
             
-            List<List<Integer>>res=twoSum(a,i+1,a.length-1,0-a[i]);
+            int comp=0-a[i];
             
-            for(int j=0;j<res.size();j++)
+            List<List<Integer>>list=twoSum(a,i+1,n-1,comp);
+            
+            for(int j=0;j<list.size();j++)
             {
-                res.get(j).add(0,a[i]);
-                ans.add(res.get(j));
+                list.get(j).add(0,a[i]);
+                res.add(list.get(j));
             }
         }
-        return ans;
+        return res;
     }
     
-    public List<List<Integer>> twoSum(int a[], int si, int ei, int target)
+    public List<List<Integer>> twoSum(int a[], int l, int r, int target)
     {
         List<List<Integer>>res=new ArrayList<>();
-        while(si<ei)
+        
+        while(l<r)
         {
-            int sum=a[si]+a[ei];
+            if(a[l]+a[r]>target)
+                r--;
             
-            if(sum>target)
-                ei--;
-            
-            else if(sum<target)
-                si++;
+            else if(a[l]+a[r]<target)
+                l++;
             
             else
             {
-                res.add(new ArrayList<>(Arrays.asList(a[si],a[ei])));
-                si++;
-                ei--;
+                List<Integer>list=new ArrayList<>();
+                list.add(a[l]);
+                list.add(a[r]);
+                res.add(list);
                 
-                while(si<ei && a[si]==a[si-1])si++;
-                while(ei>si && a[ei]==a[ei+1])ei--;
+                l++;
+                r--;
+                
+                while(l<a.length && a[l]==a[l-1])
+                    l++;
+                
+                while(r>=0 && a[r]==a[r+1])
+                    r--;
             }
         }
+        
         return res;
     }
 }
