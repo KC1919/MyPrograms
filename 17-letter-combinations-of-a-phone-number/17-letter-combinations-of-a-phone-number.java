@@ -19,11 +19,11 @@ class Solution {
         }
         char key=digits.charAt(idx);
         
-        String s=keys[key-48];
+        String keyChars=keys[key-48];
         
-        for(int i=0;i<s.length();i++)
+        for(int i=0;i<keyChars.length();i++)
         {
-            char ch=s.charAt(i);
+            char ch=keyChars.charAt(i);
             ans.append(ch);
             combinations(digits,idx+1,keys,list,ans);
             ans.deleteCharAt(ans.length()-1);
