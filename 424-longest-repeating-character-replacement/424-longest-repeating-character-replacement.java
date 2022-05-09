@@ -17,8 +17,10 @@ class Solution {
                                                 //incrementing its fequency by 1
             
             //if some character has frequency greater than the current max frequency
+            //of some character in the substring
             //then we update the max frequency of the character in the substring
-            maxf=Math.max(maxf,hm.get(ch));
+            maxf=Math.max(maxf,hm.get(ch)); //count of most frequent character in the 
+                                            //substring
             
             //and check if the difference in the length of the substring and number of 
             //max frequency character is with the range of K, then we update our max length
