@@ -27,8 +27,6 @@ class Solution {
                 hm.remove(s.charAt(j));
                 hm.add(s.charAt(i));
                 j++;
-                max=Math.max(i-j+1,max);
-                
             }
         }
         return max;
