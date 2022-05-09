@@ -6,7 +6,9 @@ class Solution {
         
         for(int i=1;i<a.length;i++)
         {
-            min=Math.min(a[i],min);
+            if(a[i]<=min)min=a[i];
+            
+            else
             max=Math.max(max,a[i]-min);
         }
         return max;
