@@ -4,9 +4,6 @@ class Solution {
         int n=temp.length;
         int ans[]=new int[n];
         
-        Stack<Integer>st=new Stack<>();
-        
-        st.push(n-1);
         ans[n-1]=-1;
         
         //used the jump strategy to reduce the time complexity
@@ -20,8 +17,6 @@ class Solution {
                 j=ans[j];
             }
             ans[i]=j;
-            
-            st.push(i);
         }
         
         //so we got our next greater index for every ith index
