@@ -29,6 +29,10 @@ class Solution {
                 
                 if(sm.get(ch)<=tm.get(ch)){
                     count++;
+                    
+                    //if at any point the count of characters become equal to the length
+                    //of the string to be found palindrome of, we immediately
+                    //return true
                     if(count==t.length())
                     return true;
                 }
@@ -47,13 +51,22 @@ class Solution {
                         //decrement its frequency from the main map
                         sm.put(rem,sm.get(rem)-1);
                         
-                        //and check 
+                        //and check if the frequency is smaller than the required frequency
+                        //then we decrement the count of total characters required
+                        //to form the permutation string
+                        //beacuse all the character counts has to be exactly same as the 
+                        //string that needs to be found
                         if(sm.get(rem)<tm.get(rem)){
                             count--;
                         }
+                        
+                        //if the frequency of a charactr becomes 0 we remove it 
+                        //from the main map
                         if(sm.get(rem)==0){
                             sm.remove(rem);
                         }
+                        
+                        //move to next character, i.e. sliding the window
                         j++;
                     }
                 }        
