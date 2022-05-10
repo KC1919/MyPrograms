@@ -7,6 +7,8 @@ class Solution {
         HashMap<Character,Integer>tm=new HashMap<>();
         HashMap<Character,Integer>sm=new HashMap<>();
         
+        //mapping all the characters with their frequncies
+        //of the second string in the map
         for(int i=0;i<t.length();i++){
             char ch=t.charAt(i);
             tm.put(ch,tm.getOrDefault(ch,0)+1);
@@ -19,11 +21,21 @@ class Solution {
         {
             char ch=s.charAt(i);
             
+            //if at any point a character occurs, who is not part of the substring 
+            // that needs to be found, we reset the count to 0 and clear the main map
+            //because the current window susbtring has become invalid so
+            //there is no point to carry those characters forward because the characters
+            //need to be consecutive and any invalid character in between would break the
+            //sequence hence we discard the whole substring in the current window and 
+            //start to look for the substring again.
             if(!tm.containsKey(ch)){
                 count=0;
                 sm.clear();
                 j=i+1;
             }
+            
+            //we only put characters that are present in the substring whose 
+            //permutation needs to be found
             else{
                 sm.put(ch,sm.getOrDefault(ch,0)+1);
                 
