@@ -19,10 +19,8 @@ class Solution {
         for(int i=num;i<=9;i++)
         {
             if(sum+i<=target){
-                sum+=i;
                 list.add(i);
-                combinationSum(k,i+1,target,list,res,sum);
-                sum-=i;
+                combinationSum(k,i+1,target,list,res,sum+i);
                 list.remove(list.size()-1);
             }
         }
