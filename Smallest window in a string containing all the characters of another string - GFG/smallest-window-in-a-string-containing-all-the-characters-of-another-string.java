@@ -25,11 +25,11 @@ class Solution
     //of all the characters of string p.
     public static String smallestWindow(String s, String t)
     {
-        if(t.length()>s.length())
+       if(t.length()>s.length())
             return "-1";
         
+        HashMap<Character,Integer>sm=new HashMap<>();
         HashMap<Character,Integer>tm=new HashMap<>();
-        HashMap<Character,Integer>hm=new HashMap<>();
         
         for(int i=0;i<t.length();i++)
         {
@@ -37,62 +37,50 @@ class Solution
             tm.put(ch,tm.getOrDefault(ch,0)+1);
         }
         
-        int start=0, end=0;
-        
-        int j=0;
         int count=0;
-        int min=Integer.MAX_VALUE;
+        int j=0;
         
+        int start=-1, end=-1;
+        int min=Integer.MAX_VALUE;
         for(int i=0;i<s.length();i++)
         {
             char ch=s.charAt(i);
+            sm.put(ch,sm.getOrDefault(ch,0)+1);
             
-            if(tm.containsKey(ch))
-            {
-                hm.put(ch,hm.getOrDefault(ch,0)+1);
-                if(hm.get(ch)<=tm.get(ch))
-                {
-                    count+=1;
-                }
-            }
-            else
-            {
-                hm.put(ch,hm.getOrDefault(ch,0)+1);
+            if(sm.get(ch)==tm.get(ch)){
+                count++;
             }
             
-            while(j<s.length() && count==t.length())
-            {
-                if(i-j+1<min)
-                {
-                     min=i-j+1;
-                     start=j;
-                     end=i;
+            if(count==tm.size()){
+                
+                if(i-j<min){
+                    start=j;
+                    end=i;
+                    min=end-start;
                 }
-                        
-                char rem=s.charAt(j);
-                if(tm.containsKey(rem))
-                {
-                    if(hm.containsKey(rem))
-                    hm.put(rem,hm.get(rem)-1);
-                            
-                    if(hm.get(rem)==0)
-                    {
-                        hm.remove(rem);
-                        count-=1;
+                
+                while(j<=i && count==tm.size()){
+                    char rem=s.charAt(j);
+                    
+                    if(tm.containsKey(rem) && tm.get(rem)==sm.get(rem)){
+                        count--;
                     }
-                            
-                    else if(hm.get(rem)<tm.get(rem))
-                    {
-                        count-=1;
+                    
+                    sm.put(rem,sm.get(rem)-1);
+                    if(sm.get(rem)==0){
+                        sm.remove(rem);
                     }
+                    
+                    if(i-j<min){
+                        start=j;
+                        end=i;
+                        min=end-start;
+                    }
+                    j++;
                 }
-                else
-                {
-                    hm.remove(rem);
-                }
-                j++;
             }
         }
-        return min==Integer.MAX_VALUE?"-1":s.substring(start,end+1);
+        
+        return (start!=-1 && end!=-1)?s.substring(start,end+1):"-1";
     }
 }
