@@ -19,7 +19,7 @@ class Solution {
             else
                 st.push(Integer.parseInt(s));
         }
-        return st.peek();
+        return st.pop();
     }
     
     public int evaluate(int a, int b, String sign){
