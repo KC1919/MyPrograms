@@ -6,18 +6,19 @@ class Solution {
         
         Stack<Integer>st=new Stack<>();
         
-        st.push(0);
-        for(int i=1;i<n;i++){
+        st.push(n-1);
+        ans[n-1]=0;
+        for(int i=n-2;i>=0;i--){
             
-            while(st.size()>0 && temp[st.peek()]<temp[i]){
-                ans[st.peek()]=i-st.peek();
+            while(st.size()>0 && temp[st.peek()]<=temp[i]){
                 st.pop();
             }
+            if(st.size()==0)
+                ans[i]=0;
+            else
+                ans[i]=st.peek()-i;
+            
             st.push(i);
-        }
-        
-        while(st.size()>0){
-            ans[st.pop()]=0;
         }
         return ans;
     }
