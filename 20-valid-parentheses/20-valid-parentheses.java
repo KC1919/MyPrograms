@@ -1,6 +1,5 @@
 class Solution {
     public boolean isValid(String s) {
-        if(s==null || s.length()==0)return true;
         
         Stack<Character>st=new Stack<>();
         
@@ -8,35 +7,46 @@ class Solution {
         {
             char ch=s.charAt(i);
             
-            if(ch=='(' || ch=='[' || ch=='{')
+            if(ch=='(' || ch=='{' || ch=='[')
                 st.push(ch);
             
-            else if(ch==')')
-            {
-                if(st.size()==0 || st.peek()!='(')
+            else if(ch==')'){
+                
+                if(st.size()==0)return false;
+                
+                else if(st.size()>0 && st.peek()!='(')
                     return false;
                 
-                st.pop();
+                else
+                    st.pop();
+                
             }
             
-            else if(ch==']')
-            {
-                if(st.size()==0 || st.peek()!='[')
+            else if(ch=='}'){
+                
+                if(st.size()==0)return false;
+                
+                else if(st.size()>0 && st.peek()!='{')
                     return false;
                 
-                st.pop();
+                else
+                    st.pop();
+                
             }
             
-            else if(ch=='}')
-            {
-                if(st.size()==0 || st.peek()!='{')
+            else if(ch==']'){
+                
+                if(st.size()==0)return false;
+                
+                else if(st.size()>0 && st.peek()!='[')
                     return false;
                 
-                st.pop();
+                else
+                    st.pop();
+                
             }
         }
-        if(st.size()!=0)return false;
         
-        return true;
+        return st.size()==0?true:false;
     }
 }
