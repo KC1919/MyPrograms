@@ -11,39 +11,32 @@ class Solution {
                 st.push(ch);
             
             else if(ch==')'){
-                
-                if(st.size()==0)return false;
-                
-                else if(st.size()>0 && st.peek()!='(')
-                    return false;
+              
+                if(st.size()>0 && st.peek()=='(')
+                    st.pop();
                 
                 else
-                    st.pop();
+                    return false;
                 
             }
             
             else if(ch=='}'){
                 
-                if(st.size()==0)return false;
-                
-                else if(st.size()>0 && st.peek()!='{')
-                    return false;
+                if(st.size()>0 && st.peek()=='{')
+                    st.pop();
                 
                 else
-                    st.pop();
+                    return false;
                 
             }
             
             else if(ch==']'){
                 
-                if(st.size()==0)return false;
-                
-                else if(st.size()>0 && st.peek()!='[')
-                    return false;
-                
-                else
+                if(st.size()>0 && st.peek()=='[')
                     st.pop();
                 
+                else
+                    return false;
             }
         }
         
