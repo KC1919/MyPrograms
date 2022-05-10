@@ -33,13 +33,22 @@ class Solution {
                     return true;
                 }
                 
+                //if the frequency of a character in the crrent window substring
+                // exceeds the required frequency
                 else if(sm.get(ch)>tm.get(ch)){
                     
+                    //then we stat removing the characters from the left of the current
+                    // substring, till the frequency is not in range
                     while(j<i && sm.get(ch)>tm.get(ch)){
+                        
+                        //character to be removed
                         char rem=s.charAt(j);
                         
+                        //decrement its frequency from the main map
                         sm.put(rem,sm.get(rem)-1);
-                        if(tm.containsKey(rem) && sm.get(rem)<tm.get(rem)){
+                        
+                        //and check 
+                        if(sm.get(rem)<tm.get(rem)){
                             count--;
                         }
                         if(sm.get(rem)==0){
