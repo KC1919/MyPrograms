@@ -16,7 +16,6 @@ class Solution {
             else
                 return mid;
         }
-        
         return -1;
     }
 }
