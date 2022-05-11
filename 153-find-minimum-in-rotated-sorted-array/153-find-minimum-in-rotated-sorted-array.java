@@ -25,7 +25,8 @@ class Solution {
             }
             
             //if the element at left index is greater than the element at mid index
-            //that means the element is to the right of th
+            //that means the element is between the left index and the mid index
+            //so we shift the right pointer to the mid index
             else
                 h=mid;
         }
