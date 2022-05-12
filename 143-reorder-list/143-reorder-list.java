@@ -42,8 +42,8 @@ class Solution {
             //if the turn is even, we make link from the currentLeft node in the left half
             // of the list to the currRight in the right half of the list 
             if(turn%2==0){
-                nextLeft=currLeft.next;
-                currLeft.next=currRight;
+                nextLeft=currLeft.next; //storing the next node, before changing the links
+                currLeft.next=currRight; //move to the next node in the left half
                 currLeft=nextLeft;
                 turn++;
             }
@@ -51,8 +51,8 @@ class Solution {
             //and if the trn is odd, we make link from the currentRight node in the right
             //half of the list to the currLeft in the left half of the list
             else{
-                nextRight=currRight.next;
-                currRight.next=currLeft;
+                nextRight=currRight.next;//storing the next node, before changing the links
+                currRight.next=currLeft; //move to the next node in the right half
                 currRight=nextRight;
                 turn++;
             }
