@@ -13,20 +13,20 @@ class Solution {
             return;
         }
         
-        for(int i=0;i<a.length;i++){
+        for(int i=0;i<a.length;i++){                                
             
-                if(i!=0 && a[i-1]==a[i])
-                    continue;
+            if(i!=0 && a[i-1]==a[i])
+                continue;
                 
-                else{
-                    if(a[i]>=-10){
-                        list.add(a[i]);
-                        a[i]+=-20;
-                        permutations(a,list,idx+1,ans);
-                        list.remove(list.size()-1);
-                        a[i]+=20;
-                    }
+            else{
+                if(a[i]>=-10){
+                    list.add(a[i]);
+                    a[i]+=-20;
+                    permutations(a,list,idx+1,ans);
+                    list.remove(list.size()-1);
+                    a[i]+=20;
                 }
+            }
         }
     }
 }
