@@ -16,32 +16,44 @@ class Solution {
         
         ListNode slow=head, fast=head, prev=null;
         
+        //first we find the mid point of the list
         while(fast!=null && fast.next!=null){
             prev=slow;
             slow=slow.next;
             fast=fast.next.next;
         }
         
-        ListNode cr=reverse(slow);
+        //then we reverse the right half of the list
+        ListNode currRight=reverse(slow); //returns the head of the reversed list
         
-        // System.out.print(prev.val);
-        prev.next=null;
-        ListNode cl=head, nl=null, nr=null;
+        prev.next=null; //making the next of the last node of the left half equal to null
+                        //so that there occurs no cycle
+        
+        //now we start from the head of left half of the list
+        //and head of the reversed right half of the list
+        //means the last node of the list
+        ListNode currLeft=head, nextLeft=null, nextRight=null;
         int turn=0;
         
-        while(cl!=null && cr!=null){
+        //now we iterate through both the halves of the list, till any one half of the 
+        //list ends
+        while(currLeft!=null && currRight!=null){
             
+            //if the turn is even, we make link from the currentLeft node in the left half
+            // of the list to the currRight in the right half of the list 
             if(turn%2==0){
-                nl=cl.next;
-                cl.next=cr;
-                cl=nl;
+                nextLeft=currLeft.next;
+                currLeft.next=currRight;
+                currLeft=nextLeft;
                 turn++;
             }
             
+            //and if the trn is odd, we make link from the currentRight node in the right
+            //half of the list to the currLeft in the left half of the list
             else{
-                nr=cr.next;
-                cr.next=cl;
-                cr=nr;
+                nextRight=currRight.next;
+                currRight.next=currLeft;
+                currRight=nextRight;
                 turn++;
             }
         }
