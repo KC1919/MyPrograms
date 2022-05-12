@@ -1,49 +1,32 @@
 class Solution {
-
-    public List<List<Integer>> permuteUnique(int[] nums) {
-        List<List<Integer>> results = new ArrayList<>();
-
-        // count the occurrence of each number
-        HashMap<Integer, Integer> counter = new HashMap<>();
-        for (int num : nums) {
-            if (!counter.containsKey(num))
-                counter.put(num, 0);
-            counter.put(num, counter.get(num) + 1);
-        }
-
-        LinkedList<Integer> comb = new LinkedList<>();
-        this.backtrack(comb, nums.length, counter, results);
-        return results;
+    public List<List<Integer>> permuteUnique(int[] a) {
+        List<List<Integer>>ans=new ArrayList<>();
+        Arrays.sort(a);
+        permutations(a,new ArrayList<>(),0,ans);
+        return ans;
     }
-
-    protected void backtrack(
-            LinkedList<Integer> comb,
-            Integer N,
-            HashMap<Integer, Integer> counter,
-            List<List<Integer>> results) {
-
-        if (comb.size() == N) {
-            // make a deep copy of the resulting permutation,
-            // since the permutation would be backtracked later.
-            results.add(new ArrayList<Integer>(comb));
+    
+    public void permutations(int a[], List<Integer>list, int idx, List<List<Integer>>ans){
+        
+        if(idx==a.length){
+            ans.add(new ArrayList<>(list));
             return;
         }
-
-        for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
-            Integer num = entry.getKey();
-            Integer count = entry.getValue();
-            if (count == 0)
+        
+        for(int i=0;i<a.length;i++){                                
+            
+            if(i!=0 && a[i-1]==a[i])
                 continue;
-            // add this number into the current combination
-            comb.addLast(num);
-            counter.put(num, count - 1);
-
-            // continue the exploration
-            backtrack(comb, N, counter, results);
-
-            // revert the choice for the next exploration
-            comb.removeLast();
-            counter.put(num, count);
+                
+            else{
+                if(a[i]>=-10){
+                    list.add(a[i]);
+                    a[i]+=-20;
+                    permutations(a,list,idx+1,ans);
+                    list.remove(list.size()-1);
+                    a[i]+=20;
+                }
+            }
         }
     }
 }
