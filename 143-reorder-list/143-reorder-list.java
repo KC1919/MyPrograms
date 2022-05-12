@@ -45,7 +45,7 @@ class Solution {
                 nextLeft=currLeft.next; //storing the next node, before changing the links
                 currLeft.next=currRight; //move to the next node in the left half
                 currLeft=nextLeft;
-                turn++;
+                turn++; //this indicates which side turn it is to change the link
             }
             
             //and if the trn is odd, we make link from the currentRight node in the right
