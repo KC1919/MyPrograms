@@ -18,10 +18,11 @@ class Solution {
         if(node==null)
             return 0;
         
-        int lh=maxDepth(node.left);
-        int rh=maxDepth(node.right);
-        int mh=Math.max(lh,rh)+1;
+        int lh=maxDepth(node.left); //getting the height from the left subtree
+        int rh=maxDepth(node.right);//getting the height from the right subtree
+        int mh=Math.max(lh,rh)+1;   //adding our height tot he max among the left and the
+                                    //right height
         
-        return mh;
+        return mh;   //returning the height to the above node
     }
 }
