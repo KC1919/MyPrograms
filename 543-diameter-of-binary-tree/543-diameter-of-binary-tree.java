@@ -15,24 +15,39 @@
  */
 class Solution {
     
-    int maxdia=0;
+    class Pair
+    {
+        int myheight;
+        int maxdia;
+        
+        Pair(){
+            myheight=0;
+            maxdia=0;
+        }
+    }
     public int diameterOfBinaryTree(TreeNode root) {
-        maxdia=0;
-        maxDia(root);
-        return maxdia;
+        Pair result=maxDia(root);
+        return result.maxdia;
     }
     
-    public int maxDia(TreeNode node){
-        if(node==null)
-            return 0;
+    public Pair maxDia(TreeNode node){
+        if(node==null){
+            return new Pair();
+        }
         
-        int lres=maxDia(node.left);
-        int rres=maxDia(node.right);
+        Pair p=new Pair();
         
-        int mydia=lres+rres;
+        Pair lres=maxDia(node.left);
+        Pair rres=maxDia(node.right);
         
-        maxdia=Math.max(maxdia,mydia);
+        int maxdia=Math.max(lres.maxdia,rres.maxdia);
+        int myheight=Math.max(lres.myheight,rres.myheight)+1;
         
-        return Math.max(lres,rres)+1;
+        int mydia=lres.myheight+rres.myheight;
+        
+        p.myheight=myheight;
+        p.maxdia=Math.max(mydia,maxdia);
+        
+        return p;
     }
 }
