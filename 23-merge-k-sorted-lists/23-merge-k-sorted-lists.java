@@ -8,39 +8,34 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-class Solution 
-{
-    public ListNode mergeKLists(ListNode[] lists) 
-    {
-        if(lists.length==0)
-            return null;
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
         
-        PriorityQueue<ListNode>pq=new PriorityQueue<>((a,b)->{return a.val-b.val;});
-        int n=lists.length;
+        PriorityQueue<ListNode>pq=new PriorityQueue<>((a,b)->{
+            return a.val-b.val;
+        });
         
-        for(int i=0;i<n;i++)
-        {
+        for(int i=0;i<lists.length;i++){
+            
             if(lists[i]!=null)
                 pq.add(lists[i]);
         }
-            
         
-        ListNode demo=new ListNode();
-        ListNode temp=demo;
+        ListNode dummy=new ListNode();
+        ListNode temp=dummy;
         
-        while(pq.size()>0)
-        {
+        while(pq.size()>0){
             ListNode rem=pq.remove();
             
+            temp.next=rem;
+            temp=temp.next;
+            
+            rem=rem.next;
+            
             if(rem!=null)
-            {
-                if(rem.next!=null)
-                    pq.add(rem.next);
-                
-                temp.next=rem;
-                temp=temp.next;
-            }
+                pq.add(rem);
+            
         }
-        return demo.next;
+        return dummy.next;
     }
 }
