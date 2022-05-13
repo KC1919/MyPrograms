@@ -17,52 +17,35 @@ class Solution {
     
     class Pair
     {
-        int height=0;
-        boolean balanced=true;
+        int myheight;
+        boolean isBalanced;
+        
+        Pair(){
+            myheight=0;
+            isBalanced=true;
+        }
     }
-    
-    public boolean isBalanced(TreeNode root) 
-    {
-        if(root==null)
-            return true;
+    public boolean isBalanced(TreeNode root) {
         
         Pair result=check(root);
-        
-        return result.balanced;
+        return result.isBalanced;
     }
     
-    public Pair check(TreeNode node)
-    {
+    public Pair check(TreeNode node){
         if(node==null)
-        {
             return new Pair();
-        }
         
         Pair p=new Pair();
         
-        Pair lr=check(node.left);
+        Pair lres=check(node.left);
+        Pair rres=check(node.right);
         
-        if(lr.balanced==false)
-        {
-            p.balanced=false;
-            return p;
-        }
+        p.myheight=Math.max(lres.myheight,rres.myheight)+1;
         
-        Pair rr=check(node.right);
+        int diff=Math.abs(lres.myheight-rres.myheight);
         
-        if(rr.balanced==false)
-        {
-            p.balanced=false;
-            return p;
-        }
-        
-        if(Math.abs(lr.height-rr.height)>1)
-        {
-            p.balanced=false;
-            return p;
-        }
-        
-        p.height=Math.max(lr.height,rr.height)+1;
+        if(lres.isBalanced==false || rres.isBalanced==false || diff>1)
+            p.isBalanced=false;
         
         return p;
     }
