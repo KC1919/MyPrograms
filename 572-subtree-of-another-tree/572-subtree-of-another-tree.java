@@ -16,15 +16,7 @@
 class Solution {
     public boolean isSubtree(TreeNode node, TreeNode subnode) {
         
-        if(node.left==null && node.right==null && subnode.left==null && subnode.right==null&& node.val!=subnode.val)
-            return false;
-        
-        return helper(node,subnode);
-    }
-    
-    public boolean helper(TreeNode node, TreeNode subnode){
-        
-        if(node==null)
+       if(node==null)
             return false;
         
         boolean res=true;
@@ -36,11 +28,11 @@ class Solution {
             }   
         }
         
-        boolean lres=helper(node.left,subnode);
+        boolean lres=isSubtree(node.left,subnode);
         if(lres==true)
             return true;
         
-        boolean rres=helper(node.right,subnode);
+        boolean rres=isSubtree(node.right,subnode);
         if(rres==true)
             return true;
         
