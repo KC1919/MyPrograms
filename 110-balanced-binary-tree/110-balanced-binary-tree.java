@@ -38,13 +38,23 @@ class Solution {
         Pair p=new Pair();
         
         Pair lres=check(node.left);
+        
+        if(lres.isBalanced==false){
+            p.isBalanced=false;
+            return p;
+        }
         Pair rres=check(node.right);
+        
+        if(rres.isBalanced==false){
+            p.isBalanced=false;
+            return p;
+        }
         
         p.myheight=Math.max(lres.myheight,rres.myheight)+1;
         
         int diff=Math.abs(lres.myheight-rres.myheight);
         
-        if(lres.isBalanced==false || rres.isBalanced==false || diff>1)
+        if(diff>1)
             p.isBalanced=false;
         
         return p;
