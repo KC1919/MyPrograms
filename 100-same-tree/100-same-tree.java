@@ -16,23 +16,32 @@
 class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {
         
+        //if both the nodes reach null then return true, shows similarity in structure
         if(p==null && q==null)
             return true;
         
+        //if any one node is null and another node is not null, return false
+        //because this shows dissimilarity in their structure
         if((p==null && q!=null) || (q==null && p!=null))
             return false;
         
+        //or if the values of the nodes is not same then also they are not identical
+        //and we return false
         if(p.val!=q.val)
             return false;
         
+        //get the result from left subtree
         boolean lres=isSameTree(p.left,q.left);
-        if(lres==false)
+        if(lres==false)  //if false received
+            return false;  //return false, no need to check right subtree
+        
+        //if false is received from the right subtree
+        boolean rres=isSameTree(p.right,q.right); 
+        if(rres==false)    //then also we return false
             return false;
         
-        boolean rres=isSameTree(p.right,q.right);
-        if(rres==false)
-            return false;
-        
+        //if reach till end, means till this statement, that measn all the conditions
+        //of identical trees were true hence we return true
         return true;
     }
 }
