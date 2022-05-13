@@ -22,6 +22,7 @@ class Solution {
         invertTree(node.left);
         invertTree(node.right);
         
+        //Swapping the nodes in postorder
         TreeNode temp=node.left;
         node.left=node.right;
         node.right=temp;
