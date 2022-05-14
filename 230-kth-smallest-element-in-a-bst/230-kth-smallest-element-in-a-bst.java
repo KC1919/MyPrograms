@@ -14,29 +14,30 @@
  * }
  */
 class Solution {
-   
     public int kthSmallest(TreeNode node, int k) {
         
-        //iterative inorder traversal
+        if(node==null)
+            return 0;
+        
         Stack<TreeNode>st=new Stack<>();
         
-        while(true)
-        {
-            //Preorder
+        
+        
+        while(true){
+            
             while(node!=null){
                 st.push(node);
                 node=node.left;
             }
-        
+            
             node=st.pop();
             
-            //Inorder
-            if(--k==0)
+            if(k==1)
                 return node.val;
             
-            node=node.right;
+            k--;
             
-            //Postorder
+            node=node.right;
         }
     }
 }
