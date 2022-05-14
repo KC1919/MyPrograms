@@ -30,12 +30,16 @@ class Solution {
         while(que.size()>0){
             int size=que.size();
             
+            //list to store nodes of a particular level
             List<Integer>list=new ArrayList<>();
+            
+            //traversing the nodes of a particular level
             while(size-->0){
                 
                 TreeNode rem=que.remove();
-                list.add(rem.val);
+                list.add(rem.val); //adding to the list
                 
+                //adding nodes of the next level
                 if(rem.left!=null)
                     que.add(rem.left);
                 
@@ -43,7 +47,10 @@ class Solution {
                     que.add(rem.right);
                 
             }
+            //incrementing the level, means moving to the next level
             level++;
+            
+            //adding the list of nodes of a particular level to the resultant list
             res.add(list);
         }
         return res;
