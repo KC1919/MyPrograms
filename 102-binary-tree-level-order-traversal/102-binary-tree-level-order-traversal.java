@@ -30,11 +30,11 @@ class Solution {
         while(que.size()>0){
             int size=que.size();
             
-            res.add(new ArrayList<>());
+            List<Integer>list=new ArrayList<>();
             while(size-->0){
                 
                 TreeNode rem=que.remove();
-                res.get(level).add(rem.val);
+                list.add(rem.val);
                 
                 if(rem.left!=null)
                     que.add(rem.left);
@@ -44,6 +44,7 @@ class Solution {
                 
             }
             level++;
+            res.add(list);
         }
         return res;
     }
