@@ -1,22 +1,24 @@
 class Solution {
-    public int lastStoneWeight(int[] stones) 
-    {
-        PriorityQueue<Integer>pq=new PriorityQueue<>((a,b)->{
-            return b-a;
+    public int lastStoneWeight(int[] a) {
+        
+        PriorityQueue<Integer>pq=new PriorityQueue<>((b,c)->{
+            return c-b;
         });
         
+        for(int i=0;i<a.length;i++){
+            pq.add(a[i]);
+        }
         
-        for(int i=0;i<stones.length;i++)
-            pq.add(stones[i]);
-        
-        while(pq.size()>1)
-        {
+        while(pq.size()>1){
+            
             int s1=pq.remove();
             int s2=pq.remove();
             
-            if(s1>s2)
-                pq.add(s1-s2);        
+            if(s1!=s2){
+                pq.add(s1-s2);
+            }
         }
-        return pq.size()>0?pq.peek():0;
+        
+        return pq.size()>0?pq.remove():0;
     }
 }
