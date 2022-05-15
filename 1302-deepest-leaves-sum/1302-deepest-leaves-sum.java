@@ -25,11 +25,9 @@ class Solution {
         if(node==null)
             return 0;
         
-        int sum=0;
-        if(level==1){
-            sum+=node.val;
-            return sum;
-        }
+        //as we reach the deepest leaf node
+        if(level==1)
+            return node.val;
         
         int lres=helper(node.left,level-1);
         int rres=helper(node.right,level-1);
