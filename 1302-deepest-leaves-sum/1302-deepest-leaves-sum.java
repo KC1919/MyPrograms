@@ -25,16 +25,20 @@ class Solution {
         if(node==null)
             return 0;
         
-        //as we reach the deepest leaf node
+        //as we reach the deepest leaf node, we return its value
         if(level==1)
             return node.val;
         
+        //we get the result from the left subtree
         int lres=helper(node.left,level-1);
+        
+        //fet the result from the right subtree
         int rres=helper(node.right,level-1);
         
-        return lres+rres;
+        return lres+rres; //return the sum of the resultgot from the left and right subtree
     }
     
+    //function to ind the height of the tree
     public int maxHeight(TreeNode node){
         
         if(node==null)
