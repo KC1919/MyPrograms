@@ -1,36 +1,33 @@
 class Solution {
-    public List<List<Integer>> combinationSum(int[] a, int target) 
-    {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        
         List<List<Integer>>res=new ArrayList<>();
-        combination(a,0,0,target,new ArrayList<>(),res);
+        
+        combinations(candidates,0,0,target,new ArrayList<>(),res);
         return res;
     }
     
-    public void combination(int a[], int ind, int sum, int target, List<Integer>cand, List<List<Integer>>res)
+    public void combinations(int a[], int idx, int sum, int target, List<Integer>list, List<List<Integer>>res)
     {
-        if(sum>target)
+        if(idx==a.length)
             return;
         
-        if(sum==target)
-        {
-            res.add(new ArrayList<>(cand));
+        if(sum==target){
+            res.add(new ArrayList<>(list));
             return;
         }
         
-        if(sum<target)
-        {
-            cand.add(a[ind]);
-            combination(a,ind,sum+a[ind],target,cand,res);
-            cand.remove(cand.size()-1);
+        if(sum+a[idx]<=target){
+            list.add(a[idx]);
+            combinations(a,idx,sum+a[idx],target,list,res);
+            list.remove(list.size()-1);
         }
         
-        for(int i=ind+1;i<a.length;i++)
-        {
-            if(sum+a[i]<=target)
-            {
-                cand.add(a[i]);
-                combination(a,i,sum+a[i],target,cand,res);
-                cand.remove(cand.size()-1);
+        for(int i=idx+1;i<a.length;i++){
+            if(sum+a[i]<=target){
+                list.add(a[i]);
+                combinations(a,i,sum+a[i],target,list,res);
+                list.remove(list.size()-1);
             }
         }
     }
