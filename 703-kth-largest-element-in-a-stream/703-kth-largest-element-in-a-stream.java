@@ -32,7 +32,7 @@ class KthLargest {
             pq.remove();
         }
         
-        return pq.size()<k?-1:pq.peek();
+        return pq.peek();
     }
 }
 
