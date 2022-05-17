@@ -14,7 +14,7 @@ class Solution {
         if(n1==null && n2==null)
             return null;
         
-        if(n1.val==target.val && n2.val==target.val)
+        if(target==n1)
             return n2;
         
         TreeNode lres=getTargetCopy(n1.left,n2.left,target);
