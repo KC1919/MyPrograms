@@ -9,27 +9,23 @@
  */
 
 class Solution {
-    TreeNode node=null;
-    public final TreeNode getTargetCopy(final TreeNode original, final TreeNode cloned, final TreeNode target) {
-        
-        node=null;
-        
-        helper(original,cloned,target);
-        return node;
-    }
-    
-    public void helper(TreeNode n1, TreeNode n2, TreeNode target){
+    public final TreeNode getTargetCopy(final TreeNode n1, final TreeNode n2, final TreeNode target) {
         
         if(n1==null && n2==null)
-            return;
+            return null;
         
         if(n1.val==target.val && n2.val==target.val)
-        {
-            node=n2;
-            return;
-        }
+            return n2;
         
-        helper(n1.left,n2.left,target);
-        helper(n1.right,n2.right,target);
+        TreeNode lres=getTargetCopy(n1.left,n2.left,target);
+        
+        if(lres!=null)
+            return lres;
+        TreeNode rres=getTargetCopy(n1.right,n2.right,target);
+        
+        if(rres!=null)
+            return rres;
+        
+        return null;
     }
 }
