@@ -11,7 +11,7 @@
 class Solution {
     public final TreeNode getTargetCopy(final TreeNode n1, final TreeNode n2, final TreeNode target) {
         
-        if(n1==null && n2==null)
+        if(n1==null)
             return null;
         
         if(target==n1)
