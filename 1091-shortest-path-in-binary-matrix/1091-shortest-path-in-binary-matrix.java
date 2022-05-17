@@ -6,6 +6,7 @@ class Solution {
         int col;
         int level=0;
     }
+    
     public int shortestPathBinaryMatrix(int[][] a) {
         
         if(a[0][0]==1)
