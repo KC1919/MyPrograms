@@ -1,49 +1,38 @@
 class Solution {
-    public List<List<Integer>> combinationSum2(int[] a, int target) 
-    {
+    public List<List<Integer>> combinationSum2(int[] a, int target) {
+        
         List<List<Integer>>res=new ArrayList<>();
-    
+        
         Arrays.sort(a);
         
-        for(int i=0;i<a.length;i++)
-        {
-            if(i>0 && a[i]==a[i-1])
-                continue;
-            
-            else{
-                List<Integer>list=new ArrayList<>();
-                list.add(a[i]);
-                combinations(a,i+1,a[i],target,list,res);
-            }
-        }
-        
+        combinations(a,0,0,new ArrayList<>(),res,target);
         return res;
     }
     
-    public void combinations(int a[], int idx, int sum, int target, List<Integer>list, List<List<Integer>>res)
+    public void combinations(int a[], int idx, int sum, List<Integer>list, List<List<Integer>>res, int target)     
     {
-        if(idx==a.length || sum==target)
-        {
-            if(sum==target)
-            {
-                res.add(new ArrayList<>(list));
-            }
+        if(sum==target){
+            res.add(new ArrayList<>(list));
             return;
         }
         
-        for(int i=idx;i<a.length;i++)
-        {
-            if(i>idx && a[i]==a[i-1])
+        if(idx>=a.length){
+            return;
+        }
+        
+        for(int i=idx;i<a.length;i++){
+            
+            if(i>0 && a[i]==a[i-1])
                 continue;
             
-            else if(sum+a[i]<=target)
-            {
+            if(a[i]+sum<=target){
                 list.add(a[i]);
-                combinations(a,i+1,sum+a[i],target,list,res);
+                int val=a[i];
+                a[i]-=30;
+                combinations(a,i+1,sum+val,list,res,target);
                 list.remove(list.size()-1);
+                a[i]+=30;
             }
-            else
-                return;
         }
     }
 }
