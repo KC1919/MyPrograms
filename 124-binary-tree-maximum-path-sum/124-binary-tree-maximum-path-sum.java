@@ -15,43 +15,34 @@
  */
 class Solution {
     
-    int maxSum=-1001;
+    class res
+    {
+        int max=Integer.MIN_VALUE;
+    }
     
-    public int maxPathSum(TreeNode root) {
-        
-        if(root==null)
-            return 0;
-        
-        maxSum=-1001;
-        
-        getMaxPathSum(root);
-        return maxSum;
+    public int maxPathSum(TreeNode root) 
+    {
+        res a=new res();
+        helper(root,a);
+        return a.max;
         
     }
     
-    public int getMaxPathSum(TreeNode node){
-        
+    public int helper(TreeNode node, res a)
+    {
         if(node==null)
             return 0;
         
-        int lres=getMaxPathSum(node.left);
-        int rres=getMaxPathSum(node.right);
+        int ldata=helper(node.left,a);
+        int rdata=helper(node.right,a);
         
-        int max=Math.max(lres,rres);
+        int max_single = Math.max(Math.max(ldata, rdata) + node.val,
+                                  node.val);
         
-        int myPathSum=node.val;
+        int max_top = Math.max(max_single, ldata + rdata + node.val);
         
-        if(max>=0){
-            if(lres>=0 && rres>=0)
-                myPathSum+=lres+rres;
-            
-            else
-                myPathSum+=max;
-        }
-            
-        
-        maxSum=Math.max(maxSum,myPathSum);
-        
-        return max>=0?max+node.val:node.val;
+        a.max = Math.max(a.max, max_top);
+ 
+        return max_single;
     }
 }
