@@ -15,57 +15,92 @@ class Node {
 
 class Solution {
     public Node copyRandomList(Node head) {
-
-        HashMap < Node, Integer > hm = new HashMap < > ();
-        hm.put(null, -1);
-
-        Node n = head;
-        int ind = 0;
-
-        while (n != null) {
-            hm.put(n, ind);
-            n = n.next;
+        
+        if(head==null)
+            return head;
+        
+        HashMap<Node,Integer>mm=new HashMap<>();
+        
+        Node thead=head;
+        int ind=0;
+        
+        while(thead!=null){
+            mm.put(thead,ind);
             ind++;
+            thead=thead.next;
         }
-
-        n = head;
-        HashMap < Integer, Node > nhm = new HashMap < > ();
-
-        Node dummy = new Node(-100000);
-        Node p = dummy;
-
-        while (n != null) {
+        
+        HashMap<Integer,Node>tm=new HashMap<>();
+        
+        Node n=head;
+        
+        Node dummy=new Node(Integer.MIN_VALUE);
+        Node temp=dummy;
+        
+        int idx=0;
+        
+        
+        while(n!=null){
             
-            int idx = hm.get(n);
-            Node nn = null;
-            
-            if (!nhm.containsKey(idx))
-                nn = new Node(n.val);
-
-            else
-                nn=nhm.get(idx);
-
-            int ridx = hm.get(n.random);
-
-            if (ridx != -1) {
+            if(tm.containsKey(idx)){
                 
-                if(ridx==idx)
-                    nn.random=nn;
-
-                else if (nhm.containsKey(ridx))
-                    nn.random = nhm.get(ridx);
+                Node node=tm.get(idx);
+                Node pnode=tm.get(idx-1);
+                pnode.next=node;
+                tm.put(idx-1,pnode);
                 
-                else {
-                    nhm.put(ridx, new Node(n.random.val));
-                    nn.random = nhm.get(ridx);
+                Node random=n.random;
+                
+                if(random!=null){
+                    int randIdx=mm.get(random);
+                    
+                    if(tm.containsKey(randIdx))
+                        node.random=tm.get(randIdx);
+                    
+                    else{
+                        Node newRandNode=new Node(random.val);
+                        tm.put(randIdx,newRandNode);
+                        node.random=newRandNode;
+                    }
                 }
-            } 
+            }
             
-            p.next = nn;
-            nhm.put(idx, nn);
-            p = p.next;
-            n = n.next;
+            else{
+                
+                Node nn=new Node(n.val);
+                Node random=n.random;
+                
+                if(random!=null){
+                    int randIdx=mm.get(random);
+                    
+                    if(tm.containsKey(randIdx))
+                        nn.random=tm.get(randIdx);
+                    
+                    else if(randIdx==idx)
+                        nn.random=nn;
+                    
+                    else{
+                        Node newRandNode=new Node(random.val);
+                        tm.put(randIdx,newRandNode);
+                        nn.random=newRandNode;
+                    }
+                }
+                
+                if(idx>0){
+                    Node pnode=tm.get(idx-1);
+                    pnode.next=nn;
+                    tm.put(idx-1,pnode);
+                }
+                
+                if(idx==0)
+                    temp=nn;
+                
+                tm.put(idx,nn);
+            }
+            
+            idx++;
+            n=n.next;
         }
-        return dummy.next;
+        return temp;
     }
 }
