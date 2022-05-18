@@ -34,10 +34,7 @@ class Solution {
         
         Node n=head;
         
-        Node dummy=new Node(Integer.MIN_VALUE);
-        Node temp=dummy;
-        
-        Node prev=null;
+        Node prev=null, temp=null;
         
         int idx=0;
         
