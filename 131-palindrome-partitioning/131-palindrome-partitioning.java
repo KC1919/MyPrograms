@@ -1,43 +1,40 @@
 class Solution {
-    public List<List<String>> partition(String s) 
-    {
+    public List<List<String>> partition(String s) {
+        
         List<List<String>>res=new ArrayList<>();
-        helper(s,res,new ArrayList<String>());
+        boolean dp[][]=new boolean[s.length()][s.length()];
+        
+        palinParti(s,0,s.length()-1,new ArrayList<>(),res,dp);
         return res;
+        
     }
     
-    public void helper(String s, List<List<String>>res, List<String> list)
+    public void palinParti(String s, int si, int ei, List<String>list, List<List<String>>res,boolean dp[][])
     {
-        if(s.length()==0)
-        {
+        if(si>ei){
             res.add(new ArrayList<>(list));
             return;
         }
         
-        for(int i=0;i<s.length();i++)
-        {
-            String rem=s.substring(0,i+1);
+        for(int i=si;i<=ei;i++){
             
-            if(palindrome(rem))
-            {
-                list.add(rem);
-                helper(s.substring(i+1),res,list);
+            if(s.charAt(si) == s.charAt(i) && (i - si <= 2 || dp[si + 1][i - 1]==true)){
+                dp[si][i]=true;
+                list.add(s.substring(si,i+1));
+                palinParti(s,i+1,ei,list,res,dp);
                 list.remove(list.size()-1);
             }
         }
     }
     
-    public boolean palindrome(String s)
-    {
-        int start=0, end=s.length()-1;
+    public boolean isPalin(String s, int si, int ei){
         
-        while(start<end)
-        {
-            if(s.charAt(start)!=s.charAt(end))
+        while(si<=ei){
+            if(s.charAt(si)!=s.charAt(ei))
                 return false;
             
-            start++;
-            end--;
+            si++;
+            ei--;
         }
         return true;
     }
