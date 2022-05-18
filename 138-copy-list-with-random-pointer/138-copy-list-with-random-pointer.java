@@ -37,67 +37,48 @@ class Solution {
         Node dummy=new Node(Integer.MIN_VALUE);
         Node temp=dummy;
         
+        Node prev=null;
+        
         int idx=0;
         
         
         while(n!=null){
             
-            if(tm.containsKey(idx)){
+            Node node=null;
+            
+            if(tm.containsKey(idx))
+                node=tm.get(idx);
+            
+            else
+                node=new Node(n.val);
+            
+            Node random=n.random;
                 
-                Node node=tm.get(idx);
-                Node pnode=tm.get(idx-1);
-                pnode.next=node;
-                tm.put(idx-1,pnode);
+            if(random!=null){
+                int randIdx=mm.get(random);
                 
-                Node random=n.random;
+                if(randIdx==idx)
+                    node.random=node;
                 
-                if(random!=null){
-                    int randIdx=mm.get(random);
+                else if(tm.containsKey(randIdx))
+                    node.random=tm.get(randIdx);
                     
-                    if(tm.containsKey(randIdx))
-                        node.random=tm.get(randIdx);
-                    
-                    else{
-                        Node newRandNode=new Node(random.val);
-                        tm.put(randIdx,newRandNode);
-                        node.random=newRandNode;
-                    }
+                else{
+                    Node newRandNode=new Node(random.val);
+                    node.random=newRandNode;
+                    tm.put(randIdx,newRandNode);
                 }
             }
             
+            if(idx==0){
+                prev=node;
+                temp=node;
+            }
             else{
-                
-                Node nn=new Node(n.val);
-                Node random=n.random;
-                
-                if(random!=null){
-                    int randIdx=mm.get(random);
-                    
-                    if(tm.containsKey(randIdx))
-                        nn.random=tm.get(randIdx);
-                    
-                    else if(randIdx==idx)
-                        nn.random=nn;
-                    
-                    else{
-                        Node newRandNode=new Node(random.val);
-                        tm.put(randIdx,newRandNode);
-                        nn.random=newRandNode;
-                    }
-                }
-                
-                if(idx>0){
-                    Node pnode=tm.get(idx-1);
-                    pnode.next=nn;
-                    tm.put(idx-1,pnode);
-                }
-                
-                if(idx==0)
-                    temp=nn;
-                
-                tm.put(idx,nn);
+                prev.next=node;
+                prev=prev.next;
             }
-            
+            tm.put(idx,node);
             idx++;
             n=n.next;
         }
