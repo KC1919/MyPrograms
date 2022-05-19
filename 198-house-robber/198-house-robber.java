@@ -18,7 +18,6 @@ class Solution {
         for(int i=n-4;i>=0;i--){
             dp[i]=Math.max(dp[i+2],dp[i+3])+price[i];
         }
-        
         return Math.max(dp[0],dp[1]);
     }
 }
