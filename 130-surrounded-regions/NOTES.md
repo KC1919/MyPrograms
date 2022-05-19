@@ -1,4 +1,4 @@
-Use the concept of BFS.
+Used the concept of BFS.
 ​
 Made a pair class that has row, col
 ​
