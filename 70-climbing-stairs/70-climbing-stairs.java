@@ -3,13 +3,16 @@ class Solution {
         
         int dp[]=new int[n+1];
         
-        dp[n]=1;
-        dp[n-1]=1;
+        int a=1;
+        int b=1;
         
         for(int i=n-2;i>=0;i--){
-            dp[i]=dp[i+1]+dp[i+2];
+            
+            int c=a+b;
+            b=a;
+            a=c;
         }
         
-        return dp[0];
+        return a;
     }
 }
