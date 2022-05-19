@@ -4,12 +4,10 @@ class Solution {
     {
         int row;
         int col;
-        boolean border;
         
-        Pair(int row, int col, boolean border){
+        Pair(int row, int col){
             this.row=row;
             this.col=col;
-            this.border=border;
         }
     }
     
@@ -25,7 +23,7 @@ class Solution {
                 if(a[i][j]=='O'){
                     if(i==0 || j==0 || i==n-1 || j==m-1){
                         a[i][j]='Y';
-                        que.add(new Pair(i,j,true));
+                        que.add(new Pair(i,j));
                     }
                 }
             }
@@ -41,7 +39,7 @@ class Solution {
                 int col=dir[k][1]+rem.col;
                 
                 if(row>=0 && row<n && col>=0 && col<m && a[row][col]=='O'){
-                    que.add(new Pair(row,col,true));
+                    que.add(new Pair(row,col));
                     a[row][col]='Y';
                 }
             }
