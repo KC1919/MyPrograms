@@ -16,7 +16,7 @@ public class Codec {
         
         StringBuilder sb=new StringBuilder();
         preorder(root,sb);
-        // System.out.println(sb.toString());
+
         return sb.toString();
     }
     
