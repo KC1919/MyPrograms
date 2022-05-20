@@ -1,39 +1,52 @@
 class Solution {
-    public boolean exist(char[][] a, String word) 
-    {
-        int dir[][]={{-1,0},{1,0},{0,-1},{0,1}};
-        boolean visited[][]=new boolean[a.length][a[0].length];
-        for(int i=0;i<a.length;i++)
-        {
-            for(int j=0;j<a[0].length;j++)
-            {
-                if(a[i][j]==word.charAt(0))
-                    if(find(a,i,j,visited,1,word,dir)==true)
-                        return true;
-            }
-        }
-        return false;
-    }
-    
-    public boolean find(char a[][], int i, int j, boolean visited[][], int count, String word, int dir[][])
-    {
-        if(count==word.length())
-            return true;
+    public boolean exist(char[][] a, String word) {
         
-        visited[i][j]=true;
-        for(int k=0;k<dir.length;k++)
-        {
-            int r=dir[k][0]+i;
-            int c=dir[k][1]+j;
-            
-            if(r<a.length && r>=0 && c<a[0].length && c>=0 && visited[r][c]==false && a[r][c]==word.charAt(count))
-            {
-                boolean res=find(a,r,c,visited,count+1,word,dir);
-                if(res==true)
-                    return true;
+        int n=a.length;
+        int m=a[0].length;
+        
+        boolean visited[][]=new boolean[n][m];
+        StringBuilder sb=new StringBuilder();
+        
+        int dir[][]={{1,0},{-1,0},{0,-1},{0,1}};
+        
+        char sc=word.charAt(0);
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(a[i][j]==sc){
+                    sb.append(a[i][j]);
+                    boolean res=findWord(a,i,j,n,m,visited,sb,word,dir);
+                    sb.deleteCharAt(sb.length()-1);
+                    if(res==true)
+                        return true;
+                }
             }
         }
-        visited[i][j]=false;
         return false;
     }
+    public boolean findWord(char a[][], int i, int j, int n, int m, boolean visited[][], StringBuilder sb, String word, int dir[][])
+        {
+            if(sb.length()==word.length()){
+                return true;
+            }
+            
+            visited[i][j]=true;
+            
+            for(int k=0;k<4;k++){
+                int row=dir[k][0]+i;
+                int col=dir[k][1]+j;
+                
+                if(row>=0 && row<n && col>=0 && col<m && a[row][col]==word.charAt(sb.length()) && visited[row][col]==false)
+                {
+                    sb.append(a[row][col]);
+                    boolean res=findWord(a,row,col,n,m,visited,sb,word,dir);
+                    if(res==true)
+                        return true;
+                    
+                    sb.deleteCharAt(sb.length()-1);
+                }
+            }
+            visited[i][j]=false;
+            return false;
+        }
 }
