@@ -9,31 +9,17 @@ class Solution {
         
         dp[n-1]=1;
         
-        int max=0;
+        int omax=0;
         for(int i=n-2;i>=0;i--){
-            int res=LIS(a,i,dp,n);
-            max=Math.max(dp[i],max);
-        }
-        return max;
-    }
-    public int LIS(int a[], int idx, int dp[], int n){
-        
-        if(idx==n)
-            return 0;
-        
-        if(dp[idx]!=0)
-            return dp[idx];
-        
-        int max=0;
-        for(int i=idx+1;i<n;i++){
-            
-            if(a[i]>a[idx]){
-                int res=LIS(a,i,dp,n);
-                max=Math.max(max,res);
+            int max=0;
+            for(int j=i+1;j<n;j++){
+                if(a[j]>a[i]){
+                    max=Math.max(max,dp[j]);
+                }
             }
+            dp[i]=max+1;
+            omax=Math.max(omax,dp[i]);
         }
-        dp[idx]=max+1;
-        
-        return dp[idx]; 
+        return omax;
     }
 }
