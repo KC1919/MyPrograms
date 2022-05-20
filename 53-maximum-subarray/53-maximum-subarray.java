@@ -1,6 +1,7 @@
 class Solution {
     public int maxSubArray(int[] a) {
         
+        //Kadane's algorithm
         int max=-10001;
         int sum=0;
         
