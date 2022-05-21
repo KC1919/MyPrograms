@@ -1,52 +1,37 @@
 class Solution {
-    public int numDecodings(String s) {
-        
-        if(s.charAt(0)=='0')
-            return 0;
-        
-        HashMap<String, Integer>hm=new HashMap<>();
-        
-        decodeWays(s,hm);
-        
-        return hm.get(s);
+    public int numDecodings(String s) 
+    {
+        Integer dp[]=new Integer[s.length()];
+        helper(s,0,dp);
+        return dp[0];
     }
     
-    public int decodeWays(String s, HashMap<String,Integer>hm){
+    int helper(String s, int idx, Integer dp[])
+    {
         
-        if(s.length()==0){
+        if(idx==s.length())
+        {
             return 1;
         }
         
-        if(hm.containsKey(s)){
-            return hm.get(s);
-        }
+        if(dp[idx]!=null)
+            return dp[idx];
         
-        String data;
+        if(s.charAt(idx)=='0')
+            return dp[idx]=0;
         
-        data=s.charAt(0)+"";
-        
-        int sres=0, dres=0;
-        
-        if(data.equals("0")){
-            return 0;
-        }
-        
-        if(!data.equals("0")){
-            sres=decodeWays(s.substring(1),hm);
-        }
-        
-        if(s.length()>=2){
-            data=s.substring(0,2);
+        int count=0;
 
-            if(Integer.parseInt(data)<=26){
-                dres=decodeWays(s.substring(2),hm);
-            }
+        count=helper(s,idx+1,dp);
+        
+        if(s.length()-idx>=2)
+        {
+            char ch1=s.charAt(idx);
+            char ch2=s.charAt(idx+1);
+            if(((ch1-48)*10)+(ch2-48)<=26)
+            count+=helper(s,idx+2,dp);
         }
         
-        int myRes=sres+dres;
-        
-        hm.put(s,myRes);
-        
-        return myRes;
+        return dp[idx]=count;
     }
 }
