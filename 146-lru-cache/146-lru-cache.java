@@ -13,7 +13,6 @@ class LRUCache {
     }
     
     private int maxSize;
-    private int size;
     private HashMap<Integer,Node>hm;
     private Node head;
     private Node tail;
@@ -21,7 +20,6 @@ class LRUCache {
     public LRUCache(int capacity) {
         hm=new HashMap<>();
         this.maxSize=capacity;
-        this.size=0;
     }
     
     public void addFirst(Node node){
