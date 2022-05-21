@@ -77,7 +77,6 @@ class LRUCache {
                 removeMid(node);
             }
             
-            
             //and return node's value
             return node.val;
         }
@@ -87,6 +86,7 @@ class LRUCache {
             return -1;
     }
     
+    //this method removes the node from the list, when the node is not head or tail
     public void removeMid(Node node){
         //we check if the fetched node is the head node
             //if yes, we do not need to do anything as this is the most recent node as it
@@ -126,40 +126,41 @@ class LRUCache {
         
         //we check if the node is already present in the list
         if(hm.containsKey(key)){
+            
             Node node=hm.get(key);
+            
+            //update the value of node with the new value
             node.val=value;
+            
+            //put back the updated node in the map
             hm.put(key,node);
             
-//             if(node==head){
-//                 //do nothing
-//             }
-            
-//             else if(node==tail){
-//                 removeLast();
-//                 addFirst(node);
-//             }
-            
-//             else{
-//                 node.prev.next=node.next;
-//                 node.next.prev=node.prev;
-//                 node.next=null;
-//                 node.prev=null;
-//                 addFirst(node);
-//             }
+            //remove the node from the list
             removeMid(node);
-            
         }
         
+        //else if the node does not exist in the map
         else{
+            
+            //create a new node with the key and value
             Node node=new Node(key,value);
-
+            
+            //check if the list is full
             if(hm.size()==this.maxSize){
+                //get the key of the tail node
                 int remKey=tail.key;
+                
+                //remove the node from the map , as it is the least recently used node
                 hm.remove(remKey);
+                
+                //remove the last node form the list, 
                 removeLast();
             }
-
+            
+            //put the new node in the map
             hm.put(key,node);
+            
+            //and add the node to the head of the list, as its the most recently used node
             addFirst(node);
         }
     }
