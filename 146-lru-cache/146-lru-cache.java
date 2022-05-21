@@ -1,118 +1,122 @@
 class LRUCache {
     
-    class Node
-    {
-        int key;
-        int value;
+    class Node{
         Node next;
         Node prev;
+        int val;
+        int key;
         
-        Node(int key, int value)
-        {
+        Node(int key, int val){
+            this.val=val;
             this.key=key;
-            this.value=value;
-            this.prev=null;
-            this.next=null;
         }
     }
     
-    HashMap<Integer,Node>hm;
-    int maxSize;
-    int size;
-    
-    Node head;
-    Node tail;
+    private int maxSize;
+    private int size;
+    private HashMap<Integer,Node>hm;
+    private Node head;
+    private Node tail;
     
     public LRUCache(int capacity) {
+        hm=new HashMap<>();
         this.maxSize=capacity;
         this.size=0;
-        this.hm=new HashMap<>();
-        this.head=this.tail=null;
     }
     
-    public void addFirst(int key, int value){
+    public void addFirst(Node node){
         
-        Node n=new Node(key,value);
-        if(this.head==null && this.tail==null){
-            this.head=this.tail=n;
+        if(head==null){
+            head=node;
+            tail=node;
         }
-        
         else{
-            this.head.prev=n;
-            n.next=this.head;
-            this.head=n;
+            node.next=head;
+            head.prev=node;
+            head=node;
         }
-        hm.put(key,n);
     }
     
-    public void remove(int key)
-    {
-        Node node=hm.get(key);
-        
-        if(node==this.head && node==this.tail){
-            this.tail=this.head=null;
+    public void removeLast(){
+        if(this.tail!=null){
+            
+            if(tail==head){
+                tail=null;
+                head=null;
+            }
+            else{
+                this.tail=this.tail.prev;
+                this.tail.next.prev=null; //breaking the next nodes prev link
+                this.tail.next=null;  //breaking the current node's next link
+            }
         }
-        
-        else if(node==head){
-            this.head=node.next;
-            node.next.prev=null;
-            node.next=null;
-        }
-        
-        else if(node==this.tail)
-        {
-            this.tail=node.prev;
-            node.prev.next=null;
-            node.prev=null;
-        }
-        
-        else
-        {
-            node.prev.next=node.next;
-            node.next.prev=node.prev;
-            node.prev=null;
-            node.next=null;
-        }
-        hm.remove(key);
     }
     
     public int get(int key) {
-        if(!hm.containsKey(key)) return -1;
         
-        else{
-            
+        if(hm.containsKey(key)){
             Node node=hm.get(key);
             
-            if(node==this.head)
-                return node.value;
+            if(node==head){
+                return node.val;
+            }
             
-            else
-                remove(key);
+            else if(node==tail){
+                removeLast();
+                addFirst(node);
+            }
             
-            addFirst(key,node.value);
-            return node.value;
+            else{
+                node.prev.next=node.next;
+                node.next.prev=node.prev;
+                node.next=null;
+                node.prev=null;
+                addFirst(node);
+            }
+            
+            return node.val;
         }
+        else
+            return -1;
     }
     
     public void put(int key, int value) {
         
         if(hm.containsKey(key)){
-            remove(key);
-            addFirst(key,value);
-        }
-        
-        else{
+            Node node=hm.get(key);
+            node.val=value;
+            hm.put(key,node);
             
-            if(this.size==this.maxSize){
-                addFirst(key,value);
-                int remKey=tail.key;
-                remove(remKey);
+            if(node==head){
+                //do nothing
+            }
+            
+            else if(node==tail){
+                removeLast();
+                addFirst(node);
             }
             
             else{
-                addFirst(key,value);
-                this.size++;
+                node.prev.next=node.next;
+                node.next.prev=node.prev;
+                node.next=null;
+                node.prev=null;
+                addFirst(node);
             }
+            
+        }
+        
+        else{
+            Node node=new Node(key,value);
+
+            if(hm.size()==this.maxSize){
+                int remKey=tail.key;
+                hm.remove(remKey);
+                removeLast();
+            }
+
+            hm.put(key,node);
+            addFirst(node);
         }
     }
 }
