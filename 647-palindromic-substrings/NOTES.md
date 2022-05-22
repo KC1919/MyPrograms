@@ -14,10 +14,10 @@ So the 2-d matrix will be of  size of the string.
 ---ending characters----
 n        a        m          a             n**
 **n**  (n)     (na)    (nam)  (nama)  (naman)
-**a**   x       (a)      (am)   (ama)    (aman)
+**a**   x       (a)      (am)    (ama)    (aman)
 **m**  x        x       (m)      (ma)      (man)
-**a**   x        x         x        (a)         (an)
-**n**   x        x         x         x          (n)
+**a**   x        x         x        (a)          (an)
+**n**   x        x         x         x           (n)
 ​
 **So the rows represent the substring starting character and the columns represent the substring ending character.**
 ​
