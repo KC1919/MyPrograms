@@ -1,44 +1,42 @@
 class Solution {
     public int[] plusOne(int[] a) {
-        int carry=0, rem=0, sum=0, cand=0;
-        int i=a.length-1;
         
-        ArrayList<Integer>ans=new ArrayList<>();
+        int n=a.length;
         
-        while(i>=0 || carry!=0)
-        {
-            if(i>=0)
-            {
-                cand=a[i];
-                if(i==a.length-1)
-                    cand+=1;
-                    
-                i--;
-            }
+        a[n-1]+=1;
+        int carry=0;
+        
+        if(a[n-1]==10){
+            a[n-1]=0;
+            carry=1;
+        }
             
-            sum=cand;
+        for(int i=a.length-2;i>=0;i--){
             
-            if(carry!=0)
-            {
-                sum+=carry;
+            if(carry>0){
                 carry=0;
+                a[i]+=1;
             }
             
-            rem=sum%10;
-            carry=sum/10;
-            
-            ans.add(rem);
-            sum=0;
-            cand=0;
+            if(a[i]>9){
+                a[i]=0;
+                carry=1;
+            }
         }
         
-        Collections.reverse(ans);
         
-        int res[]=new int[ans.size()];
+        if(carry==1){
+            
+            int ans[]=new int[a.length+1];
+            ans[0]=1;
+            
+            for(int i=1;i<=a.length;i++){
+                ans[i]=a[i-1];
+            }
+            return ans;
+        }
         
-        for(int j=0;j<res.length;j++)
-            res[j]=ans.get(j);
+        return a;
         
-        return res;
     }
 }
