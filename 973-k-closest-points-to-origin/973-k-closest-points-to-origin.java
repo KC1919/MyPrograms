@@ -1,31 +1,69 @@
 class Solution {
-    public int[][] kClosest(int[][] points, int k) {
-        // Use a lambda comparator to sort the PQ by farthest distance
-        Queue<int[]> maxPQ = new PriorityQueue<>((a, b) -> b[0] - a[0]);
-        for (int i = 0; i < points.length; i++) {
-            int[] entry = {squaredDistance(points[i]), i};
-            if (maxPQ.size() < k) {
-                // Fill the max PQ up to k points
-                maxPQ.add(entry);
-            } else if (entry[0] < maxPQ.peek()[0]) {
-                // If the max PQ is full and a closer point is found,
-                // discard the farthest point and add this one
-                maxPQ.poll();
-                maxPQ.add(entry);
+    
+    class Pair
+    {
+        double dist;
+        int ind;
+        
+        Pair(int ind, double dist)
+        {
+            this.ind=ind;
+            this.dist=dist;
+        }
+    }
+    public int[][] kClosest(int[][] points, int k) 
+    {   
+        //custom max heap PQ based on the distance from the origin
+        PriorityQueue<Pair>pq=new PriorityQueue<>((a,b)->{
+            if((int)a.dist==(int)b.dist)
+            {
+                //extracting the decimal part of both the values
+                double d1=a.dist-(int)a.dist;
+                double d2=b.dist-(int)b.dist;
+                
+                //checking if the a's decimal part is amller or grater than b's decimal part
+                if(d1<d2)
+                    return 1;
+                
+                else if(d1>d2)
+                    return -1;
+                
+                else
+                    return 0;
+            }
+            else
+                return (int)b.dist-(int)a.dist;
+        });
+        
+        for(int i=0;i<points.length;i++)
+        {
+            int x=points[i][0];
+            int y=points[i][1];
+            
+            //calculating the distance of every point from the  origin
+            double dist=Math.sqrt((int)Math.pow(x-0,2)+(int)Math.pow(y-0,2));
+            
+            if(pq.size()<k){
+                pq.add(new Pair(i,dist));
+            }
+            
+            else if(pq.size()==k){
+                
+                if(pq.peek().dist>dist){
+                    pq.add(new Pair(i,dist));
+                    pq.remove();
+                }
             }
         }
+
+        int ans[][]=new int[k][2];
         
-        // Return all points stored in the max PQ
-        int[][] answer = new int[k][2];
-        for (int i = 0; i < k; i++) {
-            int entryIndex = maxPQ.poll()[1];
-            answer[i] = points[entryIndex];
+        for(int i=0;i<k;i++)
+        {
+            Pair rem=pq.remove();
+            ans[i][0]=points[rem.ind][0];
+            ans[i][1]=points[rem.ind][1];
         }
-        return answer;
+        return ans;
     }
-    
-    private int squaredDistance(int[] point) {
-        // Calculate and return the squared Euclidean distance
-        return point[0] * point[0] + point[1] * point[1];
-    }
-};
+}
