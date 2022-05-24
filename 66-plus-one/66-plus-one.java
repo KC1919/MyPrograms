@@ -26,17 +26,9 @@ class Solution {
         
         
         if(carry==1){
-            
-            int ans[]=new int[a.length+1];
-            ans[0]=1;
-            
-            for(int i=1;i<=a.length;i++){
-                ans[i]=a[i-1];
-            }
-            return ans;
+            a=new int[n+1];
+            a[0]=1;
         }
-        
         return a;
-        
     }
 }
