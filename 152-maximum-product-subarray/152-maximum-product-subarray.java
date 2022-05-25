@@ -6,58 +6,63 @@ class Solution {
             return a[0];
         
         int n=a.length;
-        int dp[][]=new int[n][2];
         
-        dp[0][0]=a[0];
-        dp[0][1]=a[0];
+        int oldPrev=a[0];
+        int oldCurr=a[0];
         
         int max=a[0];
         
         for(int i=1;i<n;i++){
             
+            int newPrev=0;
+            int newCurr=0;
+            
             if(a[i]>0){
                 
-                if(dp[i-1][0]<0 && dp[i-1][1]<0){
-                    dp[i][0]=a[i];
-                    dp[i][1]=Math.min(dp[i-1][0],dp[i-1][1])*a[i];
+                if(oldPrev<0 && oldCurr<0){
+                    newPrev=a[i];
+                    newCurr=Math.min(oldPrev,oldCurr)*a[i];
                 }
                 
                 else{
                     
-                    if(dp[i-1][0]==0 || dp[i-1][1]==0){
-                        dp[i][0]=a[i];
-                        dp[i][1]=a[i];
+                    if(oldPrev==0 || oldCurr==0){
+                        newPrev=a[i];
+                        newCurr=a[i];
                     }
                     
                     else{
-                        dp[i][0]=dp[i-1][0]*a[i];
-                        dp[i][1]=dp[i-1][1]*a[i];
+                        newPrev=oldPrev*a[i];
+                        newCurr=oldCurr*a[i];
                     }
                 }
             }
             
             else if(a[i]<0){
                 
-                if(dp[i-1][0]<0 && dp[i-1][1]<0){
-                    dp[i][0]=a[i];
-                    dp[i][1]=Math.min(dp[i-1][0],dp[i-1][1])*a[i];
+                if(oldPrev<0 && oldCurr<0){
+                    newPrev=a[i];
+                    newCurr=Math.min(oldPrev,oldCurr)*a[i];
                 }
                 
                 else{
                     
-                    if(dp[i-1][0]==0 || dp[i-1][1]==0){
-                        dp[i][0]=a[i];
-                        dp[i][1]=a[i];
+                    if(oldPrev==0 || oldCurr==0){
+                        newPrev=a[i];
+                        newCurr=a[i];
                     }
                     
                     else{
-                        dp[i][0]=dp[i-1][1]*a[i];
-                        dp[i][1]=dp[i-1][0]*a[i];
+                        newPrev=oldPrev*a[i];
+                        newCurr=oldCurr*a[i];
                     }
                 }
             }
             
-            max=Math.max(max,Math.max(dp[i][0],dp[i][1]));
+            max=Math.max(max,Math.max(newCurr,newPrev));
+            
+            oldPrev=newPrev;
+            oldCurr=newCurr;
         }
         
         return max;
