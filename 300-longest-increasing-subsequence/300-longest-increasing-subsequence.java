@@ -9,45 +9,40 @@ class Solution {
         
         //answer of last element would always be 1, because there are 
         // no elements right to it so it cannot make any subsequence
-        dp[n-1]=1;
+        dp[0]=a[0];
         
         //this stores the longest subsequence so far
-        int omax=0;
+        int len=1;
         
-        //start from the 2nd last cell
-        for(int i=n-2;i>=0;i--){
+        for(int i=1;i<n;i++){
             
-            //this stores the local max for the ith cell
-            int max=0;
-            
-            //now the ith cell takes the answer from those cell which are
-            //greater than it to the right side
-            for(int j=i+1;j<n;j++){
+            int pos=findPos(dp,len-1,a[i]);
+                dp[pos]=a[i];
                 
-                //checking if the jth cell is greater or not
-                if(a[j]>a[i]){
-                    
-                    //if yes then takes its answer from the dp array
-                    //the answer tells the longest subsequence than the jth cell
-                    //can form
-                    
-                    //and accordingly the ith cell updates its max value
-                    max=Math.max(max,dp[j]);
-                }
-            }
+            if(pos==len)
+                len++;
+        }
+        return len;
+    }
+    
+    private int findPos(int a[], int high, int target){
+        
+        int l=0, h=high;
+        int mid=-1;
+        
+        while(l<=h){
+            mid=(l+h)/2;
             
-            //in the end when all the cells are checked which were greater than ith cell
-            //it will be having the maximum subsequence length in the max variable
-            //so it adds itself(add 1 denotes the length of ith cell) to the maximum
-            //length of the subsequence and stores that as its answer in the dp array
-            dp[i]=max+1;
-            
-            //and if the ith cell answer is greater than the maximum length subsequence
-            //so far, then we update the maximum subsequence length got so far
-            omax=Math.max(omax,dp[i]);
+            if(a[mid]<target)
+                l=mid+1;
+                
+            else if(a[mid]>target)
+                h=mid-1;
+                
+            else
+                return mid;
         }
         
-        //finally return the maximum length;
-        return omax;
+        return l;
     }
 }
