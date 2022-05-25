@@ -1,20 +1,3 @@
-public int lengthOfLIS(int[] a) {
-if(a.length==1)
-return 1;
-int n=a.length;
-int dp[]=new int[n];
-//answer of last element would always be 1, because there are
-// no elements right to it so it cannot make any subsequence
-dp[n-1]=1;
-//this stores the longest subsequence so far
-int omax=0;
-//start from the 2nd last cell
-for(int i=n-2;i>=0;i--){
-//this stores the local max for the ith cell
-int max=0;
-//now the ith cell takes the answer from those cell which are
-//greater than it to the right side
-for(int j=i+1;j<n;j++){
 //checking if the jth cell is greater or not
 if(a[j]>a[i]){
 //if yes then takes its answer from the dp array
@@ -36,3 +19,23 @@ omax=Math.max(omax,dp[i]);
 //finally return the maximum length;
 return omax;
 }
+​
+​
+**Binary Search Approach:**
+​
+The intuition behind this approach is that, if we find a smaller element then we look for its position in the dp array, because the smaller element has greater chance of forming a longer sequence with the elements ahead of it.
+​
+For example: 2, 5, 3, 4, 7, 8
+​
+So a subsequence of 2,5,7,8 can be formed.
+​
+But if we consider taking 3 instead of 5, we can form
+2,3,4,7,8, a longer subsequencce than before.
+​
+Because of picking of 5 we could not pick up 4.
+​
+And when we picked 3 we could pick 4 also, which increased the length of subs.
+​
+So this is how the smaller number increases the chance of forming greater length increasing subsequence.
+​
+So whenever a smaller element comes we look for it to overrite an element at insert position.
