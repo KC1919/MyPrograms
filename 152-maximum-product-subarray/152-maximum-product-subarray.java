@@ -17,7 +17,7 @@ class Solution {
             int newPrev=0;
             int newCurr=0;
             
-            if(a[i]>0){
+//             if(a[i]>0){
                 
                 if(oldPrev<0 && oldCurr<0){
                     newPrev=a[i];
@@ -36,28 +36,28 @@ class Solution {
                         newCurr=oldCurr*a[i];
                     }
                 }
-            }
+            // }
             
-            else if(a[i]<0){
+//             else if(a[i]<0){
                 
-                if(oldPrev<0 && oldCurr<0){
-                    newPrev=a[i];
-                    newCurr=Math.min(oldPrev,oldCurr)*a[i];
-                }
+//                 if(oldPrev<0 && oldCurr<0){
+//                     newPrev=a[i];
+//                     newCurr=Math.min(oldPrev,oldCurr)*a[i];
+//                 }
                 
-                else{
+//                 else{
                     
-                    if(oldPrev==0 || oldCurr==0){
-                        newPrev=a[i];
-                        newCurr=a[i];
-                    }
+//                     if(oldPrev==0 || oldCurr==0){
+//                         newPrev=a[i];
+//                         newCurr=a[i];
+//                     }
                     
-                    else{
-                        newPrev=oldPrev*a[i];
-                        newCurr=oldCurr*a[i];
-                    }
-                }
-            }
+//                     else{
+//                         newPrev=oldPrev*a[i];
+//                         newCurr=oldCurr*a[i];
+//                     }
+//                 }
+//             }
             
             max=Math.max(max,Math.max(newCurr,newPrev));
             
