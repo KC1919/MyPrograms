@@ -1,15 +1,5 @@
 class Solution {
     
-    class Pair
-    {
-        int prev;
-        int curr;
-        
-        Pair(int prev, int curr){
-            this.prev=prev;
-            this.curr=curr;
-        }
-    }
     public int maxProduct(int[] a) {
         
         if(a.length==1)
