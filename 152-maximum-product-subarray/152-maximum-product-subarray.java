@@ -1,55 +1,75 @@
 class Solution {
     
+    class Pair
+    {
+        int prev;
+        int curr;
+        
+        Pair(int prev, int curr){
+            this.prev=prev;
+            this.curr=curr;
+        }
+    }
     public int maxProduct(int[] a) {
         
-        int max=0;
+        if(a.length==1)
+            return a[0];
         
-        max=a[0];
-        int oldPrev=0, oldCurr=a[0];
+        int n=a.length;
+        int dp[][]=new int[n][2];
         
-        for(int i=1;i<a.length;i++)
-        {
-            int newPrev=0, newCurr=0;
+        dp[0][0]=a[0];
+        dp[0][1]=a[0];
+        
+        int max=a[0];
+        
+        for(int i=1;i<n;i++){
             
-            if(oldPrev<0 && oldCurr<0)
-            {
-                newPrev=Math.min(oldPrev,oldCurr)*a[i];
-                newCurr=a[i];
-            }
-            
-            else if((oldPrev<0 && oldCurr>0) || (oldPrev>0 && oldCurr<0))
-            {
-                newPrev=oldPrev*a[i];
-                newCurr=oldCurr*a[i];
-            }
-            
-            else if(oldPrev==0 || oldCurr==0)
-            {
-                if(oldPrev==0 && oldCurr==0){
-                    newPrev=a[i];
-                    newCurr=a[i];
-                }
-                    
-                else if(oldPrev==0){
-                    newPrev=oldCurr*a[i];
-                    newCurr=a[i];
+            if(a[i]>0){
+                
+                if(dp[i-1][0]<0 && dp[i-1][1]<0){
+                    dp[i][0]=a[i];
+                    dp[i][1]=Math.min(dp[i-1][0],dp[i-1][1])*a[i];
                 }
                 
-                else if(oldCurr==0){
-                    newPrev=oldPrev*a[i];
-                    newCurr=a[i];
+                else{
+                    
+                    if(dp[i-1][0]==0 || dp[i-1][1]==0){
+                        dp[i][0]=a[i];
+                        dp[i][1]=a[i];
+                    }
+                    
+                    else{
+                        dp[i][0]=dp[i-1][0]*a[i];
+                        dp[i][1]=dp[i-1][1]*a[i];
+                    }
                 }
             }
-            else
-            {
-                newPrev=oldPrev*a[i];
-                newCurr=oldCurr*a[i];
+            
+            else if(a[i]<0){
+                
+                if(dp[i-1][0]<0 && dp[i-1][1]<0){
+                    dp[i][0]=a[i];
+                    dp[i][1]=Math.min(dp[i-1][0],dp[i-1][1])*a[i];
+                }
+                
+                else{
+                    
+                    if(dp[i-1][0]==0 || dp[i-1][1]==0){
+                        dp[i][0]=a[i];
+                        dp[i][1]=a[i];
+                    }
+                    
+                    else{
+                        dp[i][0]=dp[i-1][1]*a[i];
+                        dp[i][1]=dp[i-1][0]*a[i];
+                    }
+                }
             }
             
-            oldPrev=newPrev;
-            oldCurr=newCurr;
-            max=Math.max(max,Math.max(newCurr,newPrev));
+            max=Math.max(max,Math.max(dp[i][0],dp[i][1]));
         }
+        
         return max;
     }
 }
