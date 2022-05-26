@@ -1,36 +1,34 @@
 class Solution {
-    public int numDistinct(String s, String t) {
+    public int numDistinct(String s, String t) 
+    {
+        Integer dp[][]=new Integer[s.length()+1][t.length()+1];
+        helper(s,t,s.length(),t.length(),dp);
+        return dp[s.length()][t.length()];
         
-        if(s.length()<t.length())
-            return 0;
-        
-        Integer dp[][]=new Integer[s.length()][t.length()];
-        return countDistinct(s,0,t,0,dp);
     }
     
-    private int countDistinct(String s, int i, String t, int j, Integer dp[][]){
+    int helper(String s, String t, int i, int j, Integer dp[][])
+    {
+        if(i<j)
+            return dp[i][j]=0;
         
-        if(i==s.length() && j<t.length())
-            return 0;
-        
-        if(j==t.length()){
+        if(j==0)
+        {
             return 1;
         }
         
         if(dp[i][j]!=null)
             return dp[i][j];
         
-        
-        if(s.charAt(i)==t.charAt(j)){
-            int moveBothPointerRes=countDistinct(s,i+1,t,j+1,dp);
-            int moveIthPointerRes=countDistinct(s,i+1,t,j,dp);
-            
-            dp[i][j]=moveBothPointerRes+moveIthPointerRes;
+        if(s.charAt(i-1)==t.charAt(j-1))
+        {
+            int lres=helper(s,t,i-1,j-1,dp);
+            int rres=helper(s,t,i-1,j,dp);
+            return dp[i][j]=lres+rres;
         }
-        
         else
-            dp[i][j]=countDistinct(s,i+1,t,j,dp);
-            
-        return dp[i][j];
+        {
+            return dp[i][j]=helper(s,t,i-1,j,dp);
+        }
     }
 }
