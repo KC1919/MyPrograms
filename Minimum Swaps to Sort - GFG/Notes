@@ -1,0 +1,43 @@
+The main logic behind this approach is that.
+
+We need to basically find the elements which are out of their place.
+
+So for that, we first make a pair class and take an pair class array.
+
+Then we make pair of all the elements with their respective index in the given array.
+
+We store these pairs in the Pair array.
+
+Then we sort this pair array in increasing order(ascending) of their values.
+
+So by sorting we would get to know the original indices of the elements that they should be placed at to make the array sorted.
+
+Now we take a boolean array to check visited status of an index.
+
+So we start iterating the sorted pair array.
+
+We check if the current element index after sorting is equal to the index of element in the original array, that means it is already at its correct position
+so we do nothing and continue.
+
+If the current element is no at its correct position and is also not visited before, so we work.
+
+WORK:
+
+take an pointer j starting from the current index.
+and a variable to count how many hops we make till we get to know how many elements to swap correctly from this point, to make it sorted.
+
+We jump to the (index of the current element in the original array) in the sorted pair array.
+
+Then we check if that is in place or not,if not so we repeat the above step of jumping.
+
+We keep on jumping till we reach back to the position from where we started the jump.
+
+This number of hops will give us the count how many elements needed to be replaced if we wanted to correctly place the ith element.
+
+So we add this (count-1) tot he total swaps. We do count-1 because if we want to place n elements correctly, so we only need to swap (n-1) elements
+
+And we also keep marking the index as true to which we hop to, so that it is not worked upon again.
+
+
+So when all the elements are traversed we have the total number of swaps required to make the array sorted.
+
