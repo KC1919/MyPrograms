@@ -27,13 +27,11 @@ class NumMatrix {
         int sum=0;
         for(int i=r1;i<=r2;i++)
         {
-            if(c1==0){
+            if(c1==0)
                 sum+=prefix[i][c2];
-            }
             
-            else{
+            else
                 sum+=prefix[i][c2]-prefix[i][c1-1];
-            }
         }
         return sum;
     }
