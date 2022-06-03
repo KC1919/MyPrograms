@@ -27,11 +27,7 @@ class NumMatrix {
         int sum=0;
         for(int i=r1;i<=r2;i++)
         {
-            if(c1==0 && c1==c2){
-                sum+=prefix[i][c1];
-            }
-            
-            else if(c1==0){
+            if(c1==0){
                 sum+=prefix[i][c2];
             }
             
