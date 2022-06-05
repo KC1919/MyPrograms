@@ -22,6 +22,8 @@ class Solution {
         
         for(int col=0;col<n;col++){
             
+            //branch and bound approach, to check if the queen is safe to place
+            //at the current cell 
             if(ldiag[row+col]==0 && rdiag[col-row+n-1]==0 && column[col]==0){
                 ldiag[row+col]=1;
                 rdiag[col-row+n-1]=1;
@@ -36,6 +38,8 @@ class Solution {
         }
     }
     
+    //function to check safety of the queen to be placed, this takes time, so we use
+    //branch and bound
     private boolean isSafe(int a[][], int row, int col, int n, int m){
         
         if(row<0 || row==n || col<0 || col==m || a[row][col]==1){
