@@ -3,28 +3,35 @@ class Solution {
     int count=0;
     public int totalNQueens(int n) {
         
-        int a[][]=new int[n][n];
+        int ldiag[]=new int[2*n-1];
+        int rdiag[]=new int[2*n-1];
+        int col[]=new int[n];
         
-        placeQueen(a,0,n,0);
+        placeQueen(ldiag,rdiag,col,0,n,0);
         return count;
     }
     
-    private void placeQueen(int a[][], int row, int n, int placed){
+    private void placeQueen(int ldiag[], int rdiag[], int column[], int row, int n, int placed){
         
         if(row==n || placed==n){
             if(placed==n){
                 count++;
             }
-                
             return;
         }
         
         for(int col=0;col<n;col++){
             
-            if(isSafe(a,row,col,n,n)==true){
-                a[row][col]=1;
-                placeQueen(a,row+1,n,placed+1);
-                a[row][col]=0;
+            if(ldiag[row+col]==0 && rdiag[col-row+n-1]==0 && column[col]==0){
+                ldiag[row+col]=1;
+                rdiag[col-row+n-1]=1;
+                column[col]=1;
+                
+                placeQueen(ldiag,rdiag,column,row+1,n,placed+1);
+                
+                ldiag[row+col]=0;
+                rdiag[col-row+n-1]=0;
+                column[col]=0;
             }
         }
     }
