@@ -11,6 +11,8 @@ class Solution {
             return hm.get(n);
         
         String prev="21";
+        
+        StringBuilder sb=new StringBuilder();
     
         //starting to calculate from the 4th term
         for(int i=4;i<=n;i++){
@@ -24,7 +26,7 @@ class Solution {
             //and count=1
             int count=1;
 
-            StringBuilder sb=new StringBuilder();
+            sb.setLength(0);
             
             //starting to iterate from the 2nd character of the string
             for(int j=1;j<s.length();j++){
