@@ -9,12 +9,14 @@ class Solution {
 
         if(n==1 || n==2 || n==3)
             return hm.get(n);
+        
+        String prev="21";
     
         //starting to calculate from the 4th term
         for(int i=4;i<=n;i++){
             
             //getting (n-1)th term
-            String s=hm.get(i-1);
+            String s=prev;
 
             //taking the 1st character as the start character
             char sc=s.charAt(0);
@@ -55,10 +57,10 @@ class Solution {
             sb.append(count+""+sc);
             
             //store the result of the nth term in the hashmap
-            hm.put(i,sb.toString());
+            prev=sb.toString();
         }
         
         //return the nth term result
-        return hm.get(n);
+        return prev;
     }
 }
