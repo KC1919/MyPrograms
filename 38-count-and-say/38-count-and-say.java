@@ -26,7 +26,7 @@ class Solution {
             //and count=1
             int count=1;
 
-            sb.setLength(0);
+            sb=new StringBuilder();
             
             //starting to iterate from the 2nd character of the string
             for(int j=1;j<s.length();j++){
