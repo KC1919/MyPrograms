@@ -54,7 +54,8 @@ class Solution {
             
             //to store the result for the last character or any string which of
             //length=1
-            sb.append(count+""+sc);
+            sb.append(count);
+            sb.append(sc);
             
             //store the result of the nth term in the hashmap
             prev=sb.toString();
