@@ -7,8 +7,12 @@ class Solution {
         int rem[]=new int[k];
         
         for(int i=0;i<a.length;i++){
-            int idx=(a[i]%k+k)%k;
-            rem[idx]++;
+            
+            //if the value is negative, then this will get the positive remainder 
+            int remainder=(a[i]%k+k)%k;
+            
+            //incrementing the count of remainder
+            rem[remainder]++;
         }
 
         for(int i=1;i<=k/2;i++){
