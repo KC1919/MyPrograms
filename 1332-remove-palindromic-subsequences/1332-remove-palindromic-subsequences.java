@@ -1,35 +1,29 @@
 class Solution {
     public int removePalindromeSub(String s) {
         
-        if(s.length()==0){
+        if(s.length()==0)
             return 0;
-        }
         
-        else if(s.length()==1 || palindrome(s)){
+        else if(s.length()==1 || palindrome(s))
             return 1;
-        }
         
         int a=0,b=0;
         
         for(int i=0;i<s.length();i++){
             char ch=s.charAt(i);
             
-            if(ch=='a'){
+            if(ch=='a')
                 a++;
-            }
-            else{
+            
+            else
                 b++;
-            }
         }
         
-        if(a>0 && b>0){
+        if(a>0 && b>0)
             return 2;
-        }
         
-        else{
+        else
             return 1;
-        }
-        
     }
     
     private boolean palindrome(String s){
