@@ -17,13 +17,12 @@ class Solution {
             
             else
                 b++;
+            
+            if(a>0 && b>0)
+                return 2;
         }
         
-        if(a>0 && b>0)
-            return 2;
-        
-        else
-            return 1;
+        return 1;
     }
     
     private boolean palindrome(String s){
@@ -32,13 +31,12 @@ class Solution {
         
         while(l<r){
             
-            if(s.charAt(l)!=s.charAt(r)){
+            if(s.charAt(l)!=s.charAt(r))
                 return false;
-            }
+    
             l++;
             r--;
         }
-        
         return true;
     }
 }
