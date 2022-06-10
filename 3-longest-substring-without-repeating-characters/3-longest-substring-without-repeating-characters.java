@@ -6,27 +6,27 @@ class Solution {
         int max=0;
         int j=0;
         
-        for(int i=0;i<s.length();i++)
-        {
+        for(int i=0;i<s.length();i++){
             char ch=s.charAt(i);
             
-            if(!hm.contains(ch))
-            {
+            if(!hm.contains(ch)){
                 hm.add(ch);
-                max=Math.max(max,i-j+1);
+                max=Math.max(hm.size(),max);
             }
             
-            else
-            {
-                while(j<i && s.charAt(j)!=ch)
-                {
-                    hm.remove(s.charAt(j));
+            else{
+                
+                while(hm.contains(ch)){
+                    
+                    char rem=s.charAt(j);
+                    
+                    hm.remove(rem);
                     j++;
                 }
                 
-                hm.remove(s.charAt(j));
-                hm.add(s.charAt(i));
-                j++;
+                hm.add(ch);
+                
+                max=Math.max(max,hm.size());
             }
         }
         return max;
