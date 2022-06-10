@@ -3,7 +3,7 @@ class Solution {
         
         int n=a.length;
         
-        Integer dp[][]=new Integer[n][n];
+        int dp[][]=new int[n][n];
         
         for(int j=0;j<n;j++){
             dp[n-1][j]=a[n-1][j];
