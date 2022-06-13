@@ -13,17 +13,14 @@ class Solution {
     
     private int minpath(List<List<Integer>>triad, int row, int j, Integer dp[][]){
         
-        if(j==triad.get(row).size()){
+        if(j==triad.get(row).size())
             return Integer.MAX_VALUE;
-        }
         
-        if(row==triad.size()-1){
+        if(row==triad.size()-1)
             return dp[row][j]=triad.get(row).get(j);
-        }
         
-        if(dp[row][j]!=null){
+        if(dp[row][j]!=null)
             return dp[row][j];
-        }
         
         int min=Integer.MAX_VALUE;
         
