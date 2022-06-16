@@ -36,7 +36,7 @@ class Solution {
                     if(i>0 && dp[i-1][j]==true)
                         dp[i][j]=true;
                     
-                    //else we put false, becaoz the previous were not able to make
+                    //else we put false, becoz the previous were not able to make
                     //and the current element is also greater than the current
                     // target sum, so it can also not make
                     else
