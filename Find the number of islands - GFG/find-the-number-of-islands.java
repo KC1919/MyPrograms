@@ -32,6 +32,9 @@ class Solution {
     {
         boolean visited[][]=new boolean[grid.length][grid[0].length];
         
+        int dir[][]={{1,0},{-1,0},{0,1},{0,-1},{1,1},{1,-1},{-1,1},{-1,-1}};
+        
+        
         int count=0;
         for(int i=0;i<grid.length;i++)
         {
@@ -39,7 +42,7 @@ class Solution {
             {
                 if(grid[i][j]=='1' && visited[i][j]==false)
                 {
-                    helper(grid,visited,i,j);
+                    helper(grid,visited,i,j,dir);
                     count++;
                 }
             }
@@ -47,25 +50,17 @@ class Solution {
         return count;
     }
     
-    void helper(char grid[][],boolean visited[][],int i,int j)
+    void helper(char grid[][],boolean visited[][],int i,int j, int dir[][])
     {
-        if(i<0 || j<0 || i==grid.length || j==grid[0].length || grid[i][j]=='0' || visited[i][j]==true)
-        {
-            return;
-        }
-        
         visited[i][j]=true;
         
-        
-        helper(grid,visited,i+1,j);
-        helper(grid,visited,i-1,j);
-        helper(grid,visited,i,j+1);
-        helper(grid,visited,i,j-1);
-        helper(grid,visited,i+1,j+1);
-        helper(grid,visited,i-1,j-1);
-        helper(grid,visited,i+1,j-1);
-        helper(grid,visited,i-1,j+1);
-        
-        
+        for(int k=0;k<dir.length;k++){
+            int row=dir[k][0]+i;
+            int col=dir[k][1]+j;
+            
+            if(row>=0 && row<grid.length && col>=0 && col<grid[0].length && grid[row][col]=='1' && visited[row][col]==false){
+                helper(grid,visited,row,col,dir);
+            }
+        }
     }
 }
