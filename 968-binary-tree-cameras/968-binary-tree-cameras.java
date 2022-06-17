@@ -30,7 +30,7 @@ class Solution {
             dfs(node.left, node);
             dfs(node.right, node);
 
-            if (par == null && !covered.contains(node) ||
+            if ((par == null && !covered.contains(node)) ||
                     !covered.contains(node.left) ||
                     !covered.contains(node.right)) {
                 ans++;
