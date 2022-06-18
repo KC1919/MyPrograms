@@ -36,23 +36,23 @@ class Sol
     {
         HashSet<String>hm=new HashSet<>();
         
-        HashMap<String,Integer>hmap=new HashMap<>();
+        Integer dp[]=new Integer[s.length()];
         
         for(String word:list){
             hm.add(word);
         }
         
-        return breakWord(s,0,hm,hmap);
+        return breakWord(s,0,hm,dp);
     }
     
-    private static int breakWord(String s, int idx, HashSet<String>hm, HashMap<String,Integer>hmap){
+    private static int breakWord(String s, int idx, HashSet<String>hm, Integer dp[]){
         
         if(idx==s.length()){
             return 1;
         }
         
-        if(hmap.containsKey(s.substring(idx))){
-            return hmap.get(s.substring(idx));
+        if(dp[idx]!=null){
+            return dp[idx];
         }
         
         for(int i=idx;i<s.length();i++){
@@ -60,15 +60,14 @@ class Sol
             String word=s.substring(idx,i+1);
             
             if(hm.contains(word)){
-                int res=breakWord(s,i+1,hm,hmap);
+                int res=breakWord(s,i+1,hm,dp);
                 if(res==1){
-                    hmap.put(word,1);
+                    dp[i]=1;
                     return 1;
                 }
             }
         }
         
-        hmap.put(s.substring(idx),0);
-        return 0;
+        return dp[idx]=0;
     }
 }
