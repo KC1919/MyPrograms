@@ -41,44 +41,49 @@ class Solution
     //Function to find length of longest increasing subsequence.
     static int longestSubsequence(int size, int a[])
     {
-        if()
-        int n=a.length;
+        int n=size;
         
         int dp[]=new int[n];
-        
+    
         dp[0]=a[0];
-        
         int len=1;
         
         for(int i=1;i<n;i++){
             
-            int pos=findPos(dp,len-1,a[i]);
-                dp[pos]=a[i];
-                
-            if(pos==len)
+            int pos=bsearch(dp,len-1,a[i]);
+            
+            dp[pos]=a[i];
+            
+            if(pos==len){
                 len++;
+            }
         }
+        
         return len;
     }
     
-    private static int findPos(int a[], int high, int target){
-        
-        int l=0, h=high;
+    private static int bsearch(int a[], int h, int target)
+    {
         int mid=-1;
         
+        int l=0;
+        
         while(l<=h){
+            
             mid=(l+h)/2;
             
-            if(a[mid]<target)
-                l=mid+1;
-                
-            else if(a[mid]>target)
-                h=mid-1;
-                
-            else
+            if(a[mid]==target){
                 return mid;
+            }
+            
+            else if(a[mid]>target){
+                h=mid-1;
+            }
+            
+            else if(a[mid]<target){
+                l=mid+1;
+            }
         }
-        
         return l;
     }
 } 
