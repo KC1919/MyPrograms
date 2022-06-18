@@ -24,12 +24,9 @@ class GfG {
 class Solution {
     public long count(int a[], int n, int target) {
         
-        
         Long dp[][]=new Long[n][target+1];   
         
         return solve(a,n,0,dp,target);
-        
-        // return dp[0][target];
     }
     
     
@@ -59,6 +56,5 @@ class Solution {
         }
         
         return dp[idx][target]=count;
-        
     }
 }
