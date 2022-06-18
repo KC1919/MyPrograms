@@ -51,12 +51,11 @@ class Solution
     static int knapSack(int target, int weight[], int value[], int n) 
     {
         Integer dp[][]=new Integer[n][target+1];
-        knapsack(target,n,0,weight,value,dp,0);
         
-        return knapsack(target,n,0,weight,value,dp,0);
+        return knapsack(target,n,0,weight,value,dp);
     }
     
-    static private int knapsack(int target, int n, int idx, int weight[], int value[], Integer dp[][], int sum){
+    static private int knapsack(int target, int n, int idx, int weight[], int value[], Integer dp[][]){
     {
         if(target==0 || idx==n){
             return 0;
@@ -67,14 +66,14 @@ class Solution
         }
         
         if(weight[idx]<=target){
-            int tres=knapsack(target-weight[idx],n,idx+1,weight,value,dp,sum+value[idx]);
-            int ntres=knapsack(target,n,idx+1,weight,value,dp,sum);
+            int tres=knapsack(target-weight[idx],n,idx+1,weight,value,dp);
+            int ntres=knapsack(target,n,idx+1,weight,value,dp);
             
             return dp[idx][target]=Math.max(value[idx]+tres,ntres);
         }
         
         else{
-            return dp[idx][target]=knapsack(target,n,idx+1,weight,value,dp,sum);
+            return dp[idx][target]=knapsack(target,n,idx+1,weight,value,dp);
         }
     }
     }
