@@ -50,7 +50,7 @@ class Solution
     //Function to return max value that can be put in knapsack of capacity W.
     static int knapSack(int target, int weight[], int value[], int n) 
     {
-        Integer dp[][]=new Integer[n+1][target+1];
+        Integer dp[][]=new Integer[n][target+1];
         knapsack(target,n,0,weight,value,dp,0);
         
         return knapsack(target,n,0,weight,value,dp,0);
