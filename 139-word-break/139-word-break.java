@@ -31,12 +31,11 @@ class Solution {
             if(hm.contains(word)){
                 int res=breakWord(s,i+1,hm,hmap);
                 if(res==1){
-                    hmap.put(word,1);
+                    hmap.put(s.substring(i),1);
                     return 1;
                 }
             }
         }
-        
         hmap.put(s.substring(idx),0);
         return 0;
     }
