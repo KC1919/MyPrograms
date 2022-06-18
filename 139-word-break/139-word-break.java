@@ -1,39 +1,43 @@
 class Solution {
-    public boolean wordBreak(String s, List<String> wordDict) {
-        return helper(s,wordDict,new HashMap<>());
+    public boolean wordBreak(String s, List<String> list) {
+        
+        HashSet<String>hm=new HashSet<>();
+        
+        HashMap<String,Integer>hmap=new HashMap<>();
+        
+        for(String word:list){
+            hm.add(word);
+        }
+        
+        int res=breakWord(s,0,hm,hmap);
+        
+        return res==0?false:true;
     }
     
-    boolean helper(String s, List<String>wordDict, HashMap<String,Boolean>answer)
-    {
-        //if the whole string is used, means given list of words
-        //were found in the string
-        if(s.length()==0){
+    private static int breakWord(String s, int idx, HashSet<String>hm, HashMap<String,Integer>hmap){
+        
+        if(idx==s.length()){
+            return 1;
+        }
+        
+        if(hmap.containsKey(s.substring(idx))){
+            return hmap.get(s.substring(idx));
+        }
+        
+        for(int i=idx;i<s.length();i++){
             
-            // so we return true to mark success
-            return true;
-        }
-        
-        //we check if the remaining substring has been processed before by some other call
-        //so we must be having the answer for it, so we return the stored answer
-        //instead of processing it agin
-        if(answer.containsKey(s)){
-            return answer.get(s);
-        }
-        
-        //we take
-        for(String word:wordDict)
-        {
-            if(s.indexOf(word)==0)
-            {
-                String remWord=s.substring(word.length());
-                if(helper(remWord,wordDict,answer)){
-                    answer.put(remWord,true);
-                    return true;
+            String word=s.substring(idx,i+1);
+            
+            if(hm.contains(word)){
+                int res=breakWord(s,i+1,hm,hmap);
+                if(res==1){
+                    hmap.put(word,1);
+                    return 1;
                 }
             }
         }
-        answer.put(s,false);
-        return false;
         
+        hmap.put(s.substring(idx),0);
+        return 0;
     }
 }
