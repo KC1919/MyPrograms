@@ -38,7 +38,7 @@ class Solution
         
         for(int i=1;i<n;i++){
             
-            int nincl=Math.min(incl,excl)+a[i];
+            int nincl=excl+a[i];
             
             int nexcl=Math.min(incl,excl+a[i]);
             
