@@ -1,25 +1,39 @@
 class Solution {
-    public int maxScore(int[] cardPoints, int k) {
-         int l = cardPoints.length;
-        int p=0;
-        int t = l-k;
-        int es=0,ss=0,tempsum=0,sum=0;
-
-        for (int i = t; i < l; i++) {
-            es+=cardPoints[i];
+    public int maxScore(int[] a, int k) {
+        
+        int sum=0;
+        
+        for(int ele:a){
+            sum+=ele;
         }
-        sum=es;
-        int j = l-k;
-        int m = 0;
-        for (int i = 1; i <=k ; i++) {
-            es=es-cardPoints[j];
-            ss=ss+cardPoints[m];
-            tempsum=es+ss;
-            if(tempsum>sum){
-                sum=tempsum;
+        
+        int n=a.length;
+        
+        if(k==n){
+            return sum;
+        }
+        
+        int win=n-k;
+        
+        int csum=0;
+        
+        int min=Integer.MAX_VALUE;
+        
+        int j=0;
+        
+        for(int i=0;i<n;i++){
+            
+            csum+=a[i];
+            
+            while((i-j+1)>win){
+                csum-=a[j];
+                j++;
             }
-            j++;m++;
+            
+            if(i-j+1==win){
+                min=Math.min(min,csum);
+            }
         }
-        return sum;
-    }    
+        return sum-min;
+    }
 }
