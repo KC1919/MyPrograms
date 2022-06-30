@@ -7,11 +7,9 @@ class Solution {
         int sum=0;
         
         while(start<end){
-            
             sum+=a[end]-a[start];
             start++;
-            end--;
-            
+            end--;      
         }
         
         return sum;
