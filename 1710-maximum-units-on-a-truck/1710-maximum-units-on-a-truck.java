@@ -1,34 +1,15 @@
 class Solution {
     
-    class Pair
-    {
-        int boxes;
-        int units;
-        int idx;
-        
-        Pair(int boxes, int units, int idx){
-            this.boxes=boxes;
-            this.idx=idx;
-            this.units=units;
-        }
-    }
     public int maximumUnits(int[][] boxes, int truckSize) {
         
-        
-        Pair a[]=new Pair[boxes.length];
-        
-        for(int i=0;i<boxes.length;i++){
-            a[i]=new Pair(boxes[i][0],boxes[i][1],i);
-        }
-        
-        Arrays.sort(a,(b,c)->{
+        Arrays.sort(boxes,(b,c)->{
             
-            if(c.units==b.units){
-                return b.boxes-c.boxes;
+            if(c[1]==b[1]){
+                return b[0]-c[0];
             }
             
             else{
-                return c.units-b.units;    
+                return c[1]-b[1];    
             }
             
         });
@@ -36,20 +17,18 @@ class Solution {
         int maxbox=0;
         int tunits=0;
         
-        for(int i=0;i<a.length;i++){
-            
-            Pair p=a[i];
+        for(int i=0;i<boxes.length;i++){
             
             // System.out.println(a[i].units+", "+a[i].boxes);
             
-            if(p.boxes+maxbox<=truckSize){
-                tunits+=(p.units*p.boxes);
-                maxbox+=p.boxes;
+            if(boxes[i][0]+maxbox<=truckSize){
+                tunits+=(boxes[i][1]*boxes[i][0]);
+                maxbox+=boxes[i][0];
             }
             
             else{
                 int remain=truckSize-maxbox;
-                tunits+=(remain*p.units);
+                tunits+=(remain*boxes[i][1]);
                 maxbox+=remain;
             }
 
