@@ -1,14 +1,13 @@
 class Solution {
 	static boolean[] validDaysForTravel;
-	static int[] dp;
+	static Integer[] dp;
 
 	public int mincostTickets(int[] days, int[] costs) {
 		validDaysForTravel = new boolean[366];
-		dp = new int[366];
 		for (int day : days) {
 			validDaysForTravel[day] = true;
 		}
-		Arrays.fill(dp, -1);
+		dp=new Integer[366];
 		return mincostTickets(days, costs, 0);
 	}
 
@@ -16,7 +15,7 @@ class Solution {
 
 		if (i >= 366)
 			return 0;
-		if (dp[i] != -1)
+		if (dp[i] != null)
 			return dp[i];
 		int res = Integer.MAX_VALUE;
 		if (validDaysForTravel[i]) {
