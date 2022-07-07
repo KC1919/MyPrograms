@@ -9,21 +9,21 @@ class Solution {
         
         //filling borders of pacific
         for(int col=0;col<m;col++){
-            pacific[0][col]=1;
+            pacific[0][col]=-1;
         }
         
         for(int row=0;row<n;row++){
-            pacific[row][0]=1;
+            pacific[row][0]=-1;
         }
         
         
         //filling of borders of atlantic
         for(int col=0;col<m;col++){
-            atlantic[n-1][col]=1;
+            atlantic[n-1][col]=-1;
         }
         
         for(int row=0;row<n;row++){
-            atlantic[row][m-1]=1;
+            atlantic[row][m-1]=-1;
         }
         
         
@@ -61,7 +61,7 @@ class Solution {
         //in the resultant list
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                if(atlantic[i][j]==1 && pacific[i][j]==1){
+                if(atlantic[i][j]==-1 && pacific[i][j]==-1){
                     List<Integer>list=new ArrayList<>();
                     list.add(i);
                     list.add(j);
@@ -80,9 +80,9 @@ class Solution {
             int row=dir[k][0]+i;
             int col=dir[k][1]+j;
             
-            if(row>=0 && row<n && col>=0 && col<m && visited[row][col]==false && a[row][col]>=a[i][j])
+            if(row>=0 && row<n && col>=0 && col<m && visited[row][col]==false && a[row][col]>=a[i][j] && a[row][col]!=-1)
             {
-                water[row][col]=1;
+                water[row][col]=-1;
                 flow(a,row,col,n,m,water,visited,dir);
             }
         }
