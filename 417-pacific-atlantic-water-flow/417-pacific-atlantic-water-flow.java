@@ -30,28 +30,35 @@ class Solution {
         int dir[][]={{0,1},{0,-1},{1,0},{-1,0}};
         boolean visited[][]=new boolean[n][m];
         
-        // Pacific flow
+        //Pacific flow starting from each cell of the top pacific border, trying to reach 
+        //as many cells as possible
         for(int col=0;col<m;col++){
             flow(a,0,col,n,m,pacific,visited,dir);
         }
         
+        //Pacific flow starting from each cell of the left pacific border, trying to reach 
+        //as many cells as possible
         for(int row=0;row<n;row++){
             flow(a,row,0,n,m,pacific,visited,dir);
         }
         
         visited=new boolean[n][m];
         
-        // Atlantic flow
+        //Atlantic flow starting from each cell of the bottom atlantic border, trying to              reach as many cells as possible
         for(int col=0;col<m;col++){
             flow(a,n-1,col,n,m,atlantic,visited,dir);
         }
         
+        //Atlantic flow starting from each cell of the right atlantic border, trying to               reach as many cells as possible
         for(int row=0;row<n;row++){
             flow(a,row,m-1,n,m,atlantic,visited,dir);
         }
         
         List<List<Integer>>res=new ArrayList<>();
         
+        //checking the cells which have 1 in both atlantic and pacific matrix
+        //that means they could be reach by botht the oceans, so we add their index
+        //in the resultant list
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 if(atlantic[i][j]==1 && pacific[i][j]==1){
