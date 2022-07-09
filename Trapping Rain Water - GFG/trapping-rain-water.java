@@ -40,35 +40,42 @@ class Solution{
     static long trappingWater(int a[], int n) { 
         
         int lmax=a[0];
-        int rmax=a[a.length-1];
-        long res=0;
-        int r=a.length-1;
-        int l=0;
+        int rmax=a[n-1];
         
-        while(l<=r)                       //[0,1,0,2,1,0,1,3,2,1,2,1]
-        {
-            if(a[l]<=rmax)
-            {
-                if(a[l]<lmax) 
-                    res+=lmax-a[l];
-                
-                else 
-                    lmax=a[l];
+        int left=0;
+        int right=n-1;
+        
+        long trap=0;
     
-                l++;
+        while(left<=right){
+            
+            if(a[left]<=rmax){
+                
+                if(a[left]<lmax){
+                    trap+=lmax-a[left];
+                }
+                
+                else{
+                    lmax=a[left];
+                }
+                
+                left++;
             }
-            else
-            {
-                if(a[r]<rmax) 
-                    res+=rmax-a[r];
+            
+            else{
                 
-                else 
-                    rmax=a[r];
+                if(a[right]<rmax){
+                    trap+=rmax-a[right];
+                }
                 
-                r--;
+                else{
+                    rmax=a[right];
+                }
+                
+                right--;
             }
         }
-        return res;
+        return trap;
     } 
 }
 
