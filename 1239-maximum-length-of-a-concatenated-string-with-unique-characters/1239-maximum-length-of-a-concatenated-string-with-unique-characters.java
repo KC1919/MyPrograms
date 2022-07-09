@@ -12,17 +12,7 @@ class Solution {
     {
         if(idx==list.size()){
             if(res.size()>0){
-                
-                // StringBuilder sb=new StringBuilder();
-                int size=0;
-                for(String ele:res){
-                    // sb.append(ele);
-                    size+=ele.length();
-                }
-                
-                // if(check(sb.toString())){
-                    max=Math.max(max,size);
-                // }
+                max=Math.max(max,s.length());
             }
             return;
         }
