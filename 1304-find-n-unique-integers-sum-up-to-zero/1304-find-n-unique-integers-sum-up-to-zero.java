@@ -3,25 +3,9 @@ class Solution {
         
         int a[]=new int[n];
         
-        int limit;
-        
-        if(n%2!=0){
-            limit=n-1;
+        for (int i = 0; i < n; ++i) {
+            a[i] = i * 2 - n + 1;
         }
-        
-        else{
-            limit=n;
-        }
-        
-        int j=1;
-        int i=0;
-        
-        while(i<limit){
-            a[i++]=j;
-            a[i++]=-j;
-            j++;
-        }
-        
         return a;
     }
 }
