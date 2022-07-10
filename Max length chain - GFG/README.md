@@ -1,5 +1,5 @@
 # Max length chain
-##  Medium 
+## Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">You are given N&nbsp;pairs of numbers. In every pair, the first number is always smaller than the second number.&nbsp;A pair (c, d) can follow another pair (a, b) if b &lt; c. Chain of pairs can be formed in this fashion. You have to find&nbsp;the longest chain which can be formed from the&nbsp;given set of pairs.&nbsp;</span><br>
 &nbsp;</p>
