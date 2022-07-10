@@ -32,23 +32,17 @@ class Solution{
     int longestCommonSubstr(String s, String t, int n, int m){
         
         int dp[][]=new int[n+1][m+1];
-        
         int max=0;
         
-        for(int i=0;i<n+1;i++){
-            
-            for(int j=0;j<m+1;j++){
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
                 
-                if(i==0 || j==0){
-                    dp[i][j]=0;
-                }
+                char ch1=s.charAt(i);
+                char ch2=t.charAt(j);
                 
-                else{
-                    
-                    if(s.charAt(i-1)==t.charAt(j-1)){
-                        dp[i][j]=dp[i-1][j-1]+1;
-                        max=Math.max(dp[i][j],max);
-                    }
+                if(ch1==ch2){
+                    dp[i+1][j+1]=1+dp[i][j];
+                    max=Math.max(max,dp[i+1][j+1]);
                 }
             }
         }
