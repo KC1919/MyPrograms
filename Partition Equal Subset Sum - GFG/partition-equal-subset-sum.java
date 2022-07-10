@@ -34,11 +34,13 @@ class Solution{
     {
         int sum=0;
         
-        for(int i=0;i<n;i++)
-        sum+=a[i];
+        for(int ele:a){
+            sum+=ele;
+        }
         
-        if(sum%2!=0)
-        return 0;
+        if(sum%2!=0){
+            return -1;
+        }
         
         int target=sum/2;
         
@@ -46,35 +48,32 @@ class Solution{
         
         for(int i=0;i<n;i++){
             
-            for(int j=1;j<=target;j++)
-            {
-                if(j<a[i]){
-                    
-                    if(i>0 && dp[i-1][j]==true)
-                        dp[i][j]=true;
-                    
-                    else
-                        dp[i][j]=false;
-                }
+            for(int j=0;j<=target;j++){
                 
-                else{
+                    if(a[i]==j){
+                        dp[i][j]=true;    
+                    }
                     
-                    if(j==a[i]){
+                    else if(a[i]>j){
+                        
+                        if(i>0 && dp[i-1][j]==true)
                         dp[i][j]=true;
                     }
-                    else if(j>a[i]){
+                    
+                    else if(a[i]<j){
                         
-                        if(i>0 && dp[i-1][j-a[i]]==true){
+                        if(i>0 && dp[i-1][j]==true){
                             dp[i][j]=true;
                         }
-                        
-                        else if(i>0 && dp[i-1][j]==true)
-                        dp[i][j]=true;
+                        else if(i>0 && dp[i-1][j-a[i]]==true){
+                            dp[i][j]=true;
+                        }
                     }
+                
+                if(j==target && dp[i][j]==true){
+                    return 1;
                 }
                 
-                if(j==target && dp[i][j]==true)
-                    return 1;
             }
         }
         
