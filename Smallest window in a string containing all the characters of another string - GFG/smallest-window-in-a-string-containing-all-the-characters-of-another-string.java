@@ -25,50 +25,45 @@ class Solution
     //of all the characters of string p.
     public static String smallestWindow(String s, String t)
     {
-       if(t.length()>s.length())
-            return "-1";
-        
-        HashMap<Character,Integer>sm=new HashMap<>();
         HashMap<Character,Integer>tm=new HashMap<>();
         
-        for(int i=0;i<t.length();i++)
-        {
+        for(int i=0;i<t.length();i++){
             char ch=t.charAt(i);
             tm.put(ch,tm.getOrDefault(ch,0)+1);
         }
         
-        int count=0;
-        int j=0;
+        HashMap<Character,Integer>hm=new HashMap<>();
         
+        int count=0, min=s.length()+1;
+        int j=0;
         int start=-1, end=-1;
-        int min=Integer.MAX_VALUE;
-        for(int i=0;i<s.length();i++)
-        {
+        
+        for(int i=0;i<s.length();i++){
             char ch=s.charAt(i);
-            sm.put(ch,sm.getOrDefault(ch,0)+1);
+            hm.put(ch,hm.getOrDefault(ch,0)+1);
             
-            if(sm.get(ch)==tm.get(ch)){
+            if(tm.containsKey(ch) && hm.get(ch)==tm.get(ch)){
                 count++;
             }
             
             if(count==tm.size()){
                 
                 if(i-j<min){
+                    min=i-j;
                     start=j;
                     end=i;
-                    min=end-start;
                 }
                 
                 while(j<=i && count==tm.size()){
                     char rem=s.charAt(j);
                     
-                    if(tm.containsKey(rem) && tm.get(rem)==sm.get(rem)){
+                    if(tm.containsKey(rem) && tm.get(rem)==hm.get(rem)){
                         count--;
                     }
                     
-                    sm.put(rem,sm.get(rem)-1);
-                    if(sm.get(rem)==0){
-                        sm.remove(rem);
+                    hm.put(rem,hm.get(rem)-1);
+                    if(hm.get(rem)==0){
+                        hm.remove(rem);
                     }
                     
                     if(i-j<min){
@@ -80,7 +75,10 @@ class Solution
                 }
             }
         }
+        if(start==-1 || end==-1){
+            return "-1";
+        }
         
-        return (start!=-1 && end!=-1)?s.substring(start,end+1):"-1";
+        return s.substring(start,end+1);
     }
 }
