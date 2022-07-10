@@ -1,5 +1,5 @@
 # Coin Change
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given a value N, find the number of ways to make change for N cents, if we have infinite supply of each of S = { S<sub>1</sub>, S<sub>2</sub>, .. , S<sub>M&nbsp;</sub>} valued coins. </span></p>
 
