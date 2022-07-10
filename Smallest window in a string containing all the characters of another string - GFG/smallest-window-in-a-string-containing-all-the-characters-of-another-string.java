@@ -54,9 +54,14 @@ class Solution
                     end=i;
                 }
                 
-                while(j<s.length() && count==tm.size()){
+                while(j<=i && count==tm.size()){
                     char rem=s.charAt(j);
                     
+                    if(i-j<min){
+                        start=j;
+                        end=i;
+                        min=end-start;
+                    }
                     if(tm.containsKey(rem) && tm.get(rem)==hm.get(rem)){
                         count--;
                     }
@@ -66,11 +71,6 @@ class Solution
                         hm.remove(rem);
                     }
                     
-                    if(i-j<min){
-                        start=j;
-                        end=i;
-                        min=end-start;
-                    }
                     j++;
                 }
             }
