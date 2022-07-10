@@ -22,39 +22,18 @@ class GfG {
 // User function Template for Java
 
 class Solution {
-    public long count(int a[], int n, int target) {
+    public long count(int a[], int m, int n) {
         
-        Long dp[][]=new Long[n][target+1];   
+        long dp[]=new long[n+1];
         
-        return solve(a,n,0,dp,target);
-    }
-    
-    
-    private long solve(int a[], int n, int idx, Long dp[][], int target){
+        dp[0]=1;
         
-        if(target==0 || idx==n){
-            
-            if(target==0)
-                return 1;
-            
-            return 0;
-        }
-        
-        if(dp[idx][target]!=null){
-            return dp[idx][target];
-        }
-        
-        long count=0;
-        if(a[idx]<=target){
-            count+=solve(a,n,idx,dp,target-a[idx]);
-        }
-        
-        for(int i=idx+1;i<n;i++){
-            if(a[i]<=target){
-                count+=solve(a,n,i,dp,target-a[i]);
+        for(int i=0;i<m;i++){
+            for(int j=a[i];j<=n;j++){
+                dp[j]+=dp[j-a[i]];
             }
         }
         
-        return dp[idx][target]=count;
+        return dp[n];
     }
 }
