@@ -54,7 +54,7 @@ class Solution
                     end=i;
                 }
                 
-                while(j<=i && count==tm.size()){
+                while(j<s.length() && count==tm.size()){
                     char rem=s.charAt(j);
                     
                     if(tm.containsKey(rem) && tm.get(rem)==hm.get(rem)){
