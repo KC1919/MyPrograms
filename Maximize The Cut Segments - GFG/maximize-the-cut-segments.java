@@ -66,11 +66,11 @@ class Solution
         
         Integer dp[]=new Integer[n+1];
         
-        int res=maxVal(a,n,dp);
+        int res=maxVal(a,0,n,dp);
         return res<0?0:res-1;
     }
     
-    private int maxVal(int a[], int target, Integer dp[]){
+    private int maxVal(int a[], int idx, int target, Integer dp[]){
         
         if(target==0){
             return 1;
@@ -82,9 +82,15 @@ class Solution
         
         int max=Integer.MIN_VALUE;
         
+        if(a[idx]<=target){
+            int res=maxVal(a,idx,target-a[idx],dp);
+            max=Math.max(res,max);
+        }
+        
+        
         for(int i=0;i<a.length;i++){
             if(a[i]<=target){
-                int res=maxVal(a,target-a[i],dp);
+                int res=maxVal(a,i,target-a[i],dp);
                 max=Math.max(res,max);
             }
         }
