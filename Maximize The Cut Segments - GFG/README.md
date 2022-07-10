@@ -1,5 +1,5 @@
 # Maximize The Cut Segments
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given an integer <strong>N</strong> denoting the Length of a line segment. You need to cut the line segment in such&nbsp;a way that the cut length of a line segment each time is either <strong>x</strong> , <strong>y</strong> or <strong>z</strong>. Here x, y, and z are integers.<br>
 After performing&nbsp;all the cut operations, your<strong> total number of cut segments must be maximum</strong>.</span></p>
