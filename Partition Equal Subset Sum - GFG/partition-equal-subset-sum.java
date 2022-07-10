@@ -56,8 +56,8 @@ class Solution{
                     
                     else if(a[i]>j){
                         
-                        if(i>0 && dp[i-1][j]==true)
-                        dp[i][j]=true;
+                        if(i>0)
+                        dp[i][j]=dp[i-1][j];
                     }
                     
                     else if(a[i]<j){
