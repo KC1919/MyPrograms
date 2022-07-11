@@ -144,11 +144,11 @@ class Solution
 	        return false;
 	    }
 	    
-	    if(isIdentical(node1.left,node2.left)==false || isIdentical(node1.right,node2.right)){
-	        return true;
+	    if(isIdentical(node1.left,node2.left)==false || isIdentical(node1.right,node2.right)==false){
+	        return false;
 	    }
 	    
-	    return false;
+	    return true;
 	}
 	
 }
