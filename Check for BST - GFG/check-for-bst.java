@@ -115,26 +115,37 @@ class GfG {
 public class Solution
 {
     //Function to check whether a Binary Tree is BST or not.
-    static int prev=Integer.MIN_VALUE;
     boolean isBST(Node root)
     {
-        prev=Integer.MIN_VALUE;
-        return check(root);
-    }
-    
-    boolean check(Node node)
-    {
-        if(node==null)
+        Node prev=null;
+        
+        Stack<Node>st=new Stack<>();
+        
+        Node node=root;
+        
+        while(node!=null || st.size()>0){
+            
+            while(node!=null){
+                
+                st.push(node);
+                node=node.left;
+            }
+            
+            node=st.pop();
+            
+            if(prev==null){
+                prev=node;
+            }
+            
+            else if(node.data<=prev.data){
+                return false;
+            }
+            
+            prev=node;
+            
+            node=node.right;
+        }
+        
         return true;
-        
-        boolean lres=check(node.left);
-        
-        if(node.data<=prev)
-        return false;
-        
-        prev=node.data;
-        
-        boolean rres=check(node.right);
-        return lres&&rres;
     }
 }
