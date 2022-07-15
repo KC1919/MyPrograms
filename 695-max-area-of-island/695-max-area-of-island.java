@@ -3,7 +3,6 @@ class Solution {
         
         int n=a.length;
         int m=a[0].length;
-        // boolean visited[][]=new boolean[n][m];
         int count[]=new int[1];
         
         int dir[][]={{1,0},{-1,0},{0,1},{0,-1}};
