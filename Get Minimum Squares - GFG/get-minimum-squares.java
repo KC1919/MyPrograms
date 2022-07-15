@@ -28,12 +28,9 @@ class Solution
 {
     public int MinSquares(int n)
     {
-        // List<Integer>list=new ArrayList<>();
-        
         Integer dp[]=new Integer[n+1];
         
         return minsquare(n,n,dp)-1;
-        
     }
     
     private int minsquare(int num, int target, Integer dp[]){
@@ -48,7 +45,7 @@ class Solution
         
         int min=Integer.MAX_VALUE;
         
-        for(int i=1;i<=(int)Math.sqrt(num);i++){
+        for(int i=1;i<=(int)Math.sqrt(target);i++){
             if(i*i<=target){
                 int res=minsquare(num,target-(i*i),dp);
                 min=Math.min(min,res);
