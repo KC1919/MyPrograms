@@ -12,9 +12,9 @@ class Solution {
                 return mid;
             }
             
-            else if(a[0]<=a[mid]){
+            else if(a[l]<=a[mid]){
                 
-                if(target>=a[0] && target<=a[mid]){
+                if(target>=a[l] && target<a[mid]){
                     h=mid-1;
                 }
                 
@@ -23,8 +23,8 @@ class Solution {
                 }
             }
             
-            else if(a[mid]<=a[h]){
-                if(target>=a[mid] && target<=a[h]){
+            else{
+                if(target>a[mid] && target<=a[h]){
                     l=mid+1;
                 }
                 
