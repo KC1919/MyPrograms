@@ -10,6 +10,7 @@ class Solution {
         if(n==2){
             return Math.max(a[0],a[1]);
         }
+        
         int dp[]=new int[n];
         
         dp[n-1]=a[n-1];
