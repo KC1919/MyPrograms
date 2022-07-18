@@ -1,23 +1,32 @@
 class Solution {
-    public int rob(int[] price) {
+    public int rob(int[] a) {
         
-        if(price.length==1)
-            return price[0];
-        
-        else if(price.length==2)
-            return Math.max(price[0],price[1]);
-        
-        
-        int n=price.length;
+        int n=a.length;
         int dp[]=new int[n];
         
-        dp[n-1]=price[n-1];
-        dp[n-2]=price[n-2];
-        dp[n-3]=price[n-3]+price[n-1];
+        Arrays.fill(dp,-1);
         
-        for(int i=n-4;i>=0;i--){
-            dp[i]=Math.max(dp[i+2],dp[i+3])+price[i];
+        int res1=rob(a,0,n,dp);
+        int res2=rob(a,1,n,dp);
+        
+        return Math.max(res1,res2);
+    }
+    
+    private int rob(int a[], int idx, int n, int dp[]){
+        
+        if(idx>=n){
+            return 0;
         }
-        return Math.max(dp[0],dp[1]);
+        
+        if(dp[idx]!=-1){
+            return dp[idx];
+        }
+        
+        int j1=rob(a,idx+2,n,dp);
+        int j2=rob(a,idx+3,n,dp);
+        
+        int max=Math.max(j1,j2);
+        
+        return dp[idx]=max+a[idx];
     }
 }
