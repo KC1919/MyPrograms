@@ -1,16 +1,31 @@
 class Solution {
     public int climbStairs(int n) {
         
-        int a=1;
-        int b=1;
+        int dp[]=new int[n+1];
+        Arrays.fill(dp,-1);
         
-        for(int i=n-2;i>=0;i--){
-            
-            int c=a+b;
-            b=a;
-            a=c;
+        return climb(n,0,dp);
+    }
+    
+    private int climb(int n, int idx, int dp[]){
+        
+        if(idx>n){
+            return 0;
         }
         
-        return a;
+        if(idx==n){
+            return dp[idx]=1;
+        }
+        
+        if(dp[idx]!=-1){
+            return dp[idx];
+        }
+        
+        
+        int oneStep=climb(n,idx+1,dp);
+        int twoStep=climb(n,idx+2,dp);
+        
+        
+        return dp[idx]=oneStep+twoStep;
     }
 }
