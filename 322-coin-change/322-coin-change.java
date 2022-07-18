@@ -26,10 +26,10 @@ class Solution {
         
         int min=Integer.MAX_VALUE;
         
-        // if(target>=a[idx]){
-        //     int res=minCoins(a,idx,target-a[idx],dp);
-        //     min=Math.min(res,min);
-        // }
+        if(target>=a[idx]){
+            int res=minCoins(a,idx,target-a[idx],dp);
+            min=Math.min(res,min);
+        }
         
         for(int i=0;i<a.length;i++){
             if(target>=a[i]){
