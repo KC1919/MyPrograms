@@ -2,31 +2,24 @@ class Solution {
     public int rob(int[] a) {
         
         int n=a.length;
+        
+        if(n==1){
+            return a[0];
+        }
+        
+        if(n==2){
+            return Math.max(a[0],a[1]);
+        }
         int dp[]=new int[n];
         
-        Arrays.fill(dp,-1);
+        dp[n-1]=a[n-1];
+        dp[n-2]=a[n-2];
+        dp[n-3]=dp[n-1]+a[n-3];
         
-        int res1=rob(a,0,n,dp);
-        int res2=rob(a,1,n,dp);
-        
-        return Math.max(res1,res2);
-    }
-    
-    private int rob(int a[], int idx, int n, int dp[]){
-        
-        if(idx>=n){
-            return 0;
+        for(int i=n-4;i>=0;i--){
+            dp[i]=Math.max(dp[i+2],dp[i+3])+a[i];
         }
         
-        if(dp[idx]!=-1){
-            return dp[idx];
-        }
-        
-        int j1=rob(a,idx+2,n,dp);
-        int j2=rob(a,idx+3,n,dp);
-        
-        int max=Math.max(j1,j2);
-        
-        return dp[idx]=max+a[idx];
+        return Math.max(dp[0],dp[1]);
     }
 }
