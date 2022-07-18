@@ -1,42 +1,31 @@
 class Solution {
-    public boolean wordBreak(String s, List<String> list) {
+    public boolean wordBreak(String s, List<String> wordDict) {
         
-        HashSet<String>hm=new HashSet<>();
-        
-        HashMap<String,Integer>hmap=new HashMap<>();
-        
-        for(String word:list){
-            hm.add(word);
-        }
-        
-        int res=breakWord(s,0,hm,hmap);
-        
-        return res==0?false:true;
+        Integer dp[]=new Integer[s.length()];
+        return breakAll(s,0,wordDict,dp);
     }
     
-    private static int breakWord(String s, int idx, HashSet<String>hm, HashMap<String,Integer>hmap){
+    private boolean breakAll(String s, int idx, List<String>list, Integer dp[]){
         
-        if(idx==s.length()){
-            return 1;
+        if(s.length()==0){
+            return true;
         }
         
-        if(hmap.containsKey(s.substring(idx))){
-            return hmap.get(s.substring(idx));
+        if(dp[idx]!=null){
+            return dp[idx]==1?true:false;
         }
         
-        for(int i=idx;i<s.length();i++){
+        for(String word:list){
             
-            String word=s.substring(idx,i+1);
-            
-            if(hm.contains(word)){
-                int res=breakWord(s,i+1,hm,hmap);
-                if(res==1){
-                    hmap.put(s.substring(i),1);
-                    return 1;
+            if(s.indexOf(word)==0){
+                boolean res=breakAll(s.substring(word.length()),idx+word.length(),list,dp);
+                if(res){
+                    dp[idx]=1;
+                    return true;
                 }
-            }
+            }   
         }
-        hmap.put(s.substring(idx),0);
-        return 0;
+        dp[idx]=0;
+        return false;
     }
 }
