@@ -49,11 +49,11 @@ class Solution {
                 start++;
                 end--;
                 
-                while(start<a.length && a[start]==a[start-1]){
+                while(start<end && a[start]==a[start-1]){
                     start++;
                 }
                 
-                while(end>=0 && a[end]==a[end+1]){
+                while(end>start && a[end]==a[end+1]){
                     end--;
                 }
             }
