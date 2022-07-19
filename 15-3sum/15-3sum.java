@@ -1,59 +1,64 @@
 class Solution {
-    public List<List<Integer>> threeSum(int[] a) 
-    {
-        int n=a.length;
-        Arrays.sort(a);
+    public List<List<Integer>> threeSum(int[] a) {
         
         List<List<Integer>>res=new ArrayList<>();
+        int n=a.length;
         
-        for(int i=0;i<n;i++)
-        {
+        Arrays.sort(a);
+        
+        for(int i=0;i<n-2;i++){
+            
             if(i>0 && a[i]==a[i-1])
                 continue;
             
-            int comp=0-a[i];
+            int ele=a[i];
+            int target=0-ele;
             
-            List<List<Integer>>list=twoSum(a,i+1,n-1,comp);
+            List<List<Integer>>list=twoSum(a,i+1,n-1,target);
             
-            for(int j=0;j<list.size();j++)
-            {
-                list.get(j).add(0,a[i]);
-                res.add(list.get(j));
+            for(List<Integer>item:list){
+                item.add(0,ele);
+                res.add(item);
             }
         }
         return res;
     }
     
-    public List<List<Integer>> twoSum(int a[], int l, int r, int target)
-    {
-        List<List<Integer>>res=new ArrayList<>();
+    private List<List<Integer>> twoSum(int a[], int start, int end, int target){
         
-        while(l<r)
-        {
-            if(a[l]+a[r]>target)
-                r--;
+        List<List<Integer>>list=new ArrayList<>();
+        
+        while(start<end){
             
-            else if(a[l]+a[r]<target)
-                l++;
+            if(a[start]+a[end]<target){
+                start++;
+            }
             
-            else
-            {
-                List<Integer>list=new ArrayList<>();
-                list.add(a[l]);
-                list.add(a[r]);
-                res.add(list);
+            else if(a[start]+a[end]>target){
+                end--;
+            }
+            
+            else{
                 
-                l++;
-                r--;
+                List<Integer>res=new ArrayList<>();
+                res.add(a[start]);
+                res.add(a[end]);
                 
-                while(l<a.length && a[l]==a[l-1])
-                    l++;
+                list.add(res);
                 
-                while(r>=0 && a[r]==a[r+1])
-                    r--;
+                start++;
+                end--;
+                
+                while(start<a.length && a[start]==a[start-1]){
+                    start++;
+                }
+                
+                while(end>=0 && a[end]==a[end+1]){
+                    end--;
+                }
             }
         }
         
-        return res;
+        return list;
     }
 }
