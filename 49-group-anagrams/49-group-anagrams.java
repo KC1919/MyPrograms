@@ -8,7 +8,7 @@ class Solution {
             String word=s[i];
             char a[]=word.toCharArray();
             Arrays.sort(a);
-            String temp=new String(a);
+            String temp=String.valueOf(a);
             
             if(hm.containsKey(temp)){
                 hm.get(temp).add(word);
