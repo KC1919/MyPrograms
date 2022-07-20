@@ -1,33 +1,31 @@
 class Solution {
-    public List<List<String>> groupAnagrams(String[] s) 
-    {
-        int count=0;
-        int n=s.length;
+    public List<List<String>> groupAnagrams(String[] s) {
         
-        List<List<String>>list=new ArrayList<>();
-        HashMap<String,Integer>hm=new HashMap<>();
+        HashMap<String,List<String>>hm=new HashMap<>();
         
-        for(int i=0;i<n;i++)
-        {
+        for(int i=0;i<s.length;i++){
+            
             String word=s[i];
-            char sortWord[]=word.toCharArray();
-            Arrays.sort(sortWord);
-            String val=String.valueOf(sortWord);
+            char a[]=word.toCharArray();
+            Arrays.sort(a);
+            String temp=new String(a);
             
-            if(hm.containsKey(val))
-                list.get(hm.get(val)).add(word);
+            if(hm.containsKey(temp)){
+                hm.get(temp).add(word);
+            }
             
-            else
-            {
-                hm.put(val,count);
-                
-                if(count==list.size())
-                    list.add(new ArrayList<>());
-                
-                list.get(count).add(word);
-                count++;
+            else{
+                hm.put(temp,new ArrayList<>());
+                hm.get(temp).add(word);
             }
         }
-        return list;
+        
+        List<List<String>>res=new ArrayList<>();
+        
+        for(String key:hm.keySet()){
+            res.add(hm.get(key));
+        }
+        
+        return res;
     }
 }
