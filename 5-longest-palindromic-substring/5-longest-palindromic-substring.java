@@ -54,14 +54,11 @@ class Solution {
         
         while(left>=0 && right<s.length() && s.charAt(left)==s.charAt(right))
         {
-            if(s.charAt(left)==s.charAt(right))
+            if((right-left+1)>max)
             {
-                if((right-left+1)>max)
-                {
-                    li=left;
-                    ri=right;
-                    max=right-left+1;
-                }
+                li=left;
+                ri=right;
+                max=right-left+1;
                 left--;
                 right++;
             }  
