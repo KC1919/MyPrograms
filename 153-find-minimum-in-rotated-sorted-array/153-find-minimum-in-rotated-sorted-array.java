@@ -10,24 +10,16 @@ class Solution {
             
             if(a[low]<=a[mid]){
                 
-                if(a[low]<=a[high]){
-                    high=mid-1;
+                if(a[low]>a[high]){
+                    low=mid+1;
                 }
                 else{
-                    low=mid+1;
+                    return a[low];
                 }
             }
             
             else{
-                
-                if(a[mid]<=a[high]){
-                    high=mid;
-                }
-                
-                else{
-                    low=mid;
-                }
-                
+                high=mid;
             }
         }
         return a[low];
