@@ -6,7 +6,7 @@ If the element at ith index and element at jth index sums to K, then increment t
 ​
 First we map all the elements with their frequencies.
 Then we iterate the array from the 1st element.
-And we calculate the diffrence.
+And we calculate the difference.
 We look for the difference in the hashmap.
 ​
 We check if the diff is equal to the element itself, then the frequency needs to be greater than 1, so as to make a pair.
