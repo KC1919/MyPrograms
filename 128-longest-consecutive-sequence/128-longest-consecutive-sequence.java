@@ -9,12 +9,12 @@ class Solution {
         
         int max=Integer.MIN_VALUE;
         
-        for(int i=0;i<a.length;i++)
+        for(int ele:hm)
         {
-            if(!hm.contains(a[i]-1))
+            if(!hm.contains(ele-1))
             {
                 int count=0;
-                while(hm.contains(a[i]+count)){
+                while(hm.contains(ele+count)){
                     count++;
                 }
                 
