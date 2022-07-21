@@ -32,8 +32,6 @@ class Solution {
         if(node!=null){
             ListNode rhead[]=reverse(node,right,count);
             
-            // System.out.println(rhead[0].val+","+rhead[1].val);
-            
             if(prev!=null)
                 prev.next=rhead[0];
 
