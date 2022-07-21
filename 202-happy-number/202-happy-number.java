@@ -1,35 +1,19 @@
 class Solution {
-    public boolean isHappy(int n) {
-        
-        if(n==1){
-            return true;
+    
+    public int getNext(int n) {
+        int totalSum = 0;
+        while (n > 0) {
+            int d = n % 10;
+            n = n / 10;
+            totalSum += d * d;
         }
-        
-        Set<Integer>hm=new HashSet<>();
-        
-        while(n!=1 && !hm.contains(n)){
-
-            hm.add(n);
-            n=getNext(n);
-            
-            if(n==1){
-                return true;
-            }
-        }
-        
-        return false;
+        return totalSum;
     }
     
-    private int getNext(int n){
-        
-        int sum=0;
-        
-        while(n>0){
-            int d=n%10;
-            sum+=d*d;
-            n/=10;
+    public boolean isHappy(int n) {
+        while (n != 1 && n != 4) {
+            n = getNext(n);
         }
-        
-        return sum;
+        return n == 1;
     }
 }
