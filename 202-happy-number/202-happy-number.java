@@ -1,18 +1,15 @@
 class Solution {
     public boolean isHappy(int n) {
         
-        if(n==1){
+        if(n==1)
             return true;
-        }
         
         Set<Integer>hm=new HashSet<>();
         
         while(n!=1 && !hm.contains(n)){
-
             hm.add(n);
             n=getNext(n);
         }
-        
         return n==1;
     }
     
