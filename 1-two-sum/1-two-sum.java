@@ -4,7 +4,7 @@ class Solution {
         HashMap<Integer,Integer>hm=new HashMap<>();
         
         for(int i=0;i<a.length;i++){
-            if(hm.size()>0 && hm.containsKey(target-a[i])){
+            if(hm.containsKey(target-a[i])){
                 return new int[]{hm.get(target-a[i]),i};
             }
             
