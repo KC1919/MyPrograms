@@ -4,28 +4,36 @@ class Solution {
         if(interval.length==0)
             return a;
         
+        //getting the insertion position of the interval
         int pos=findPos(a,interval[0]);
     
         int n=a.length;
         
+        
         int ans[][]=new int[n+1][2];
         
+        //then copy all the intervals that come before the new interval
+        //insertion position
         for(int i=0;i<pos;i++){
             ans[i][0]=a[i][0];
             ans[i][1]=a[i][1];
         }
         
+        //then put the new interval at the insertion position
         ans[pos][0]=interval[0];
         ans[pos][1]=interval[1];
         
+        //then put the remaining intervals that now come after the new interval
         for(int i=pos+1;i<=n;i++){
             ans[i][0]=a[i-1][0];
             ans[i][1]=a[i-1][1];
         }
         
+        //then merge this new array of intervals
         return mergeInterval(ans);
     }
     
+    //method to merge the intervals
     public int[][] mergeInterval(int a[][]){
         List<int[]>list=new ArrayList<>();
         
@@ -56,6 +64,7 @@ class Solution {
         return ans;
     }
     
+    //method to find the insertion position of the interval(binary search)
     public int findPos(int a[][], int target){
         
         int l=0, h=a.length-1;
