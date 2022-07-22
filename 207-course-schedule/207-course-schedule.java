@@ -5,32 +5,36 @@ class Solution {
         int src;
         int nbr;
         
-        Edge(int src, int nbr){
+        Edge(int src, int nbr)
+        {
             this.src=src;
             this.nbr=nbr;
         }
     }
-    public boolean canFinish(int vtces, int[][] a) {
+    
+    public boolean canFinish(int courses, int[][] edges) {
         
-        ArrayList<Edge>graph[]=new ArrayList[vtces];
         
-        for(int i=0;i<vtces;i++){
+        ArrayList<Edge>graph[]=new ArrayList[courses];
+        
+        for(int i=0;i<courses;i++){
             graph[i]=new ArrayList<>();
         }
         
-        for(int i=0;i<a.length;i++){
-            int src=a[i][0];
-            int nbr=a[i][1];
+        for(int i=0;i<edges.length;i++){
+            int src=edges[i][0];
+            int nbr=edges[i][1];
             
             graph[src].add(new Edge(src,nbr));
         }
         
-        boolean visited[]=new boolean[vtces];
-        boolean dfsvis[]=new boolean[vtces];
+        boolean visited[]=new boolean[courses];
+        boolean dfsvis[]=new boolean[courses];
         
-        for(int i=0;i<vtces;i++){
+        for(int i=0;i<courses;i++){
             if(visited[i]==false){
-                if(detect(graph,i,visited,new boolean[vtces])){
+                boolean res=topologicalSort(graph,i,visited,dfsvis);
+                if(res){
                     return false;
                 }
             }
@@ -39,29 +43,28 @@ class Solution {
         return true;
     }
     
-    private boolean detect(ArrayList<Edge>graph[], int src, boolean visited[], boolean dfsvisit[])
+    public boolean topologicalSort(ArrayList<Edge>graph[], int src, boolean visited[], boolean dfsvis[])
     {
         
         visited[src]=true;
-        dfsvisit[src]=true;
+        
+        dfsvis[src]=true;
         
         for(Edge e:graph[src]){
-            if(dfsvisit[e.nbr]==true && visited[e.nbr]==true){
+            
+            if(dfsvis[e.nbr]==true && visited[e.nbr]==true){
                 return true;
             }
             
             if(visited[e.nbr]==false){
-                boolean res=detect(graph,e.nbr,visited,dfsvisit);    
-                
-                if(res==true){
+                boolean res=topologicalSort(graph,e.nbr,visited,dfsvis); 
+                if(res){
                     return true;
                 }
             }
         }
         
-        dfsvisit[src]=false;
-        
+        dfsvis[src]=false;
         return false;
     }
-    
 }
