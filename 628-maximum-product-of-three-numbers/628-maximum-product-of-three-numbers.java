@@ -33,9 +33,6 @@ class Solution {
             }
         }
         
-        // System.out.println("Min: "+m1+","+m2);
-        // System.out.println("Max: "+max1+","+max2+","+max3);
-        
         int p1=m1*m2*max1;
         int p2=max1*max2*max3;
         
