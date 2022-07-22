@@ -66,7 +66,7 @@ class Solution {
         
         //if any one node is null and another node is not null, return false
         //because this shows dissimilarity in their structure
-        if((p==null && q!=null) || (q==null && p!=null))
+        if(p==null || q==null)
             return false;
         
         //or if the values of the nodes is not same then also they are not identical
