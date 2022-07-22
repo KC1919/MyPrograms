@@ -20,7 +20,7 @@ class Solution {
             return false;
         
         //taking a status variable
-        boolean res=true; //by default setting it to true
+        // boolean res=true; //by default setting it to true
                          //this variable helps to deal with duplicates
                          //because there can be many nodes with same value as
                          //that of the root node of the subtree
@@ -33,7 +33,7 @@ class Solution {
             
             //then we pass the two nodes in to the isSameTree function
             //which checks for similarity of both the trees with structure and values both
-            res=isSameTree(node,subnode);
+            boolean res=isSameTree(node,subnode);
             
             //if true is returned measn the subtree is valid in main tree
             if(res==true){
