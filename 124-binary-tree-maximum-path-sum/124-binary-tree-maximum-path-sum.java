@@ -14,57 +14,34 @@
  * }
  */
 class Solution {
-    
-    int maxSum=-1001;
-    
+    int max=-1001;
     public int maxPathSum(TreeNode root) {
         
-        if(root==null)
-            return 0;
-        
-        maxSum=-1001;
-        
-        getMaxPathSum(root);
-        return maxSum;
-        
+        max=-1001;
+        maxSum(root);
+        return max;
     }
     
-    public int getMaxPathSum(TreeNode node){
+    private int maxSum(TreeNode node){
         
-        if(node==null)
-            return 0;
-        
-        int lres=getMaxPathSum(node.left);
-        int rres=getMaxPathSum(node.right);
-        
-        //maximum between the left result and right result
-        int max=Math.max(lres,rres);
-        int myPathSum=node.val;
-        
-        //if the maximum is not negative
-        if(max>=0){
-            
-            //if both lres and rres are positive then we add both to the myPathSum
-            if(lres>=0 && rres>=0)
-                myPathSum+=lres+rres;
-            
-            //else if any one is negative
-            //we add the positive one
-            else
-                myPathSum+=max;
+        if(node==null){
+            return -1001;
         }
+        
+        int lres=maxSum(node.left);
+        int rres=maxSum(node.right);
+        
+        int maxBT=Math.max(lres,rres);
+        int mySum=node.val;
+        
+        if(maxBT>=0){
+            mySum=maxBT+node.val;
             
-        //we compare the maximum sum so far and compare it with our current
-        //pathSum and update accordingly
-        maxSum=Math.max(maxSum,myPathSum);
+            max=Math.max(max,lres+rres+node.val);
+        }
         
-        //and we return to the above node, the path that will lead to the
-        //maximum sum
+        max=Math.max(max,mySum);
         
-        //so we check if the max of the left and right result is positive
-        //then we add ourself(current node's value to the max) and return
-        //else if the max is negative so we only return the current node's value
-        //because adding negative would minimize the path sum
-        return max>=0?max+node.val:node.val;
+        return mySum;
     }
 }
