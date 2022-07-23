@@ -64,6 +64,7 @@ class Solution {
         
         if(level==0){
             list.add(node.val);
+            return;
         }
         
         getNodes(node.left,list,level-1,block);
