@@ -9,56 +9,63 @@
  */
 class Solution {
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
-        ArrayList<TreeNode>list=new ArrayList<>();
-        
-        nodeRootPath(root,list,target);
         
         List<Integer>klist=new ArrayList<>();
         
-        for(int i=0;i<list.size();i++){
-            List<Integer>temp=new ArrayList<>();
+        nodeRootPath(root,target,klist,k);
+        
+//         for(int i=0;i<list.size();i++){
+//             List<Integer>temp=new ArrayList<>();
             
-            TreeNode block=i>0?list.get(i-1):null;
-            getNodes(list.get(i),temp,k-i,block);
+//             TreeNode block=i>0?list.get(i-1):null;
+//             getNodes(list.get(i),temp,k-i,block);
             
-            if(temp.size()>0){
-                klist.addAll(temp);
-            }
-        }
+//             if(temp.size()>0){
+//                 klist.addAll(temp);
+//             }
+//         }
         
         return klist;
     }
     
-    private boolean nodeRootPath(TreeNode node, ArrayList<TreeNode>list, TreeNode target){
+    private int nodeRootPath(TreeNode node, TreeNode target, List<Integer>klist, int k){
         
         if(node==null){
-            return false;
+            return 0;
         }
         
         if(node==target){
-            list.add(node);
-            return true;
+            List<Integer>temp=new ArrayList<>();
+            getNodes(node,temp,k,null);
+            klist.addAll(temp);
+            
+            return 1;
         }
         
-        boolean lres=nodeRootPath(node.left,list,target);
+        int lres=nodeRootPath(node.left,target,klist,k);
         
-        if(lres){
-            list.add(node);
-            return true;
-        }
-        boolean rres=nodeRootPath(node.right,list,target);
-        
-        if(rres){
-            list.add(node);
-            return true;
+        if(lres>0){
+            List<Integer>temp=new ArrayList<>();
+            getNodes(node,temp,k-lres,node.left);
+            klist.addAll(temp);
+            return lres+1;
         }
         
-        return false;
+        int rres=nodeRootPath(node.right,target,klist,k);
+        
+        if(rres>0){
+            List<Integer>temp=new ArrayList<>();
+            getNodes(node,temp,k-rres,node.right);
+            klist.addAll(temp);
+            return rres+1;
+        }
+        
+        return 0;
     }
     
     private void getNodes(TreeNode node, List<Integer>list, int level,TreeNode block){
         
-        if(node==null || node==block){
+        if(node==null || node==block || level<0){
             return;
         }
         
