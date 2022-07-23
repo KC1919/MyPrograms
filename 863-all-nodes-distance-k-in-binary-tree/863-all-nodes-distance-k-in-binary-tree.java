@@ -35,28 +35,21 @@ class Solution {
         }
         
         if(node==target){
-            // List<Integer>temp=new ArrayList<>();
             getNodes(node,klist,k,null);
-            // klist.addAll(temp);
-            
             return 1;
         }
         
         int lres=nodeRootPath(node.left,target,klist,k);
         
         if(lres>0){
-            // List<Integer>temp=new ArrayList<>();
             getNodes(node,klist,k-lres,node.left);
-            // klist.addAll(temp);
             return lres+1;
         }
         
         int rres=nodeRootPath(node.right,target,klist,k);
         
         if(rres>0){
-            // List<Integer>temp=new ArrayList<>();
             getNodes(node,klist,k-rres,node.right);
-            // klist.addAll(temp);
             return rres+1;
         }
         
