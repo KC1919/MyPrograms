@@ -24,10 +24,8 @@ class Solution {
     private int minSteps(int a[], int target, int n){
         
         int sum=0;
-        for(int i=0;i<n;i++){
-            if(i<target){
-                sum+=Math.abs(a[target]-a[i]);
-            }
+        for(int i=0;i<target;i++){
+            sum+=Math.abs(a[target]-a[i]);
         }
         
         if(n%2==0){
