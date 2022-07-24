@@ -2,14 +2,14 @@ class Solution {
     public int minMoves2(int[] a) {
         
         Arrays.sort(a);
-        
-        int start=0,end=a.length-1;
+        int n=a.length;
+        int left=0, right=n-1;
         int sum=0;
         
-        while(start<end){
-            sum+=a[end]-a[start];
-            start++;
-            end--;      
+        while(left<=right){
+            sum+=Math.abs(a[left]-a[right]);
+            left++;
+            right--;
         }
         
         return sum;
