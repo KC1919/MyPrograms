@@ -9,29 +9,31 @@ class Solution {
         
         int min=Integer.MAX_VALUE;
         
-//         if(n%2==0){
-//             int res1=minSteps(a,n/2);
-//             int res2=minSteps(a,n/2-1);
-//             min=Math.min(res1,res2);
-//         }
+        int mid=n/2;
         
-//         else{
-            int res1=minSteps(a,n/2);
-            min=Math.min(res1,min);
-        // }
+        if(n%2==0){
+            mid-=1;
+        }
+        
+        int res=minSteps(a,mid,n);
+        min=Math.min(res,min);
         
         return min;
     }
     
-    private int minSteps(int a[], int target){
+    private int minSteps(int a[], int target, int n){
         
         int sum=0;
-        for(int i=0;i<a.length;i++){
-            if(i!=target){
+        for(int i=0;i<n;i++){
+            if(i<target){
                 sum+=Math.abs(a[target]-a[i]);
             }
         }
         
-        return sum/2;
+        if(n%2==0){
+            sum=sum+((a[n-1]-a[target])/2);
+        }
+        
+        return sum;
     }
 }
