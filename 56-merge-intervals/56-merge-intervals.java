@@ -1,41 +1,40 @@
 class Solution {
-    public int[][] merge(int[][] a) {
+    public int[][] merge(int[][] inter) {
         
-        Arrays.sort(a,(b,c)->{
-            return b[0]-c[0];
+        Arrays.sort(inter,(a,b)->{
+            
+            if(a[0]==b[0])
+                return a[1]-b[1];
+            
+            return a[0]-b[0];
         });
         
-        int start=a[0][0];
-        int end=a[0][1];
+        List<int[]>list=new ArrayList<>();
         
-        List<int[][]>list=new ArrayList<>();
+        int start=inter[0][0];
+        int end=inter[0][1];
         
-        for(int i=1;i<a.length;i++){
+        for(int i=1;i<inter.length;i++){
             
-            if(a[i][0]<=end){
-                end=Math.max(end,a[i][1]);
+            if(inter[i][0]<=end){
+                end=Math.max(end,inter[i][1]);
             }
             
             else{
-                list.add(new int[][]{{start,end}});
-                
-                start=a[i][0];
-                end=a[i][1];
+                list.add(new int[]{start,end});
+                start=inter[i][0];
+                end=inter[i][1];
             }
         }
         
-        int ans[][]=new int[list.size()+1][2];
+        list.add(new int[]{start,end});
         
-        for(int i=0;i<list.size();i++){
-            
-            int pair[][]=list.get(i);
-            ans[i][0]=pair[0][0];
-            ans[i][1]=pair[0][1];
+        int ans[][]=new int[list.size()][2];
+        int idx=0;
+        
+        for(int[] ele:list){
+            ans[idx++]=ele;
         }
-        
-        int n=ans.length;
-        ans[n-1][0]=start;
-        ans[n-1][1]=end;
         
         return ans;
     }
