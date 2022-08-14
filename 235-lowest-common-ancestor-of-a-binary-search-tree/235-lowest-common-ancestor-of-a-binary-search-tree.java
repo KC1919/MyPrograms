@@ -10,30 +10,24 @@
 
 class Solution {
     
-    TreeNode lca=null;
     
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         
-        lca=null;
-        traverse(root,p,q);
-        
-        return lca;
+        return traverse(root,p,q);
     }
     
-    public void traverse(TreeNode node, TreeNode p, TreeNode q){
+    public TreeNode traverse(TreeNode node, TreeNode p, TreeNode q){
         
         if(node==null)
-            return;
+            return null;
         
         if(p.val<node.val && q.val<node.val)
-            traverse(node.left,p,q);
+            return traverse(node.left,p,q);
         
         else if(p.val>node.val && q.val>node.val)
-            traverse(node.right,p,q);
+            return traverse(node.right,p,q);
         
-        else{
-            lca=node;
-            return;
-        }
+        else
+            return node;
     }
 }
