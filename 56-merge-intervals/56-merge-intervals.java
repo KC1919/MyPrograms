@@ -29,13 +29,6 @@ class Solution {
         
         list.add(new int[]{start,end});
         
-        int ans[][]=new int[list.size()][2];
-        int idx=0;
-        
-        for(int[] ele:list){
-            ans[idx++]=ele;
-        }
-        
-        return ans;
+        return list.toArray(new int[0][]);
     }
 }
