@@ -10,21 +10,21 @@
  * }
  */
 public class Solution {
-    public ListNode getIntersectionNode(ListNode l1, ListNode l2) 
-    {
+    public ListNode getIntersectionNode(ListNode l1, ListNode l2) {
+        
         ListNode n1=l1;
         ListNode n2=l2;
         
-        if(n1==null ||n2==null)
-            return null;
-        
-        while(n1!=n2)
-        {
-            n1=(n1==null)?l2:n1.next;
-            n2=(n2==null)?l1:n2.next;
+        while(n1!=n2){
+            n1=n1!=null?n1.next:l2;
+            
+            if(n1==n2){
+                return n1;
+            }
+            
+            n2=n2!=null?n2.next:l1;
         }
         
         return n1;
-        
     }
 }
