@@ -17,11 +17,6 @@ public class Solution {
         
         while(n1!=n2){
             n1=n1!=null?n1.next:l2;
-            
-            if(n1==n2){
-                return n1;
-            }
-            
             n2=n2!=null?n2.next:l1;
         }
         
