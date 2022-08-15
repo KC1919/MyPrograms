@@ -20,12 +20,3 @@ return head.next;
 //pointer will reach the last node, our slow pointer would be at the node just
 //before the nth node from the end
 while(fast.next!=null)
-{
-fast=fast.next;
-slow=slow.next;
-}
-//we detach the nth node from the list and we link the node previous to the nth
-//to the next node of the nth node, that ensures the nth node from the end of the
-//list is deleted
-slow.next=slow.next.next;
-return head;
