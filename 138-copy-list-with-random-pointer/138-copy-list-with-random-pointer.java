@@ -37,19 +37,20 @@ class Solution {
         }
         
         n=head;
+        Node cn=nhead;
         
         while(n!=null){
             
             Node curr=n;
-            Node copy=hm.get(curr);
             
             if(curr.random==null)
-                copy.random=null;
+                cn.random=null;
             
             else
-                copy.random=hm.get(curr.random);
+                cn.random=hm.get(curr.random);
             
             n=n.next;
+            cn=cn.next;
         }
         return nhead;
     }
