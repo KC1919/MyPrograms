@@ -12,7 +12,7 @@ We check if the index of random pointer is -1 then it is null.
 ​
 If it is not -1, then we see if the index is prpesent in the hashmap of new nodes, if present then we assign that node to the random pointer of the newly created node.
 ​
-If the randompointer is not present in the hashmap of new nodes, then we create a new node corresponding to the random pointer , and assign that node to the current nodes random pointer and we add the newly created random pinter to the hashmap of new nodes with its corrsponding index.
+If the random pointer is not present in the hashmap of new nodes, then we create a new node corresponding to the random pointer , and assign that node to the current nodes random pointer and we add the newly created random pinter to the hashmap of new nodes with its corrsponding index.
 ​
 And in the end we add the current new node to the hasmap of new nodes with its corrsponding index.
 ​
