@@ -1,64 +1,62 @@
 class Solution {
     public List<List<Integer>> threeSum(int[] a) {
         
-        List<List<Integer>>res=new ArrayList<>();
-        int n=a.length;
-        
         Arrays.sort(a);
         
-        for(int i=0;i<n-2;i++){
+        List<List<Integer>>res=new ArrayList<>();
+        
+        for(int i=0;i<a.length;i++){
             
-            if(i>0 && a[i]==a[i-1])
-                continue;
+            if(i>0 && a[i]==a[i-1]) continue;
             
-            int ele=a[i];
-            int target=0-ele;
+            int comp=0-a[i];
             
-            List<List<Integer>>list=twoSum(a,i+1,n-1,target);
+            List<List<Integer>>result=twoSum(a,i+1,comp);
             
-            for(List<Integer>item:list){
-                item.add(0,ele);
-                res.add(item);
+            if(result.size()>0){
+                
+                for(List<Integer>list:result){
+                    list.add(0,a[i]);
+                    res.add(list);
+                }
             }
         }
+        
         return res;
     }
     
-    private List<List<Integer>> twoSum(int a[], int start, int end, int target){
+    private List<List<Integer>> twoSum(int a[], int start, int target){
         
-        List<List<Integer>>list=new ArrayList<>();
+        List<List<Integer>>res=new ArrayList<>();
         
-        while(start<end){
+        int left=start, right=a.length-1;
+        
+        while(left<right){
             
-            if(a[start]+a[end]<target){
-                start++;
+            if(a[left]+a[right]==target){
+                
+                List<Integer>list=new ArrayList<>();
+                
+                list.add(a[left]);
+                list.add(a[right]);
+                res.add(list);
+                
+                left++;
+                right--;
+                
+                while(left<a.length && a[left]==a[left-1]) left++;
+                while(right>=0 && a[right]==a[right+1]) right--;
             }
             
-            else if(a[start]+a[end]>target){
-                end--;
+            else if(a[left]+a[right]<target){
+                left++;
             }
             
-            else{
-                
-                List<Integer>res=new ArrayList<>();
-                res.add(a[start]);
-                res.add(a[end]);
-                
-                list.add(res);
-                
-                start++;
-                end--;
-                
-                while(start<end && a[start]==a[start-1]){
-                    start++;
-                }
-                
-                while(end>start && a[end]==a[end+1]){
-                    end--;
-                }
+            else if(a[left]+a[right]>target){
+                right--;
             }
         }
         
-        return list;
+        return res;
     }
 }
