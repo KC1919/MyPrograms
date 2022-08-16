@@ -36,37 +36,44 @@ class Solution {
         
         while(n!=null){
             
+            //curr node
             Node curr=n;
+            
+            //curr random node
             Node crand=n.random;
             
+            //curr node position
             int cnpos=hm.get(curr);
             
+            //new node
             Node nn;
             
-            if(nm.containsKey(cnpos)){
+            if(nm.containsKey(cnpos))
                 nn=nm.get(cnpos);
-            }
             
-            else{
+            else
                 nn=new Node(curr.val);
-            }
             
-            if(crand==null){
+            if(crand==null)
                 nn.random=null;
-            }
             
             else{
                 
+                //curr random node position
                 int crpos=hm.get(crand);
                 
-                if(cnpos==crpos){
+                //if curr rand node pos is same as curr node pos
+                //that means the random pointer of curr node points to itself
+                if(cnpos==crpos)
                     nn.random=nn;
-                }
                 
-                else if(nm.containsKey(crpos)){
+                //check if random node is present in the new list of nodes
+                else if(nm.containsKey(crpos))
                     nn.random=nm.get(crpos);
-                }
 
+                //if not present create new random node of the curr new node
+                //and put it int the hasmap of new nodes after attaching the new random
+                //to the currr new node
                 else{ 
                     Node nrn=new Node(crand.val);
                     nn.random=nrn;
@@ -74,9 +81,8 @@ class Solution {
                 }
             }
             
-            if(prev!=null){
+            if(prev!=null)
                 prev.next=nn;
-            }
             
             prev=nn;
             nm.put(cnpos,nn);
