@@ -43,11 +43,7 @@ class Solution {
             
             Node curr=n;
             
-            if(curr.random==null)
-                cn.random=null;
-            
-            else
-                cn.random=hm.get(curr.random);
+            cn.random=curr.random==null?null:hm.get(curr.random);
             
             n=n.next;
             cn=cn.next;
