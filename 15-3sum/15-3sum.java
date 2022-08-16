@@ -44,8 +44,8 @@ class Solution {
                 left++;
                 right--;
                 
-                while(left<a.length && a[left]==a[left-1]) left++;
-                while(right>=0 && a[right]==a[right+1]) right--;
+                while(left<right && a[left]==a[left-1]) left++;
+                while(right>left && a[right]==a[right+1]) right--;
             }
             
             else if(a[left]+a[right]<target){
