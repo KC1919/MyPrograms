@@ -14,11 +14,6 @@ class Solution {
                 a[idx++]=a[i];
             }
         }
-        
-        // if(a[n-1]!=a[n-2]){
-        //     a[idx]=a[n-1];
-        // }
-        
         return idx;
     }
 }
