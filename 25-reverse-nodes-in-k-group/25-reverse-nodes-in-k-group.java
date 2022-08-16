@@ -9,21 +9,19 @@
  * }
  */
 class Solution {
-    
-    ListNode oh=null, ot=null;
+
     ListNode th=null, tt=null;
     
     public ListNode reverseKGroup(ListNode head, int k) {
         
         ListNode next=null, node=head;
+        ListNode oh=null, ot=null;
         
         int size=length(head);
         
         while(size>=k){
             
             int count=k;
-            
-            size-=k;
             
             while(count-->0){
                 next=node.next;
@@ -44,11 +42,12 @@ class Solution {
             
             th=null;
             tt=null;
+            size-=k;
         }
         
         
         if(size>0){
-            ot.next=next;
+            ot.next=node;
         }
         
         return oh;
