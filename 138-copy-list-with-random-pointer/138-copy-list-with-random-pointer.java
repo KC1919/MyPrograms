@@ -25,13 +25,11 @@ class Solution {
         while(n!=null){
             Node nn=new Node(n.val);
             
-            if(nhead==null){
+            if(nhead==null)
                 nhead=nn;
-            }
             
-            if(prev!=null){
+            if(prev!=null)
                 prev.next=nn;
-            }
             
             prev=nn;
             hm.put(n,nn);
@@ -45,17 +43,14 @@ class Solution {
             Node curr=n;
             Node copy=hm.get(curr);
             
-            if(curr.random==null){
+            if(curr.random==null)
                 copy.random=null;
-            }
             
-            else{
+            else
                 copy.random=hm.get(curr.random);
-            }
             
             n=n.next;
         }
-        
         return nhead;
     }
 }
