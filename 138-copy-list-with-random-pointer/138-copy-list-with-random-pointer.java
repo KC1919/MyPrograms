@@ -16,12 +16,10 @@ class Node {
 class Solution {
     public Node copyRandomList(Node head) {
         
-        if(head==null){
+        if(head==null)
             return head;
-        }
         
         Node n=head;
-        
         Node forw=null;
         
         while(n!=null){
@@ -41,13 +39,11 @@ class Solution {
             forw=n.next.next;
             Node crand=n.random;
             
-            if(crand==null){
+            if(crand==null)
                 n.next.random=null;
-            }
             
-            else{
+            else
                 n.next.random=crand.next;
-            }
             
             n=forw;
         }
@@ -58,8 +54,10 @@ class Solution {
         Node n1=head;
         
         while(n.next!=null){
-            n1.next=n1.next.next;
+            
+            n1.next=n.next;
             n1=n1.next;
+            
             n.next=n.next.next;
             n=n.next;
         }
