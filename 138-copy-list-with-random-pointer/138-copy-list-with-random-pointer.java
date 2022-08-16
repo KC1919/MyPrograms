@@ -16,69 +16,72 @@ class Node {
 class Solution {
     public Node copyRandomList(Node head) {
         
-        if(head==null)
-            return head;
+        HashMap<Node,Integer>hm=new HashMap<>();
+        HashMap<Integer,Node>nm=new HashMap<>();
         
-        HashMap<Node,Integer>mm=new HashMap<>();
-        
-        Node thead=head;
-        int ind=0;
-        
-        while(thead!=null){
-            mm.put(thead,ind);
-            ind++;
-            thead=thead.next;
-        }
-        
-        HashMap<Integer,Node>tm=new HashMap<>();
+        int count=0;
         
         Node n=head;
         
-        Node prev=null, temp=null;
+        while(n!=null){
+            hm.put(n,count);
+            n=n.next;
+            count++;
+        }
         
-        int idx=0;
         
+        n=head;
+        
+        Node prev=null;
         
         while(n!=null){
             
-            Node node=null;
+            Node curr=n;
+            Node crand=n.random;
             
-            if(tm.containsKey(idx))
-                node=tm.get(idx);
+            int cnpos=hm.get(curr);
             
-            else
-                node=new Node(n.val);
+            Node nn;
             
-            Node random=n.random;
+            if(nm.containsKey(cnpos)){
+                nn=nm.get(cnpos);
+            }
+            
+            else{
+                nn=new Node(curr.val);
+            }
+            
+            if(crand==null){
+                nn.random=null;
+            }
+            
+            else{
                 
-            if(random!=null){
-                int randIdx=mm.get(random);
+                int crpos=hm.get(crand);
                 
-                if(randIdx==idx)
-                    node.random=node;
+                if(cnpos==crpos){
+                    nn.random=nn;
+                }
                 
-                else if(tm.containsKey(randIdx))
-                    node.random=tm.get(randIdx);
-                    
-                else{
-                    Node newRandNode=new Node(random.val);
-                    node.random=newRandNode;
-                    tm.put(randIdx,newRandNode);
+                else if(nm.containsKey(crpos)){
+                    nn.random=nm.get(crpos);
+                }
+
+                else{ 
+                    Node nrn=new Node(crand.val);
+                    nn.random=nrn;
+                    nm.put(crpos,nrn);
                 }
             }
             
-            if(idx==0){
-                prev=node;
-                temp=node;
+            if(prev!=null){
+                prev.next=nn;
             }
-            else{
-                prev.next=node;
-                prev=prev.next;
-            }
-            tm.put(idx,node);
-            idx++;
+            
+            prev=nn;
+            nm.put(cnpos,nn);
             n=n.next;
         }
-        return temp;
+        return nm.get(0);
     }
 }
