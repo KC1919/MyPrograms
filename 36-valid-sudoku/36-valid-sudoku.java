@@ -1,38 +1,37 @@
 class Solution {
-    public boolean isValidSudoku(char[][] board) {
+    public boolean isValidSudoku(char[][] a) {
         
-        HashMap<Integer,HashSet<Integer>>row=new HashMap<>();
-        HashMap<Integer,HashSet<Integer>>col=new HashMap<>();
+        HashMap<Integer,HashSet<Character>>row=new HashMap<>();
+        HashMap<Integer,HashSet<Character>>col=new HashMap<>();
         
-        int n=board.length;
+        int n=a.length;
         
-        for(int i=0;i<n;i++){
-            
+        for(int i=0;i<9;i++){
             row.put(i,new HashSet<>());
-            
-            for(int j=0;j<n;j++){
-                
-                if(board[i][j]=='.')
-                    continue;
+            col.put(i,new HashSet<>());
+        }
         
-                int ele=board[i][j]-48;
-                
-                if(row.get(i).contains(ele))
-                    return false;
-                
-                row.get(i).add(ele);
-                
-                if(col.containsKey(j) && col.get(j).contains(ele))
-                    return false;
-
-                if(!col.containsKey(j))
-                    col.put(j,new HashSet<>());
-                
-                col.get(j).add(ele);
+        for(int i=0;i<9;i++)
+        {
+            for(int j=0;j<9;j++)
+            {
+                if(a[i][j]!='.')
+                {
+                    //checking if the current element is already present in the row aur col
+                    if(row.get(i).contains(a[i][j]) || col.get(j).contains(a[i][j])){
+                        return false;
+                    }
+                    
+                    //if not present we add it to the hashSet of the corresponding row and col
+                    else{
+                        row.get(i).add(a[i][j]);
+                        col.get(j).add(a[i][j]);
+                    }
+                }
             }
         }
         
-        return check(board);
+        return check(a);
     }
     
     private boolean check(char board[][]){
