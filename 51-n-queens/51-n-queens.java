@@ -1,90 +1,60 @@
 class Solution {
     public List<List<String>> solveNQueens(int n) {
         
-        char a[][]=new char[n][n];
+        boolean col[]=new boolean[n];
+        boolean row[]=new boolean[n];
+        boolean ldiag[]=new boolean[2*n-1];
+        boolean rdiag[]=new boolean[2*n-1];
         
-        int row=0;
         List<List<String>>res=new ArrayList<>();
         
-        for(int col=0;col<n;col++){
-            a[row][col]='Q';
-            placeQueen(a,row+1,n,1,res);
-            a[row][col]='\0';
-        }
+        placeQueen(n,0,0,col,row,ldiag,rdiag,res,new ArrayList<>());
+        
         return res;
     }
     
-    public boolean placeQueen(char a[][], int row, int n, int count, List<List<String>>res){
+    private void placeQueen(int n, int placed, int r, boolean col[], boolean row[], boolean ldiag[], boolean rdiag[], List<List<String>>res, List<Integer>list){
         
-        if(count==n){
-            List<String>list=new ArrayList<>();
+        if(placed==n){
+            
+            List<String>queens=new ArrayList<>();
             
             for(int i=0;i<n;i++){
+                
+                int colu=list.get(i);
                 StringBuilder sb=new StringBuilder();
                 for(int j=0;j<n;j++){
-                    if(a[i][j]=='Q')
+                    if(j==colu)
                         sb.append('Q');
-                    else 
+                    
+                    else
                         sb.append('.');
                 }
-                list.add(sb.toString());
+                
+                queens.add(sb.toString());
             }
-            res.add(list);
-            return true;
+            
+            res.add(new ArrayList<>(queens));
+            
+            return;
         }
         
         for(int j=0;j<n;j++){
-            if(isSafe(a,row,j,n)){
+            
+            if(col[j]==false && ldiag[r+j]==false && rdiag[r-j+n-1]==false){
+                col[j]=true;
+                ldiag[r+j]=true;
+                rdiag[r-j+n-1]=true;
+                list.add(j);
                 
-                a[row][j]='Q';
-                boolean result=placeQueen(a,row+1,n,count+1,res);
-                a[row][j]='\0';
-            }
+                placeQueen(n,placed+1,r+1,col,row,ldiag,rdiag,res,list);
+                
+                col[j]=false;
+                ldiag[r+j]=false;
+                rdiag[r-j+n-1]=false;
+                list.remove(list.size()-1);
+            }   
         }
-        return false;
     }
     
-    public boolean isSafe(char a[][], int row, int col, int n){
-        
-        if(row<0 || row==n || col<0 || col==n)
-            return false;
-        
-        // check row
-        for(int j=0;j<n;j++){
-            if(a[row][j]=='Q')
-                return false;
-        }
-        
-        // check column
-        for(int i=0;i<n;i++){
-            if(a[i][col]=='Q')
-                return false;
-        }
-        
-        // check UL diagonal
-        for(int i=row, j=col;i>=0 && j>=0;i--,j--){
-            if(a[i][j]=='Q')
-                return false;
-        }
-        
-        // check UR diagonal
-        for(int i=row, j=col; i>=0 && j<n; i--,j++){
-            if(a[i][j]=='Q')
-                return false;
-        }
-        
-        // check DL diagonal
-        for(int i=row, j=col; i<n && j>=0; i++,j--){
-            if(a[i][j]=='Q')
-                return false;
-        }
-        
-        // check DR diagonal
-        for(int i=row, j=col; i<n && j<n; i++,j++){
-            if(a[i][j]=='Q')
-                return false;
-        }
-        
-        return true;
-    }
 }
