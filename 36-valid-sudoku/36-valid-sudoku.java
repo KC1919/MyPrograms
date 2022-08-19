@@ -1,68 +1,72 @@
 class Solution {
-    public boolean isValidSudoku(char[][] a) 
-    {
-        HashMap<Integer,HashSet<Character>>row=new HashMap<>();
-        HashMap<Integer,HashSet<Character>>col=new HashMap<>();
+    public boolean isValidSudoku(char[][] board) {
         
-        for(int i=0;i<9;i++){
+        HashMap<Integer,HashSet<Integer>>row=new HashMap<>();
+        HashMap<Integer,HashSet<Integer>>col=new HashMap<>();
+        
+        int n=board.length;
+        
+        for(int i=0;i<n;i++){
+            
             row.put(i,new HashSet<>());
-            col.put(i,new HashSet<>());
-        }
+            
+            for(int j=0;j<n;j++){
+                
+                if(board[i][j]=='.')
+                    continue;
         
-        for(int i=0;i<9;i++)
-        {
-            for(int j=0;j<9;j++)
-            {
-                if(a[i][j]!='.')
-                {
-                    //checking if the current element is already present in the row aur col
-                    if(row.get(i).contains(a[i][j]) || col.get(j).contains(a[i][j])){
-                        return false;
-                    }
-                    
-                    //if not present we add it to the hashSet of the corresponding row and col
-                    else{
-                        row.get(i).add(a[i][j]);
-                        col.get(j).add(a[i][j]);
-                    }
-                }
+                int ele=board[i][j]-48;
+                
+                if(row.get(i).contains(ele))
+                    return false;
+                
+                row.get(i).add(ele);
+                
+                if(col.containsKey(j) && col.get(j).contains(ele))
+                    return false;
+
+                if(!col.containsKey(j))
+                    col.put(j,new HashSet<>());
+                
+                col.get(j).add(ele);
             }
         }
-        return checkSub(a,0,0);
+        
+        return check(board);
     }
     
-    //function to check if the subgrid of 3*3 is valid or not
-    public boolean checkSub(char a[][], int row, int col)
-    {
+    private boolean check(char board[][]){
+        
         HashSet<Character>hm=new HashSet<>();
         
-        // this runs till all the 3*3 subgrids are checked
-        while(row<9 && col<9){
+        int row=0, col=0;
+        
+        while(row<9){
             
-            //start from the 1st row of every subgrid
-            for(int i=row;i<row+3;i++)
-            {
-                for(int j=col;j<col+3;j++) //start from the 1st row of every subgrid
-                {
-                    if(a[i][j]!='.')
-                    {
-                        if(hm.contains(a[i][j]))
+            for(int i=row;i<row+3;i++){
+                
+                for(int j=col;j<col+3;j++){
+                    
+                    if(board[i][j]!='.'){
+                        
+                        if(hm.contains(board[i][j])){
                             return false;
+                        }
 
-                        hm.add(a[i][j]);
+                        hm.add(board[i][j]);
                     }
                 }
             }
-            hm.clear();//when we validate one subgrid we clear the hashmap, so that we                        //can process the next grid
-            col+=3; //we jump 3 cols to reach the start column of new subgrid
             
-            //if we exceed the column boundary, means we have to move to subgrid 
-            //below
+            hm.clear();
+            col+=3;
+            
             if(col==9){
-                col=0;  //so we initialize the column to 0 
-                row+=3; //and we jump 3 rows becoz we have to jump to the subgrid below
+                row+=3;
+                col=0;
             }
         }
+        
         return true;
     }
 }
