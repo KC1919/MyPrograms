@@ -1,6 +1,7 @@
 class Solution {
     public List<List<Integer>> combinationSum2(int[] a, int target) {
         
+        //sorting the array to avoid duplicate combinations
         Arrays.sort(a);
 
         List<List<Integer>>res=new ArrayList<>();
@@ -22,6 +23,7 @@ class Solution {
         
         for(int i=idx;i<a.length;i++){
             
+            //best way to handle duplicate combinations
             if(i>idx && a[i]==a[i-1])
                 continue;
             
