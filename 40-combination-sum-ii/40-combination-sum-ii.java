@@ -4,12 +4,12 @@ class Solution {
         Arrays.sort(a);
 
         List<List<Integer>>res=new ArrayList<>();
-        combi(a,0,new ArrayList<>(),res,target,new int[a.length]);
+        combi(a,0,new ArrayList<>(),res,target);
         return res;
     }
     
  
-    private void combi(int a[], int idx, List<Integer>list, List<List<Integer>>res, int target, int slots[]){
+    private void combi(int a[], int idx, List<Integer>list, List<List<Integer>>res, int target){
         
         if(idx==a.length || target==0){
             
@@ -22,14 +22,12 @@ class Solution {
         
         for(int i=idx;i<a.length;i++){
             
-            if(i>0 && a[i]==a[i-1] && slots[i-1]==0)
+            if(i>idx && a[i]==a[i-1])
                 continue;
             
             if(a[i]<=target){
                 list.add(a[i]);
-                slots[i]=1;
-                combi(a,i+1,list,res,target-a[i],slots);
-                slots[i]=0;
+                combi(a,i+1,list,res,target-a[i]);
                 list.remove(list.size()-1);
             }
         }
