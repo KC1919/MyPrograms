@@ -6,11 +6,11 @@ class Solution {
         return res;
     }
     
-    private boolean palinParti(String s, int idx, List<String>list, List<List<String>>res){
+    private void palinParti(String s, int idx, List<String>list, List<List<String>>res){
         
         if(idx==s.length()){
             res.add(new ArrayList<>(list));
-            return true;
+            return;
         }
         
         for(int i=idx;i<s.length();i++){
@@ -18,15 +18,10 @@ class Solution {
             String substr=s.substring(idx,i+1);
             if(isPalin(substr)){
                 list.add(substr);
-                boolean rres=palinParti(s,i+1,list,res);
-                // if(rres){
-                //     return true;
-                // }
+                palinParti(s,i+1,list,res);
                 list.remove(list.size()-1);
             }
         }
-        
-        return false;
     }
     
     private boolean isPalin(String s){
