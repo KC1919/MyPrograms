@@ -2,40 +2,45 @@ class Solution {
     public List<List<String>> partition(String s) {
         
         List<List<String>>res=new ArrayList<>();
-        boolean dp[][]=new boolean[s.length()][s.length()];
-        
-        palinParti(s,0,s.length()-1,new ArrayList<>(),res,dp);
+        palinParti(s,0,new ArrayList<>(),res);
         return res;
-        
     }
     
-    public void palinParti(String s, int si, int ei, List<String>list, List<List<String>>res,boolean dp[][])
-    {
-        if(si>ei){
+    private boolean palinParti(String s, int idx, List<String>list, List<List<String>>res){
+        
+        if(idx==s.length()){
             res.add(new ArrayList<>(list));
-            return;
+            return true;
         }
         
-        for(int i=si;i<=ei;i++){
+        for(int i=idx;i<s.length();i++){
             
-            if(s.charAt(si) == s.charAt(i) && (i - si <= 2 || dp[si + 1][i - 1]==true)){
-                dp[si][i]=true;
-                list.add(s.substring(si,i+1));
-                palinParti(s,i+1,ei,list,res,dp);
+            String substr=s.substring(idx,i+1);
+            if(isPalin(substr)){
+                list.add(substr);
+                boolean rres=palinParti(s,i+1,list,res);
+                // if(rres){
+                //     return true;
+                // }
                 list.remove(list.size()-1);
             }
         }
+        
+        return false;
     }
     
-    public boolean isPalin(String s, int si, int ei){
+    private boolean isPalin(String s){
         
-        while(si<=ei){
-            if(s.charAt(si)!=s.charAt(ei))
+        int start=0, end=s.length()-1;
+        while(start<end){
+            if(s.charAt(start)!=s.charAt(end)){
                 return false;
-            
-            si++;
-            ei--;
+            }
+            start++;
+            end--;
         }
+        
         return true;
     }
+    
 }
