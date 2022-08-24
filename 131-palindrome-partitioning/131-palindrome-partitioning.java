@@ -12,21 +12,19 @@ class Solution {
             res.add(new ArrayList<>(list));
             return;
         }
-        
+    
         for(int i=idx;i<s.length();i++){
             
-            String substr=s.substring(idx,i+1);
-            if(isPalin(substr)){
-                list.add(substr);
+            if(isPalin(s,idx,i)){
+                list.add(s.substring(idx,i+1));
                 palinParti(s,i+1,list,res);
                 list.remove(list.size()-1);
             }
         }
     }
     
-    private boolean isPalin(String s){
+    private boolean isPalin(String s, int start, int end){
         
-        int start=0, end=s.length()-1;
         while(start<end){
             if(s.charAt(start)!=s.charAt(end)){
                 return false;
