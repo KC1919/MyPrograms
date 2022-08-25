@@ -11,19 +11,20 @@ class Solution {
         }
         
         for(int i=0;i<t.length();i++){
+            
             char ch=t.charAt(i);
-                            if(hm.containsKey(ch)){
-                                hm.put(ch,hm.get(ch)-1);
-                                if(hm.get(ch)==0){
-                                    hm.remove(ch);
-                                }
+            
+            if(hm.containsKey(ch)){
+                hm.put(ch,hm.get(ch)-1);
+                if(hm.get(ch)==0){
+                    hm.remove(ch);
+                }
                                 
-                                if(hm.size()==0){
-                                    return true;
-                                }
-                            }
+                if(hm.size()==0){
+                    return true;
+                }
+            }
         }
-        
         return false;
     }
 }
