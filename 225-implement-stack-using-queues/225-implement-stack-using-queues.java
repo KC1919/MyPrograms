@@ -1,32 +1,30 @@
 class MyStack {
     
-    LinkedList<Integer> q1;
+    private Queue<Integer>que;
     public MyStack() {
-        q1= new LinkedList<>();
+        que=new LinkedList<>();
     }
     
-     
-
-    // Push element x onto stack.
     public void push(int x) {
-        q1.add(x);
-        int sz = q1.size();
-        while (sz > 1) {
-            q1.add(q1.remove());
-            sz--;
+        que.add(x);
+        
+        for(int i=0;i<que.size()-1;i++){
+            que.add(que.peek());
+            que.remove();
         }
     }
     
     public int pop() {
-        return q1.remove();
+        
+        return que.remove();
     }
     
     public int top() {
-        return q1.peek();
+        return que.peek();
     }
     
     public boolean empty() {
-        return q1.isEmpty();
+        return que.isEmpty();
     }
 }
 
