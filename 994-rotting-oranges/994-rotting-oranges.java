@@ -29,12 +29,17 @@ class Solution {
             }
         }
         
+        if(cone==0){
+            return 0;
+        }
+        
         int dir[][]={{1,0},{-1,0},{0,1},{0,-1}};
         int time=0;
         
         while(que.size()>0){
+            
+            time++;
             int size=que.size();
-            int flag=0;
             
             while(size-->0){
                 
@@ -47,14 +52,9 @@ class Solution {
                     if(row>=0 && col>=0 && row<n && col<m && a[row][col]==1){
                         a[row][col]=2;
                         que.add(new Pair(row,col));
-                        flag=1;
                         cone--;
                     }
                 }
-            }
-            
-            if(flag==1){
-                time++;
             }
             
             if(cone==0){
