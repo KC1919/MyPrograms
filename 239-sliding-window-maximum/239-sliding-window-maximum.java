@@ -1,38 +1,29 @@
 class Solution {
-    public int[] maxSlidingWindow(int[] a, int k) {
-       
-        int n=a.length;
+    public int[] maxSlidingWindow(int[] nums, int k) {
         
-        int ans[]=new int[n-k+1];
-        int c=0;
+        ArrayDeque<Integer>que=new ArrayDeque<>();
+        int ans[]=new int[nums.length-k+1];
         
-        Deque<Integer>que=new ArrayDeque<>();
+        int j=0, idx=0;
         
-        int max=0;
-        
-        for(int i=0;i<n;i++)
-        {
-            //if the index at the peek of que is out of the window, then we remove it
-            if(!que.isEmpty() && que.peek()==i-k)
-                que.poll();
+        for(int i=0;i<nums.length;i++){
             
-            //till the elements at indices contained in the que are smaller than the 
-            //current element, we keep on removing element from the last
-            //because we have to maintain monotonic increasing queue
-            //so if any elementcomes it removes all the smaller element from the que in the
-            //curent window being considered
+            if(que.size()>0 && que.peek()<j){
+                que.remove();
+            }
             
-            while(!que.isEmpty() && a[que.peekLast()]<a[i])
-                que.pollLast();
+            while(que.size()>0 && nums[que.peekLast()]<=nums[i]){
+                que.removeLast();
+            }
             
-            //adding the current index in the que
-            que.offer(i);
+            que.add(i);
             
-            if(i>=k-1){
-                ans[c++]=a[que.peek()]; //the peek index will always have the greatest 
-                                        // element in the current window
+            if(i-j+1==k){
+                ans[idx++]=nums[que.peek()];
+                j++;
             }
         }
+        
         return ans;
     }
 }
