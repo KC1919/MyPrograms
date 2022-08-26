@@ -1,6 +1,7 @@
 class Solution {
     public int[] maxSlidingWindow(int[] a, int k) {
         
+        //Using the next greater element strategy
         int n=a.length;
         
         int ng[]=new int[n];
@@ -26,14 +27,23 @@ class Solution {
                 j=i;
             }
             
+            //checking if the next greater of current index lies inside the 
+            //current window, then we jump onto that index, bcoz that
+            //will be the greatest element of that window
+            
             while(j<n && ng[j]<(i+k)){
                 j=ng[j];
             }
             
+            //if the next greater index lies out of the array, 
+            //then it means, the current element is the greatest element
+            //of the current window
             if(j==n){
                 ans[idx++]=a[i];
             }
             
+            //else the greatest element of the current window is the 
+            //jth element
             else{
                 ans[idx++]=a[j];
             }
