@@ -18,26 +18,24 @@ class Solution {
             ls[i]=j;
         }
         
-        Stack<Integer>st=new Stack<>();
-        st.push(n-1);
+        int rs[]=new int[n];
+        
+        rs[n-1]=n;
         
         int max=0;
         
         for(int i=n-1;i>=0;i--){
             
-            int j=n;
-            while(st.size()>0 && a[i]<=a[st.peek()]){
-                st.pop();
+            int j=i+1;
+            
+            while(j!=n && a[i]<=a[j]){
+                j=rs[j];
             }
             
-            if(st.size()!=0){
-                j=st.peek();
-            }
-            
-            int wid=(j-ls[i])-1;
+            rs[i]=j;
+            int wid=(rs[i]-ls[i])-1;
             max=Math.max(max,a[i]*wid);
             
-            st.push(i);
         }
         
         return max;
