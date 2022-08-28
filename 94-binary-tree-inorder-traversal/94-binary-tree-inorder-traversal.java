@@ -24,9 +24,6 @@ class Solution {
         TreeNode node=root;
         
         Stack<TreeNode>st=new Stack<>();
-        st.push(root);
-        
-        node=node.left;
         
         while(st.size()>0 || node!=null){
             
