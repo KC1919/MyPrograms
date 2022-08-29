@@ -14,19 +14,41 @@
  * }
  */
 class Solution {
-    public long prev = Long.MIN_VALUE;
-    public boolean isValidBST(TreeNode root) 
+    
+    class Pair
     {
-       if(root==null) 
-           return true;
-        boolean l = isValidBST(root.left);
+        TreeNode node;
+        boolean isBST=true;
+        long min=Long.MAX_VALUE;
+        long max=Long.MIN_VALUE;
+    }
+    
+    public boolean isValidBST(TreeNode root) {
         
-        if(l==false || prev>=root.val) 
-            return false;
+        if(root.left==null && root.right==null){
+            return true;
+        }
         
-        prev = root.val;
-        boolean r = isValidBST(root.right);
-        return l && r;
+        Pair res=helper(root);
+        return res.isBST;
+    }
+    
+    private Pair helper(TreeNode node){
         
+        if(node==null){
+            return new Pair();
+        }
+        
+        Pair lres=helper(node.left);
+        Pair rres=helper(node.right);
+        
+        Pair myres=new Pair();
+        
+        myres.isBST=(lres.isBST && rres.isBST) && (node.val>lres.max && node.val<rres.min);
+        
+        myres.min=Math.min(node.val,Math.min(lres.min,rres.min));
+        myres.max=Math.max(node.val,Math.max(lres.max,rres.max));
+        
+        return myres;
     }
 }
