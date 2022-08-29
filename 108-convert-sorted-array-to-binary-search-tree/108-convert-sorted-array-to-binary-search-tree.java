@@ -14,21 +14,26 @@
  * }
  */
 class Solution {
-    public TreeNode sortedArrayToBST(int[] nums) {
-        return construct(nums,0,nums.length-1);
+    public TreeNode sortedArrayToBST(int[] a) {
+        return partiBST(a,0,a.length-1);
     }
     
-    public TreeNode construct(int a[], int l, int h)
-    {
-        if(l>h)
+    private TreeNode partiBST(int a[], int l, int r){
+        
+        if(l>r){
             return null;
+        }
         
-        int mid=(l+h)/2;
+        int mid=(l+r)/2;
         
-        TreeNode lc=construct(a,l,mid-1);
-        TreeNode rc=construct(a,mid+1,h);
+        TreeNode node=new TreeNode(a[mid]);
         
-        TreeNode node=new TreeNode(a[mid],lc,rc);
+        TreeNode leftChild=partiBST(a,l,mid-1);
+        TreeNode rightChild=partiBST(a,mid+1,r);
+        
+        node.left=leftChild;
+        node.right=rightChild;
+        
         return node;
     }
 }
