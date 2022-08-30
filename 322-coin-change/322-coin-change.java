@@ -1,29 +1,29 @@
 class Solution {
     public int coinChange(int[] coins, int amount) {
         
-        Integer dp[]=new Integer[amount+1];
-        minCoins(coins,amount,dp);
-        return dp[amount]==Integer.MAX_VALUE?-1:dp[amount];
-    }
-    
-    private int minCoins(int a[], int target, Integer dp[]){
+        if(amount==0)return 0;
         
-        if(target==0){
-            return dp[target]=0;
-        }
+        int dp[]=new int[amount+1];
         
-        if(dp[target]!=null){
-            return dp[target];
-        }
+        Arrays.fill(dp,Integer.MAX_VALUE);
         
-        int min=Integer.MAX_VALUE;
-        for(int i=0;i<a.length;i++){
-            if(target>=a[i]){
-                int res=minCoins(a,target-a[i],dp);
-                min=Math.min(res,min);
+        for(int j=0;j<=amount;j++){
+            for(int coin:coins){
+                
+                if(j<coin)continue;
+                
+                else if(j==coin){
+                    dp[j]=1;
+                    break;
+                }
+                
+                else{
+                    if(dp[j-coin]>0 && dp[j-coin]!=Integer.MAX_VALUE){
+                        dp[j]=Math.min(dp[j],dp[j-coin]+1);
+                    }
+                }
             }
         }
-        
-        return dp[target]=min==Integer.MAX_VALUE?min:min+1;
+        return dp[amount]==Integer.MAX_VALUE?-1:dp[amount];
     }
 }
