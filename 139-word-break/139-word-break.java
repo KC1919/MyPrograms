@@ -1,31 +1,30 @@
 class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
         
-        Integer dp[]=new Integer[s.length()];
-        return breakAll(s,0,wordDict,dp);
+        Boolean dp[]=new Boolean[s.length()];
+        return fuckWord(s,wordDict,0,dp);
     }
     
-    private boolean breakAll(String s, int idx, List<String>list, Integer dp[]){
+    private boolean fuckWord(String s, List<String>list, int idx, Boolean dp[]){
         
         if(s.length()==0){
             return true;
         }
         
         if(dp[idx]!=null){
-            return dp[idx]==1?true:false;
+            return dp[idx];
         }
         
         for(String word:list){
-            
             if(s.indexOf(word)==0){
-                boolean res=breakAll(s.substring(word.length()),idx+word.length(),list,dp);
-                if(res){
-                    dp[idx]=1;
-                    return true;
+                boolean res=fuckWord(s.substring(word.length()),list,idx+word.length(),dp);
+                
+                if(res==true){
+                    return dp[idx]=true;
                 }
-            }   
+            }
         }
-        dp[idx]=0;
-        return false;
+        
+        return dp[idx]=false;
     }
 }
