@@ -9,59 +9,52 @@ class Solution {
         
         //filling borders of pacific
         for(int col=0;col<m;col++){
-            pacific[0][col]=-1;
+            pacific[0][col]=1;
         }
         
         for(int row=0;row<n;row++){
-            pacific[row][0]=-1;
+            pacific[row][0]=1;
         }
         
         
         //filling of borders of atlantic
         for(int col=0;col<m;col++){
-            atlantic[n-1][col]=-1;
+            atlantic[n-1][col]=1;
         }
         
         for(int row=0;row<n;row++){
-            atlantic[row][m-1]=-1;
+            atlantic[row][m-1]=1;
         }
         
         
         int dir[][]={{0,1},{0,-1},{1,0},{-1,0}};
         boolean visited[][]=new boolean[n][m];
         
-        //Pacific flow starting from each cell of the top pacific border, trying to reach 
-        //as many cells as possible
+        // Pacific flow
         for(int col=0;col<m;col++){
             flow(a,0,col,n,m,pacific,visited,dir);
         }
         
-        //Pacific flow starting from each cell of the left pacific border, trying to reach 
-        //as many cells as possible
         for(int row=0;row<n;row++){
             flow(a,row,0,n,m,pacific,visited,dir);
         }
         
         visited=new boolean[n][m];
         
-        //Atlantic flow starting from each cell of the bottom atlantic border, trying to              reach as many cells as possible
+        // Atlantic flow
         for(int col=0;col<m;col++){
             flow(a,n-1,col,n,m,atlantic,visited,dir);
         }
         
-        //Atlantic flow starting from each cell of the right atlantic border, trying to               reach as many cells as possible
         for(int row=0;row<n;row++){
             flow(a,row,m-1,n,m,atlantic,visited,dir);
         }
         
         List<List<Integer>>res=new ArrayList<>();
         
-        //checking the cells which have 1 in both atlantic and pacific matrix
-        //that means they could be reach by botht the oceans, so we add their index
-        //in the resultant list
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                if(atlantic[i][j]==-1 && pacific[i][j]==-1){
+                if(atlantic[i][j]==1 && pacific[i][j]==1){
                     List<Integer>list=new ArrayList<>();
                     list.add(i);
                     list.add(j);
@@ -80,9 +73,9 @@ class Solution {
             int row=dir[k][0]+i;
             int col=dir[k][1]+j;
             
-            if(row>=0 && row<n && col>=0 && col<m && visited[row][col]==false && a[row][col]>=a[i][j] && a[row][col]!=-1)
+            if(row>=0 && row<n && col>=0 && col<m && visited[row][col]==false && a[row][col]>=a[i][j])
             {
-                water[row][col]=-1;
+                water[row][col]=1;
                 flow(a,row,col,n,m,water,visited,dir);
             }
         }
