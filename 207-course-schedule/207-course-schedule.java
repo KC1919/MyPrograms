@@ -1,64 +1,44 @@
 class Solution {
-    
-    class Edge
-    {
-        int src;
-        int nbr;
+    public boolean canFinish(int vtces, int[][] courses) {
         
-        Edge(int src, int nbr)
-        {
-            this.src=src;
-            this.nbr=nbr;
-        }
-    }
-    
-    public boolean canFinish(int courses, int[][] edges) {
+        List<List<Integer>>graph=new ArrayList<>();
         
-        
-        ArrayList<Edge>graph[]=new ArrayList[courses];
-        
-        for(int i=0;i<courses;i++){
-            graph[i]=new ArrayList<>();
+        for(int i=0;i<vtces;i++){
+            graph.add(new ArrayList<>());
         }
         
-        for(int i=0;i<edges.length;i++){
-            int src=edges[i][0];
-            int nbr=edges[i][1];
+        for(int i=0;i<courses.length;i++){
+            int src=courses[i][0];
+            int nbr=courses[i][1];
             
-            graph[src].add(new Edge(src,nbr));
+            graph.get(src).add(nbr);
         }
         
-        boolean visited[]=new boolean[courses];
-        boolean dfsvis[]=new boolean[courses];
+        boolean visited[]=new boolean[vtces];
+        boolean dfsvis[]=new boolean[vtces];
         
-        for(int i=0;i<courses;i++){
+        for(int i=0;i<vtces;i++){
             if(visited[i]==false){
-                boolean res=topologicalSort(graph,i,visited,dfsvis);
-                if(res){
+                if(cycle(graph,i,visited,dfsvis)){
                     return false;
                 }
             }
         }
-        
         return true;
     }
     
-    public boolean topologicalSort(ArrayList<Edge>graph[], int src, boolean visited[], boolean dfsvis[])
-    {
+    private boolean cycle(List<List<Integer>>graph, int src, boolean visited[], boolean dfsvis[]){
         
         visited[src]=true;
-        
         dfsvis[src]=true;
         
-        for(Edge e:graph[src]){
-            
-            if(dfsvis[e.nbr]==true && visited[e.nbr]==true){
+        for(int nbr:graph.get(src)){
+            if(visited[nbr]==true && dfsvis[nbr]==true){
                 return true;
             }
             
-            if(visited[e.nbr]==false){
-                boolean res=topologicalSort(graph,e.nbr,visited,dfsvis); 
-                if(res){
+            else if(visited[nbr]==false){
+                if(cycle(graph,nbr,visited,dfsvis)){
                     return true;
                 }
             }
