@@ -14,30 +14,25 @@
  * }
  */
 class Solution {
-    
     int count=0;
     public int goodNodes(TreeNode root) {
-        if(root==null)
-            return 0;
-        
         count=0;
         
-        helper(root,root);
-        
+        countGoodNodes(root,-10001);
         return count;
     }
     
-    public void helper(TreeNode node, TreeNode prev){
-        
-        if(node==null)
+    public void countGoodNodes(TreeNode node, int maxPathVal){
+        if(node==null){
             return;
-        
-        if(node.val>=prev.val){
-            prev=node;
-            count++;
         }
         
-        helper(node.left,prev);
-        helper(node.right,prev);
+        if(node.val>=maxPathVal){
+            count++;
+            maxPathVal=node.val;
+        }
+        
+        countGoodNodes(node.left,maxPathVal);
+        countGoodNodes(node.right,maxPathVal);
     }
 }
