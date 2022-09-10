@@ -3,17 +3,25 @@ class Solution {
         
         int sum=0;
         
-        int min=Integer.MAX_VALUE;
+        // Approach 1
         
-        for(int i=0;i<prices.length;i++){
+//         int min=Integer.MAX_VALUE;
+        
+//         for(int i=0;i<prices.length;i++){
             
-            if(prices[i]<min){
-                min=prices[i];
-            }
+//             if(prices[i]<min){
+//                 min=prices[i];
+//             }
             
-            else{
-                sum+=(prices[i]-min);
-                min=prices[i];
+//             else{
+//                 sum+=(prices[i]-min);
+//                 min=prices[i];
+//             }
+//         }
+        
+        for(int i=1;i<prices.length;i++){
+            if(prices[i]>prices[i-1]){
+                sum+=prices[i]-prices[i-1];
             }
         }
         
