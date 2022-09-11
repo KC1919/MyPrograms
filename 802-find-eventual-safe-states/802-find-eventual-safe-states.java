@@ -1,68 +1,55 @@
 class Solution {
+    
+    List<Integer>res;
     public List<Integer> eventualSafeNodes(int[][] graph) {
         
-        int nodes=graph.length;
-        Integer dp[]=new Integer[nodes];
+        int vtces=graph.length;
+        boolean visited[]=new boolean[vtces];
         
-        for(int i=0;i<graph.length;i++)
-        {
-            if(graph[i].length==0)
-                dp[i]=1;
-        }
+        res=new ArrayList<>();
         
-        boolean visited[]=new boolean[nodes];
-        List<Integer>list=new ArrayList<>();
+        Integer dp[]=new Integer[vtces];
         
-        for(int i=0;i<nodes;i++)
-        {
-            if(dp[i]==null)
-            {
-                boolean res=travelGraph(graph,i,visited,dp);
-                dp[i]=res==false?0:1;
+        for(int i=0;i<vtces;i++){
+            if(visited[i]==false){
+                safeState(graph,i,visited,dp);
             }
         }
         
+        Collections.sort(res);
         
-        for(int i=0;i<nodes;i++)
-        {
-            if(dp[i]==1)
-                list.add(i);
-        }
-        
-        return list;
+        return res;
     }
     
-    public boolean travelGraph(int graph[][], int src, boolean visited[], Integer dp[])
-    {
-        if(dp[src]!=null)
+    private boolean safeState(int graph[][], int src, boolean visited[], Integer dp[]){
+        
+        
+        if(dp[src]!=null){
             return dp[src]==0?false:true;
+        }
             
         visited[src]=true;
         
-        boolean myRes=true;
+        int count=0;
         
-        int flag=0;
-        
-        for(int e:graph[src])
-        {
-            if(visited[e]==true)
-                return false;
-                
-            else if(visited[e]==false)
-            {
-                boolean res=travelGraph(graph,e,visited,dp);
-                myRes=res&myRes;
-                
-                flag=1;
+        for(int e:graph[src]){
+            if(visited[e]==false){
+                boolean rres=safeState(graph,e,visited,dp);
+                if(rres){
+                    count++;
+                }
             }
         }
         
-        if(flag==0)
-            myRes=false;
-        
-        dp[src]=myRes==false?0:1;
         visited[src]=false;
         
-        return myRes;
+        if(count==graph[src].length){
+            res.add(src);
+            dp[src]=1;
+            return true;
+        }
+        
+        dp[src]=0;
+        return false;
     }
 }
