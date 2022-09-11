@@ -39,6 +39,10 @@ class Solution {
                     count++;
                 }
             }
+            
+            else{
+                return false;
+            }
         }
         
         visited[src]=false;
