@@ -16,7 +16,11 @@ class Solution {
             }
         }
         
-        Collections.sort(res);
+        for(int i=0;i<vtces;i++){
+            if(dp[i]!=null && dp[i]==1){
+                res.add(i);
+            }
+        }
         
         return res;
     }
@@ -48,7 +52,7 @@ class Solution {
         visited[src]=false;
         
         if(count==graph[src].length){
-            res.add(src);
+            // res.add(src);
             dp[src]=1;
             return true;
         }
