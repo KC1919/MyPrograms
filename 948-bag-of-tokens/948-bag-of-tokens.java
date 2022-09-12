@@ -24,9 +24,8 @@ class Solution {
                 right--;
             }
             
-            else{
+            else
                 break;
-            }
         }
         
         return max;
