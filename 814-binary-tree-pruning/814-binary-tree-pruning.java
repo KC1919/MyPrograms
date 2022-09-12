@@ -20,6 +20,7 @@ class Solution {
         if(node!=null && node.left==null && node.right==null && node.val==0){
             return null;
         }
+        
         boolean res=prune(node);
         
         if(res==false && node.val==0)return null;
