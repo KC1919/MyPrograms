@@ -18,94 +18,9 @@ class Solution {
     public int pseudoPalindromicPaths (TreeNode root) {
         
         count=0;
-        
         findPalins(root,new HashMap<>(),0);
         return count;
-//         List<List<Integer>>res=rootToLeafPath(root);
-        
-//         int count=0;
-        
-//         for(List<Integer>item:res){
-            
-//             HashMap<Integer,Integer>hm=new HashMap<>();
-            
-//             for(int ele:item){
-//                 hm.put(ele,hm.getOrDefault(ele,0)+1);
-//             }
-            
-//             int flag=0;
-//             if(item.size()%2==0){
-                
-//                 flag=0;
-//                 for(int key:hm.keySet()){
-//                     if(hm.get(key)%2!=0){
-//                         flag=1;
-//                         break;
-//                     }
-//                 }
-                
-//                 if(flag==0){
-//                     count++;
-//                 }
-//             }
-            
-//             else{
-                
-//                 flag=0;
-//                 int oc=0;
-//                 for(int key:hm.keySet()){
-//                     if(hm.get(key)%2!=0){
-//                         oc++;
-//                     }
-//                     if(oc>1){
-//                         break;
-//                     }
-//                 }
-                
-//                 if(oc==1){
-//                     count++;
-//                 }
-//             }
-//         }
-        
-//         return count;
     }
-    
-//     public List<List<Integer>> rootToLeafPath(TreeNode node){
-        
-//         if(node==null){
-//             return new ArrayList<>();
-//         }
-        
-//         List<List<Integer>>myres=new ArrayList<>();
-            
-//         if(node.left==null && node.right==null){
-//             myres.add(new ArrayList<>());
-//             myres.get(0).add(node.val);
-//             return myres;
-//         }
-        
-//         List<List<Integer>>lres=rootToLeafPath(node.left);
-        
-//         if(lres.size()>0){
-//             for(List<Integer>item:lres){
-//                 item.add(node.val);
-//             }
-//         }
-        
-//         List<List<Integer>>rres=rootToLeafPath(node.right);
-        
-//         if(rres.size()>0){
-//             for(List<Integer>item:rres){
-//                 item.add(node.val);
-//             }
-//         }
-        
-//         myres.addAll(lres);
-//         myres.addAll(rres);
-        
-//         return myres;
-//     }
     
     private void findPalins(TreeNode node, HashMap<Integer,Integer>hm, int depth){
         
