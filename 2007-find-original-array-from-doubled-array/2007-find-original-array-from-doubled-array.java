@@ -1,10 +1,7 @@
 class Solution {
     public int[] findOriginalArray(int[] a) {
         
-        if(a.length%2!=0){
-            return new int[0];
-        }
-        
+        if(a.length%2!=0) return new int[0];
         
         Arrays.sort(a);
         
