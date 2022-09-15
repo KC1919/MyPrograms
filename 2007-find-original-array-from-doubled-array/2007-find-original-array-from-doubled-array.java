@@ -8,54 +8,51 @@ class Solution {
         
         Arrays.sort(a);
         
-        HashMap<Double,Integer>hm=new HashMap<>();
+        HashMap<Integer,Integer>hm=new HashMap<>();
         
         int ans[]=new int[a.length/2];
         
         for(int ele:a){
-            hm.put(ele*1.0,hm.getOrDefault(ele*1.0,0)+1);
+            hm.put(ele,hm.getOrDefault(ele,0)+1);
         }
         
         int idx=0;
         
-        for(int i=0;i<a.length;i++){
+        for(int ele:a){
             
-            if(hm.containsKey(a[i]*1.0)){
+            if(hm.containsKey(ele)){
                 
-                if(a[i]==0){
-                    if(hm.get(a[i]*1.0)>=2){
-                        ans[idx++]=a[i];
-                        hm.put(a[i]*1.0,hm.get(a[i]*1.0)-2);
+                if(ele==0){
+                    
+                    if(hm.get(ele)>=2){
                         
-                        if(hm.get(a[i]*1.0)==0){
-                            hm.remove(a[i]*1.0);
-                        }
+                        ans[idx++]=ele;
+                        hm.put(ele,hm.get(ele)-2);
+                        
+                        if(hm.get(ele)==0) hm.remove(ele);
                     }
-                    else{
-                        break;
-                    }
+                    
+                    else break;
                 }
                 
                 else{
                     
                     int flag=0;
-                    double ele=(a[i]*1.0)*2;
+                    int eleD=ele*2;
                     
-                    if(hm.containsKey(ele)){
-                        hm.put(ele,hm.get(ele)-1);
-                        if(hm.get(ele)==0) hm.remove(ele);
+                    if(hm.containsKey(eleD)){
+                        hm.put(eleD,hm.get(eleD)-1);
+                        if(hm.get(eleD)==0) hm.remove(eleD);
 
-                        ans[idx++]=a[i];
+                        ans[idx++]=ele;
                         flag=1;
                     }
                     
-                    else{
-                        break;
-                    }
+                    else break;
                     
                     if(flag==1){
-                        hm.put(a[i]*1.0,hm.get(a[i]*1.0)-1);
-                        if(hm.get(a[i]*1.0)==0) hm.remove(a[i]*1.0);
+                        hm.put(ele,hm.get(ele)-1);
+                        if(hm.get(ele)==0) hm.remove(ele);
                     }
                 }
             }
