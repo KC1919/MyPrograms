@@ -5,27 +5,52 @@ class Solution {
         
         int si=-1, ei=-1;
         
-        int i=0, j=0;
+        // int i=0, j=0;
         
-        while(i<s.length()){
+//         while(i<=(s.length()-t.length()+1)){
             
-            if(s.charAt(i)==t.charAt(j)){
+//             if(s.charAt(i)==t.charAt(j)){
                 
-                if(si==-1) si=i;
+//                 if(si==-1) si=i;
                 
-                ei=i;
+//                 ei=i;
                 
-                j++;
-                i++;
+//                 j++;
+//                 i++;
                 
-                if((ei-si+1)==t.length()) return si;
-            }
+//                 if((ei-si+1)==t.length()) return si;
+//             }
             
-            else{
-                i=si+1;
-                si=i;
-                ei=-1;
-                j=0;
+//             else{
+//                 i=si+1;
+//                 si=i;
+//                 ei=-1;
+//                 j=0;
+//             }
+//         }
+        
+//         if((ei-si+1)==t.length()) return si;
+        
+//         return -1;
+        
+        for(int i=0;i<=s.length()-t.length();i++){
+            
+            int k=i;
+            si=-1;
+            ei=-1;
+            for(int j=0;j<t.length();j++){
+                if(s.charAt(k)==t.charAt(j)){
+                    si=si==-1?k:si;
+                    ei=k;
+                    
+                    k++;
+                    
+                    if(ei-si+1==t.length()){
+                        return si;
+                    }
+                }
+                
+                else break;
             }
         }
         
