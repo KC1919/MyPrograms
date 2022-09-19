@@ -14,44 +14,41 @@
  * }
  */
 class Solution {
-    public TreeNode deleteNode(TreeNode node, int key) 
-    {
-        if(node==null)
-            return null;
+    public TreeNode deleteNode(TreeNode node, int key) {
         
-        if(node.val==key)
-        {
-            if(node.left==null && node.right==null)
+        if(node==null)return null;
+        
+        if(node.val==key){
+            if(node.right!=null){
+                TreeNode rmin=getRightMin(node.right);
+                node.val=rmin.val;
+                node.right=deleteNode(node.right,rmin.val);
+            }
+            
+            else if(node.left!=null){
+                TreeNode lmax=getLeftMax(node.left);
+                node.val=lmax.val;
+                node.left=deleteNode(node.left,lmax.val);
+            }
+            
+            else{
                 return null;
-            
-            else if(node.left!=null && node.right==null)
-                return node.left;
-            
-            else if(node.left==null && node.right!=null)
-                return node.right;
-            
-            else
-            {
-                int max=findMax(node.right);
-                node.val=max;
-                node.right=deleteNode(node.right,max);
             }
         }
         
-        else if(key<node.val)
-            node.left=deleteNode(node.left,key);
-        
-        else
-            node.right=deleteNode(node.right,key);
+        node.left=deleteNode(node.left,key);
+        node.right=deleteNode(node.right,key);
         
         return node;
     }
     
-    public int findMax(TreeNode node)
-    {
-        if(node.left!=null)
-            return findMax(node.left);
-        else
-            return node.val;
+    private TreeNode getRightMin(TreeNode node){
+        if(node.left!=null)return getRightMin(node.left);
+        else return node;
+    }
+    
+    private TreeNode getLeftMax(TreeNode node){
+        if(node.right!=null)return getLeftMax(node.right);
+        else return node;
     }
 }
