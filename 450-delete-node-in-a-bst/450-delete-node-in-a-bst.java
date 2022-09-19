@@ -35,8 +35,11 @@ class Solution {
             }
         }
         
-        node.left=deleteNode(node.left,key);
-        node.right=deleteNode(node.right,key);
+        else if(key<node.val)
+            node.left=deleteNode(node.left,key);
+        
+        else
+            node.right=deleteNode(node.right,key);
         
         return node;
     }
