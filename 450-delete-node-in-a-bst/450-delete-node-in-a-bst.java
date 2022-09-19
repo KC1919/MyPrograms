@@ -19,20 +19,19 @@ class Solution {
         if(node==null)return null;
         
         if(node.val==key){
-            if(node.right!=null){
-                TreeNode rmin=getRightMin(node.right);
-                node.val=rmin.val;
-                node.right=deleteNode(node.right,rmin.val);
-            }
             
-            else if(node.left!=null){
-                TreeNode lmax=getLeftMax(node.left);
-                node.val=lmax.val;
-                node.left=deleteNode(node.left,lmax.val);
-            }
+            if(node.left==null && node.right==null)return null;
+            
+            else if(node.left!=null && node.right==null)
+                return node.left;
+            
+            else if(node.left==null && node.right!=null)
+                return node.right;
             
             else{
-                return null;
+                 TreeNode rmin=getRightMin(node.right);
+                 node.val=rmin.val;
+                 node.right=deleteNode(node.right,rmin.val);
             }
         }
         
@@ -44,11 +43,6 @@ class Solution {
     
     private TreeNode getRightMin(TreeNode node){
         if(node.left!=null)return getRightMin(node.left);
-        else return node;
-    }
-    
-    private TreeNode getLeftMax(TreeNode node){
-        if(node.right!=null)return getLeftMax(node.right);
         else return node;
     }
 }
