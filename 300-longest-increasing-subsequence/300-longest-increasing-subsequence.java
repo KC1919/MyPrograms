@@ -13,9 +13,9 @@ class Solution {
             
             if(pos==len){
                 len++;
+                max=Math.max(len,max);
             }
-            
-            max=Math.max(len,max);
+
             dp[pos]=a[i];
         }
         
