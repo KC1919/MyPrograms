@@ -30,7 +30,7 @@ class Solution {
             leftIncDp[i]+=1;
         }
         
-        int min=Integer.MAX_VALUE;
+        int max=0;
         
         for(int i=1;i<n;i++){
             
@@ -38,16 +38,9 @@ class Solution {
             int lds=leftIncDp[i];
             
             if(lis>1 && lds>1 && (lis+lds-1)>=3){
-                int remLeft=(i+1)-lis;
-                int remRight=(n-i)-lds;
-                
-                int totalRem=remLeft+remRight;
-                
-                System.out.println(totalRem);
-            
-                min=Math.min(min,totalRem);
+                max=Math.max(lis+lds-1,max);
             }
         }
-        return min;
+        return n-max;
     }
 }
