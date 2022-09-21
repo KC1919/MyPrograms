@@ -19,20 +19,15 @@ class Solution {
             int newVal=nums[idx]+val;
             
             if(nums[idx]%2==0){
-                
-                if(newVal%2!=0)
-                    evenSum-=nums[idx];
-                
-                else 
-                    evenSum+=val;
+                evenSum-=nums[idx];
             }
             
-            else{
-                if(newVal%2==0) 
-                    evenSum+=newVal;
+            nums[idx]+=val;
+            
+            if(nums[idx]%2==0){
+                evenSum+=nums[idx];
             }
             
-            nums[idx]=newVal;
             ans[i]=evenSum;
         }
         
