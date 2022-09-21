@@ -37,7 +37,7 @@ class Solution {
             int lis=rightIncDp[i];
             int lds=leftIncDp[i];
             
-            if(lis>1 && lds>1 && (lis+lds-1)>=3){
+            if(lis>1 && lds>1){
                 max=Math.max(lis+lds-1,max);
             }
         }
