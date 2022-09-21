@@ -37,8 +37,6 @@ class Solution {
             int lis=rightIncDp[i];
             int lds=leftIncDp[i];
             
-            // System.out.println(i+" - "+lis+" , "+lds);
-            
             if(lis>1 && lds>1 && (lis+lds-1)>=3){
                 int remLeft=(i+1)-lis;
                 int remRight=(n-i)-lds;
@@ -50,7 +48,6 @@ class Solution {
                 min=Math.min(min,totalRem);
             }
         }
-        
         return min;
     }
 }
