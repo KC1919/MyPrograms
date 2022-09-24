@@ -14,49 +14,35 @@
  * }
  */
 class Solution {
-    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-        
-        List<List<Integer>>res=pathSumAll(root,targetSum,0);
-        
-        for(List<Integer>list:res){
-            Collections.reverse(list);
-        }
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) 
+    {
+        List<List<Integer>>res=new ArrayList<>();
+        List<Integer>list=new ArrayList<>();
+        helper(root,targetSum,0,res,list);
         return res;
+        
     }
     
-    private List<List<Integer>> pathSumAll(TreeNode node, int target, int sum){
+    public void helper(TreeNode node, int target, int sum, List<List<Integer>>res, List<Integer>list)
+    {
+        if(node==null)
+            return;
         
-        if(node==null){
-            return new ArrayList<>();
-        }
+        sum+=node.val;
+        list.add(node.val);
         
-        List<List<Integer>>myRes=new ArrayList<>();
-        if(node.left==null && node.right==null){
-            
-            if(sum+node.val==target){
-                myRes.add(new ArrayList<>());
-                myRes.get(0).add(node.val);
+        if(node.left==null && node.right==null)
+        {
+            if(sum==target){
+                res.add(new ArrayList<>(list));
             }
-            return myRes;
+            list.remove(list.size()-1); 
+            return;
         }
         
-        List<List<Integer>>lres=pathSumAll(node.left,target,sum+node.val);
-        List<List<Integer>>rres=pathSumAll(node.right,target,sum+node.val);
+        helper(node.left,target,sum,res,list);   
+        helper(node.right,target,sum,res,list);
+        list.remove(list.size()-1);
         
-        if(lres.size()>0){
-            for(List<Integer>list:lres){
-                list.add(node.val);
-                myRes.add(list);
-            }
-        }
-        
-        if(rres.size()>0){
-            for(List<Integer>list:rres){
-                list.add(node.val);
-                myRes.add(list);
-            }
-        }
-        
-        return myRes;
     }
 }
