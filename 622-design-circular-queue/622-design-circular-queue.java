@@ -14,7 +14,6 @@ class MyCircularQueue {
     public boolean enQueue(int value) {
         
         if(size==a.length){
-            // System.out.println(size);
             return false;
         } 
         
