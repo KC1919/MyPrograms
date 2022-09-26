@@ -76,17 +76,18 @@ class Solution {
             if(visited[nbr]==false){
                 boolean res=hasPath(graph,nbr,dst,visited,path);
                 
+                if(!path.containsKey(src)){
+                    path.put(src,new HashSet<>());
+                }
+                
                 if(res){
-                    if(!path.containsKey(src)){
-                        path.put(src,new HashSet<>());
-                    }
-                    
                     path.get(src).add(dst);
                     visited[src]=false;
                     return true;
                 }
             }
         }
+        
         visited[src]=false;
         
         return false;
