@@ -1,7 +1,7 @@
 class Solution {
     public boolean equationsPossible(String[] a) {
         
-        List<List<Integer>>graph=new ArrayList<>();
+        List<HashSet<Integer>>graph=new ArrayList<>();
         
         HashMap<Character,Integer>hm=new HashMap<>();
         int count=0;
@@ -23,7 +23,7 @@ class Solution {
         }
         
         for(int i=0;i<hm.size();i++){
-            graph.add(new ArrayList<>());
+            graph.add(new HashSet<>());
         }
         
         for(String s:a){
@@ -60,13 +60,13 @@ class Solution {
         return true;
     }
     
-    private boolean hasPath(List<List<Integer>>graph, int src, int dst, boolean visited[], HashMap<Integer,HashSet<Integer>>path)
+    private boolean hasPath(List<HashSet<Integer>>graph, int src, int dst, boolean visited[], HashMap<Integer,HashSet<Integer>>path)
     {
         if(src==dst){
             return true;
         }
         
-        if(path.containsKey(src) && path.get(src).contains(dst)){
+        if(graph.get(src).contains(dst) || (path.containsKey(src) && path.get(src).contains(dst))){
             return true;
         }
         
