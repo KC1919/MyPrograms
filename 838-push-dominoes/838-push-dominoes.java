@@ -18,9 +18,6 @@ class Solution {
                     a[temp]='L';
                     temp--;
                 }
-                
-                left++;
-                right=left;
             }
             
             else if(a[left]=='R'){
@@ -42,12 +39,12 @@ class Solution {
                     left=right+1;
                 }
                 right=left;
+                
+                continue;
             }
             
-            else{
-                left++;
-                right=left;
-            }
+            left++;
+            right=left;
         }
         
         for(int i=0;i<a.length;i++){
