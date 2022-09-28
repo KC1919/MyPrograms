@@ -32,13 +32,7 @@ class Solution {
             n1=n1.next;
         }
         
-        if(n==1){
-            n1.next=n2.next;
-        }
-        
-        else{
-            n1.next=n1.next.next;
-        }
+        n1.next=n1.next.next;
         
         return head;
     }
