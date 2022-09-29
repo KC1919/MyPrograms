@@ -1,21 +1,79 @@
 class Solution {
-    public int divide(int A, int B) {
-    if (A == 1 << 31 && B == -1) return (1 << 31) - 1; //overflow detection
-	//division 
-    int a = Math.abs(A), b = Math.abs(B), res = 0, x = 0;
-    //Find Cn, Cn-1, ..., C0
-    while (a - b >= 0) {
-        //find Cm, 
-        int Cm = 0;
-        while(a - (b * (1 << Cm << 1)) >= 0){
-            Cm++;
+    
+    long remainder=0;
+    public int divide(int a, int b) {
+        
+        if(a==b) return 1;
+        
+        remainder=0;
+        
+        long n=Math.abs((long)a);
+        long d=Math.abs((long)b);
+        
+        if(n<d) return 0;
+        
+        // System.out.println(n+","+d);
+        
+        long res=myDivide(n,d);
+        
+        // System.out.println(res);
+        
+        if(res==-1)
+            return 0;
+        
+        if(a<0 && b<0 || a>=0 && b>=0){
+            res=res;
         }
         
-        res = res + (1<< Cm);
-        a = a - b*(1<<Cm);
+        else{
+            res=-res;
+        }
+        
+        if(res>Integer.MAX_VALUE){
+            return Integer.MAX_VALUE;
+        }
+        
+        if(res<Integer.MIN_VALUE){
+            return Integer.MIN_VALUE;
+        }
+    
+        return (int)res;
     }
     
+    private long myDivide(long n, long d){
+        
+        if(n<d){
+            return Long.MIN_VALUE;
+        }
+        
+        long count=1;
+        long sum=d;
+        long myres=0;
+        
+        while(sum<n){
     
-    return (A > 0) == (B > 0) ? res : -res; //deal with the sign
-}
+            if((sum+sum)<=n){
+                count+=count;
+                sum+=sum;
+            }
+            
+            else{
+                long rem=n-sum;
+                long res=myDivide(rem,d);
+                
+                myres=res;
+                
+                if(res==Long.MIN_VALUE){
+                    remainder=rem;
+                    return count;
+                }
+                
+                else{
+                    return count+res;
+                }
+            }
+        }
+
+        return count+myres;
+    }
 }
