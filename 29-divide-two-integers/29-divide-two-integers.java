@@ -12,11 +12,7 @@ class Solution {
         
         if(n<d) return 0;
         
-        // System.out.println(n+","+d);
-        
         long res=myDivide(n,d);
-        
-        // System.out.println(res);
         
         if(res==-1)
             return 0;
