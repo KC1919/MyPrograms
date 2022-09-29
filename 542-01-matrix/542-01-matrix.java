@@ -1,53 +1,47 @@
 class Solution {
-    
-    class Pair
-    {
-        int i;
-        int j;
+    public int[][] updateMatrix(int[][] mat) {
         
-        Pair(int i, int j){
-            this.i=i;
-            this.j=j;
-        }
-    }
-    
-    public int[][] updateMatrix(int[][] a) {
+        int n=mat.length;
+        int m=mat[0].length;
         
-        Queue<Pair>que=new LinkedList<>();
-        int n=a.length;
-        int m=a[0].length;
+        Queue<int[]>que=new LinkedList<>();
+        
+        int dir[][]={{1,0},{-1,0},{0,1},{0,-1}};
+        
+        
+        int a[][]=new int[n][m];
         
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                if(a[i][j]==0){
-                    que.add(new Pair(i,j));
+                if(mat[i][j]==0){
+                    que.add(new int[]{i,j});
                 }
             }
         }
         
-        int dp[][]=new int[n][m];
-        int dir[][]={{1,0},{-1,0},{0,1},{0,-1}};
+        int distance=0;
         
         while(que.size()>0){
+            
             int size=que.size();
+            distance++;
             
             while(size-->0){
                 
-                Pair rem=que.remove();
+                int rem[]=que.remove();
                 
                 for(int k=0;k<4;k++){
-                    int row=dir[k][0]+rem.i;
-                    int col=dir[k][1]+rem.j;
+                    int row=dir[k][0]+rem[0];
+                    int col=dir[k][1]+rem[1];
                     
-                    if(row>=0 && row<n && col>=0 && col<m && a[row][col]==1 && dp[row][col]==0){
-                        dp[row][col]=dp[rem.i][rem.j]+1;
-                        
-                        que.add(new Pair(row,col));
+                    if(row>=0 && col>=0 && row<n && col<m && mat[row][col]==1){
+                        mat[row][col]=-1;
+                        a[row][col]=distance;
+                        que.add(new int[]{row,col});
                     }
                 }
             }
         }
-        
-        return dp;
+        return a;
     }
 }
