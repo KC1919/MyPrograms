@@ -4,8 +4,6 @@ class Solution {
         List<Integer>list=new ArrayList<>();
         int idx=findPos(a,x);
         
-        // System.out.println(idx);
-        
         int left=idx-1, right=idx;
         
         if(left<0){
