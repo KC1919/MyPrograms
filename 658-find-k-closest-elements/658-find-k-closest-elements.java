@@ -1,47 +1,66 @@
 class Solution {
-    
-    class Pair{
-        int diff;
-        int idx;
-        
-        Pair(int diff, int idx){
-            this.diff=diff;
-            this.idx=idx;
-        }
-    }
-    
     public List<Integer> findClosestElements(int[] a, int k, int x) {
         
         List<Integer>list=new ArrayList<>();
+        int idx=findPos(a,x);
         
-        PriorityQueue<Pair>pq=new PriorityQueue<>((b,c)->{
-            if(b.diff==c.diff){
-                return b.idx-c.idx;
-            }
-            
-            return c.diff-b.diff;
-        });
+        int left=idx-1, right=idx;
+        int count=0;
         
-        for(int i=0;i<a.length;i++){
-            int d=Math.abs(x-a[i]);
-            
-            if(pq.size()<k)
-                pq.add(new Pair(d,i));
-            
-            else if(pq.size()==k){
+        while(left>=0 && right<a.length && count<k){
                 
-                if(pq.peek().diff>d){
-                    pq.remove();
-                    pq.add(new Pair(d,i));
-                }
+            int ldiff=Math.abs(x-a[left]);
+            int rdiff=Math.abs(x-a[right]);
+                
+            if(ldiff<=rdiff){
+                list.add(a[left]);
+                left--;
             }
+                
+            else if(rdiff<ldiff){
+                list.add(a[right]);
+                right++;
+            }
+            count++;
         }
-        
-        while(pq.size()>0){
-            list.add(a[pq.remove().idx]);
+            
+        while(left>=0 && count<k){
+            list.add(a[left]);
+            left--;
+            count++;
+        }
+            
+        while(right<a.length && count<k){
+            list.add(a[right]);
+            right++;
+            count++;
         }
         
         Collections.sort(list);
+        
         return list;
+    }
+    
+    private int findPos(int a[], int target){
+        
+        int l=0, h=a.length-1;
+        
+        while(l<=h){
+            int mid=(l+h)/2;
+            
+            if(a[mid]<target){
+                l=mid+1;
+            }
+            
+            else if(a[mid]>target){
+                h=mid-1;
+            }
+            
+            else{
+                return mid;
+            }
+        }
+        
+        return l;
     }
 }
