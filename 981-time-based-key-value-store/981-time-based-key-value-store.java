@@ -1,79 +1,31 @@
 class TimeMap {
+    HashMap<String, TreeMap<Integer, String>> keyTimeMap;
     
-    HashMap<String,HashMap<Integer,String>>hm;
-    
-    HashMap<String,List<Integer>>bucket;
     public TimeMap() {
-        hm=new HashMap<>();
-        bucket=new HashMap<>();
+        keyTimeMap = new HashMap<String, TreeMap<Integer, String>>();
     }
-  
+    
     public void set(String key, String value, int timestamp) {
-        
-        if(!hm.containsKey(key)){
-            hm.put(key,new HashMap<>());
-            bucket.put(key,new ArrayList<>());
-            bucket.get(key).add(timestamp);
+        if (!keyTimeMap.containsKey(key)) {
+            keyTimeMap.put(key, new TreeMap<Integer, String>());
         }
         
-        hm.get(key).put(timestamp,value);
-        List<Integer>temp=bucket.get(key);
-        if(temp.get(temp.size()-1)<timestamp){
-            bucket.get(key).add(timestamp);
-        }
+        // Store '(timestamp, value)' pair in 'key' bucket.
+        keyTimeMap.get(key).put(timestamp, value);
     }
     
     public String get(String key, int timestamp) {
-        if(hm.containsKey(key)){
-            if(hm.get(key).containsKey(timestamp)){
-                return hm.get(key).get(timestamp);
-            }
-            
-            else{
-                List<Integer>timeList=bucket.get(key);
-                int pos=findPos(timeList,timestamp);
-                
-                if(pos==0){
-                    return "";
-                }
-                
-                int prevTime=timeList.get(pos-1);
-                return hm.get(key).get(prevTime);
-            }
-        }
-        
-        else{
+        // If the 'key' does not exist in map we will return empty string.
+        if (!keyTimeMap.containsKey(key)) {
             return "";
         }
-    }
-    
-    private int findPos(List<Integer>list, int target){
         
-        int lo=0, hi=list.size()-1;
-        
-        while(lo<=hi){
-            int mid=(lo+hi)/2;
-            
-            if(list.get(mid)==target){
-                return mid;
-            }
-            
-            else if(list.get(mid)<target){
-                lo=mid+1;
-            }
-            
-            else if(list.get(mid)>target){
-                hi=mid-1;
-            }
+        Integer floorKey = keyTimeMap.get(key).floorKey(timestamp);
+        // Return searched time's value, if exists.
+        if (floorKey != null) {
+            return keyTimeMap.get(key).get(floorKey);
         }
         
-        return lo;
+        return "";
     }
 }
-
-/**
- * Your TimeMap object will be instantiated and called as such:
- * TimeMap obj = new TimeMap();
- * obj.set(key,value,timestamp);
- * String param_2 = obj.get(key,timestamp);
- */
