@@ -17,7 +17,8 @@ class TimeMap {
         }
         
         hm.get(key).put(timestamp,value);
-        if(bucket.get(key).get(bucket.get(key).size()-1)<timestamp){
+        List<Integer>temp=bucket.get(key);
+        if(temp.get(temp.size()-1)<timestamp){
             bucket.get(key).add(timestamp);
         }
     }
