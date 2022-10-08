@@ -15,10 +15,12 @@ class Solution {
             
             if(i+2<n){
                 int res=twoSum(nums,i+1,comp);
-                int d=Math.abs(target-(res+nums[i]));
-
+                int mySum=res+nums[i];
+                
+                int d=Math.abs(target-(mySum));
+                
                 if(d<diff){
-                    sum=nums[i]+res;
+                    sum=mySum;
                     diff=d;
                 }
             }
@@ -36,23 +38,24 @@ class Solution {
         while(l<r){
             
             int d=Math.abs(target-(a[l]+a[r]));
+            int csum=a[l]+a[r];
             
-            if(a[l]+a[r]==target){
+            if(csum==target){
                 return target;
             }
             
-            else if(a[l]+a[r]>target){
+            else if(csum>target){
                 if(d<diff){
-                    sum=a[l]+a[r];
+                    sum=csum;
                     diff=d;
                 }
                 
                 r--;
             }
             
-            else if(a[l]+a[r]<target){
+            else if(csum<target){
                 if(d<diff){
-                    sum=a[l]+a[r];
+                    sum=csum;
                     diff=d;
                 }
                 
