@@ -14,121 +14,43 @@
  * }
  */
 class Solution {
-    
-    class Pair
-    {
-        int state=0;
-        TreeNode node;
+    public boolean findTarget(TreeNode root, int k) {
+        if(root==null){
+            return false;
+        }
         
-        Pair(TreeNode node, int state)
-        {
-            this.node=node;
-            this.state=state;
+        List<Integer>list=new ArrayList<>();
+        
+        inorder(root,list);
+        
+        int left=0, right=list.size()-1;
+        
+        while(left<right){
+            int lval=list.get(left);
+            int rval=list.get(right);
+            
+            if(lval+rval==k){
+                return true;
+            }
+            
+            else if(lval+rval>k){
+                right--;
+            }
+            
+            else if(lval+rval<k){
+                left++;
+            }
         }
+        return false;
     }
     
-    public Stack<Pair>st;
-    public Stack<Pair>rst;
-    public boolean findTarget(TreeNode root, int target) 
-    {
-       st=new Stack<>();
-       rst=new Stack<>();
-       
-       st.push(new Pair(root,0));
-       rst.push(new Pair(root,0));
-       
-       Pair left=getNextLeft();
-       Pair right=getNextRight();
-       
-    //   System.out.println(left.data+","+right.data);
-       
-       while(left.node.val<right.node.val)
-       {
-           if((left.node.val+right.node.val)==target)
-           return true;
-           
-           else if((left.node.val+right.node.val)<target)
-           {
-               left=getNextLeft();
-           }
-           else if((left.node.val+right.node.val)>target)
-           {
-               right=getNextRight();
-           }
-       }
-       
-       return false;
-    }
-    
-    public Pair getNextLeft()
-    {
-        while(st.size()>0)
-        {
-            Pair top=st.peek();
-            
-            if(top.state==0)
-            {
-                if(top.node.left!=null)
-                {
-                    Pair p=new Pair(top.node.left,0);
-                    st.push(p);
-                }
-                top.state++;
-            }
-            
-            else if(top.state==1)
-            {
-                if(top.node.right!=null)
-                {
-                    Pair p=new Pair(top.node.right,0);
-                    st.push(p);
-                }
-                top.state++;
-                return top;
-            }
-            
-            else
-            {
-                st.pop();
-            }
-            
+    private void inorder(TreeNode node, List<Integer>list){
+        if(node==null){
+            return;
         }
-        return null;
-    }
-    
-    public Pair getNextRight()
-    {
-        while(rst.size()>0)
-        {
-            Pair top=rst.peek();
-            
-            if(top.state==0)
-            {
-                if(top.node.right!=null)
-                {
-                    Pair p=new Pair(top.node.right,0);
-                    rst.push(p);
-                }
-                top.state++;
-            }
-            
-            else if(top.state==1)
-            {
-                if(top.node.left!=null)
-                {
-                    Pair p=new Pair(top.node.left,0);
-                    rst.push(p);
-                }
-                top.state++;
-                return top;
-            }
-            
-            else
-            {
-                rst.pop();
-            }
-            
-        }
-        return null;
+        
+        inorder(node.left,list);
+        list.add(node.val);
+        inorder(node.right,list);
     }
 }
