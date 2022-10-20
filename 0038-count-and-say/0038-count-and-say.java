@@ -22,12 +22,10 @@ class Solution {
             return myRes.toString();
         }
         
-        char ch='\0';
-        
         for(int i=1;i<res.length();i++){
-            ch=res.charAt(i);
+            chr=res.charAt(i);
             
-            if(i>0 && ch==res.charAt(i-1)){
+            if(i>0 && chr==res.charAt(i-1)){
                 count++;
             }
             
@@ -39,7 +37,7 @@ class Solution {
         }
         
         myRes.append(count);
-        myRes.append(ch);
+        myRes.append(chr);
         
         return myRes.toString();
     }
