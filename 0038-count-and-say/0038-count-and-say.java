@@ -16,8 +16,6 @@ class Solution {
         int count=1;
         char chr=res.charAt(0);
         
-        // System.out.println(n+" "+res);
-        
         if(res.length()==1){
             myRes.append(count);
             myRes.append(chr);
@@ -31,7 +29,6 @@ class Solution {
             
             if(i>0 && ch==res.charAt(i-1)){
                 count++;
-                // System.out.println(n);
             }
             
             else{
@@ -41,11 +38,8 @@ class Solution {
             }
         }
         
-        // System.out.println(n+" "+count);
         myRes.append(count);
         myRes.append(ch);
-        
-        // System.out.println(n+" "+myRes);
         
         return myRes.toString();
     }
