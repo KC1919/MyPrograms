@@ -3,20 +3,49 @@ class Solution {
         
         HashMap<Integer,Integer>hm=new HashMap<>();
         
+        int j=0;
         for(int i=0;i<a.length;i++){
-            if(!hm.containsKey(a[i])){
-                hm.put(a[i],i);
+            
+            if(hm.containsKey(a[i])){
+                return true;
             }
             
             else{
-                if(i-hm.get(a[i])<=k){
-                    return true;
-                }
-                else{
-                    hm.put(a[i],i);
-                }
+                hm.put(a[i],i);
+            }
+            
+            if(i-j+1>k){
+                hm.remove(a[j]);
+                j++;
             }
         }
         return false;
     }
 }
+
+// ---------------------------------------------------------------
+
+// HASHMAP SOLUTION
+
+// class Solution {
+//     public boolean containsNearbyDuplicate(int[] a, int k) {
+        
+//         HashMap<Integer,Integer>hm=new HashMap<>();
+        
+//         for(int i=0;i<a.length;i++){
+//             if(!hm.containsKey(a[i])){
+//                 hm.put(a[i],i);
+//             }
+            
+//             else{
+//                 if(i-hm.get(a[i])<=k){
+//                     return true;
+//                 }
+//                 else{
+//                     hm.put(a[i],i);
+//                 }
+//             }
+//         }
+//         return false;
+//     }
+// }
