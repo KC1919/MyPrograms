@@ -1,54 +1,40 @@
 class Solution {
+    
     int max=0;
-    public int maxLength(List<String> arr) {
+    public int maxLength(List<String> list) {
         
         max=0;
-        findMax(arr,0,new StringBuilder(),0);
+        subsequence(list,0,new ArrayList<>(),"",new StringBuilder());
         return max;
     }
     
-    private void findMax(List<String>list, int idx, StringBuilder sb, int len){
-        
+    private void subsequence(List<String>list, int idx, List<String>res, String s, StringBuilder sb)
+    {
         if(idx==list.size()){
-            max=Math.max(max,len);
+            if(res.size()>0){
+                max=Math.max(max,s.length());
+            }
             return;
         }
         
-        for(int i=idx;i<list.size();i++){
-            
-            String word=list.get(i);
-            String s=sb.toString();
-            
-            if(unique(word) && compare(s,word)){
-                sb.append(word);
-                findMax(list,i+1,sb,len+word.length());
-                sb=new StringBuilder(s);
-            }
-            
-            else{
-                findMax(list,i+1,sb,len);
-            }
+        //choose
+        
+        if(checko(s) && checko(list.get(idx)) && check(s,list.get(idx))){
+            res.add(list.get(idx));
+            sb.append(list.get(idx));
+            subsequence(list,idx+1,res,sb.toString(),sb);
+            res.remove(res.size()-1);
+            sb=new StringBuilder(s);
         }
+        
+            
+        //don't choose
+        subsequence(list,idx+1,res,s,sb);
     }
     
-    private boolean unique(String s){
-        
-        HashSet<Character>hm=new HashSet<>();
-        
-        for(int i=0;i<s.length();i++){
-            
-            char ch=s.charAt(i);
-            
-            if(hm.contains(ch))
-                return false;
-            
-            hm.add(ch);
-        }
-        return true;
-    }
     
-    private boolean compare(String s, String t){
-        
+    private boolean check(String s, String t)
+    {
         HashSet<Character>hm=new HashSet<>();
         
         for(int i=0;i<t.length();i++){
@@ -64,6 +50,22 @@ class Solution {
             if(hm.contains(ch)){
                 return false;
             }
+        }
+        return true;
+    }
+    
+    private boolean checko(String s){
+        
+        HashSet<Character>hm=new HashSet<>();
+        
+        for(int i=0;i<s.length();i++){
+            
+            char ch=s.charAt(i);
+            
+            if(hm.contains(ch))
+                return false;
+            
+            hm.add(ch);
         }
         return true;
     }
