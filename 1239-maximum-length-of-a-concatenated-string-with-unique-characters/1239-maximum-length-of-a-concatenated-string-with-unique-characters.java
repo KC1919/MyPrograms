@@ -1,71 +1,57 @@
 class Solution {
-    
     int max=0;
-    public int maxLength(List<String> list) {
+    public int maxLength(List<String> arr) {
         
         max=0;
-        subsequence(list,0,new ArrayList<>(),"",new StringBuilder());
+        findMax(arr,0,new StringBuilder(),0);
         return max;
     }
     
-    private void subsequence(List<String>list, int idx, List<String>res, String s, StringBuilder sb)
-    {
+    private void findMax(List<String>list, int idx, StringBuilder sb, int len){
+        
         if(idx==list.size()){
-            if(res.size()>0){
-                max=Math.max(max,s.length());
-            }
+            max=Math.max(max,len);
             return;
         }
         
-        //choose
-        
-        if(checko(s) && checko(list.get(idx)) && check(s,list.get(idx))){
-            res.add(list.get(idx));
-            sb.append(list.get(idx));
-            subsequence(list,idx+1,res,sb.toString(),sb);
-            res.remove(res.size()-1);
-            sb=new StringBuilder(s);
-        }
-        
+        for(int i=idx;i<list.size();i++){
             
-        //don't choose
-        subsequence(list,idx+1,res,s,sb);
+            String word=list.get(i);
+            String s=sb.toString();
+            
+            if(unique(word) && compare(s,word)){
+                sb.append(word);
+                findMax(list,i+1,sb,len+word.length());
+                sb=new StringBuilder(s);
+            }
+            
+            else{
+                findMax(list,i+1,sb,len);
+            }
+        }
     }
     
-    
-    private boolean check(String s, String t)
-    {
-        HashSet<Character>hm=new HashSet<>();
-        
-        for(int i=0;i<t.length();i++){
-            
-            char ch=t.charAt(i);
-            
-            hm.add(ch);
-        }
-        
+    private boolean unique(String s){
         
         for(int i=0;i<s.length();i++){
             char ch=s.charAt(i);
-            if(hm.contains(ch)){
+            int idx=s.indexOf(ch);
+            if(idx!=-1 && idx!=i){
                 return false;
             }
         }
+        
         return true;
     }
     
-    private boolean checko(String s){
-        
-        HashSet<Character>hm=new HashSet<>();
+    private boolean compare(String s, String t){
         
         for(int i=0;i<s.length();i++){
-            
             char ch=s.charAt(i);
             
-            if(hm.contains(ch))
+            if(t.indexOf(ch)!=-1){
                 return false;
-            
-            hm.add(ch);
+            }
         }
         return true;
     }
