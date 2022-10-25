@@ -21,7 +21,7 @@ class Solution {
         if(unique(word) && compare(s,word)){
             sb.append(word);
             findMax(list,idx+1,sb,len+word.length());
-            sb=new StringBuilder(s);
+            sb.delete(sb.length()-word.length(),sb.length());
         }
            
         findMax(list,idx+1,sb,len);
