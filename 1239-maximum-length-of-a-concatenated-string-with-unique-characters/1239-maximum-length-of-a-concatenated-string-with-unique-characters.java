@@ -33,23 +33,35 @@ class Solution {
     
     private boolean unique(String s){
         
-        for(int i=0;i<s.length();i++){
-            char ch=s.charAt(i);
-            int idx=s.indexOf(ch);
-            if(idx!=-1 && idx!=i){
-                return false;
-            }
-        }
+        HashSet<Character>hm=new HashSet<>();
         
+        for(int i=0;i<s.length();i++){
+            
+            char ch=s.charAt(i);
+            
+            if(hm.contains(ch))
+                return false;
+            
+            hm.add(ch);
+        }
         return true;
     }
     
     private boolean compare(String s, String t){
         
+        HashSet<Character>hm=new HashSet<>();
+        
+        for(int i=0;i<t.length();i++){
+            
+            char ch=t.charAt(i);
+            
+            hm.add(ch);
+        }
+        
+        
         for(int i=0;i<s.length();i++){
             char ch=s.charAt(i);
-            
-            if(t.indexOf(ch)!=-1){
+            if(hm.contains(ch)){
                 return false;
             }
         }
