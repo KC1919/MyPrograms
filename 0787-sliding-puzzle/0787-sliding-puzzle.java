@@ -28,7 +28,7 @@ class Solution {
             int size=que.size();
             int idx=-1;
 
-            level++;
+            // level++;
 
             while(size-->0){
                 String rem=que.remove();
@@ -43,16 +43,19 @@ class Solution {
                 for(int i=0;i<swap.length;i++){
                     String tobeadded=swapchar(rem,idx,swap[i]);
 
-                    if(tobeadded.equals(target)){
-                        return level;
-                    }
+                    // if(tobeadded.equals(target)){
+                    //     return level;
+                    // }
 
-                    if(!vis.contains(tobeadded)){
-                        que.add(tobeadded);
-                        vis.add(tobeadded);
+                    if(vis.contains(tobeadded)){
+                        continue;
                     }
+                    
+                    que.add(tobeadded);
+                    vis.add(tobeadded);
                 }
             }
+            level++;
         }
         return -1;
     }
@@ -61,12 +64,11 @@ class Solution {
 
         StringBuilder sb=new StringBuilder(rem);
 
-        System.out.println(sb);
-        char ch=sb.charAt(idx);
-        sb.setCharAt(idx, sb.charAt(swapind));
-        sb.setCharAt(swapind, ch);
+        // System.out.println(sb);
+        sb.setCharAt(idx, rem.charAt(swapind));
+        sb.setCharAt(swapind, rem.charAt(idx));
 
-        System.out.println(sb);
+        // System.out.println(sb);
         return sb.toString();
     }
 }
