@@ -4,7 +4,7 @@ class Solution {
         int n=mat.length;
         int m=mat[0].length;
 
-        int dp[][]=new int[n][m];
+        int ans[][]=new int[n][m];
 
         boolean visited[][]=new boolean[n][m];
 
@@ -34,7 +34,7 @@ class Solution {
 
                     if(row>=0 && col>=0 && row<n && col<m && visited[row][col]==false && mat[row][col]==1){
                         que.add(new int[]{row,col});
-                        dp[row][col]=level;
+                        ans[row][col]=level;
                         visited[row][col]=true;
 
                     }
@@ -42,6 +42,6 @@ class Solution {
             }
         }
 
-        return dp;
+        return ans;
     }
 }
