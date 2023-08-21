@@ -1,7 +1,7 @@
 class Solution {
     public boolean repeatedSubstringPattern(String s) {
         
-        for(int i=1;i<s.length();i++){
+        for(int i=1;i<=s.length()/2;i++){
 
             String str=s.substring(0,i);
             int flag=0;
@@ -18,8 +18,6 @@ class Solution {
                     break;
                 } 
             }
-
-            System.out.println(len);
             if(flag==0 && len==s.length()){
                 return true;
             }
