@@ -8,7 +8,7 @@ class Solution {
 
     public boolean partition(int nums[], int idx, int len, Boolean dp[]){
 
-        if(len==0){
+        if(idx==nums.length){
             return true;
         }
 
