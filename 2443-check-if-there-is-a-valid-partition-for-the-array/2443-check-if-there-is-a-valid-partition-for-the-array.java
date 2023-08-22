@@ -3,10 +3,10 @@ class Solution {
         
         Boolean dp[]=new Boolean[nums.length];
 
-        return partition(nums,0,nums.length,dp);
+        return partition(nums,0,dp);
     }
 
-    public boolean partition(int nums[], int idx, int len, Boolean dp[]){
+    public boolean partition(int nums[], int idx, Boolean dp[]){
 
         if(idx==nums.length){
             return true;
@@ -20,7 +20,7 @@ class Solution {
 
         if(idx+1<nums.length){
             if(nums[idx]==nums[idx+1]){
-                ans=partition(nums,idx+2,len-2,dp);
+                ans=partition(nums,idx+2,dp);
 
                 if(ans==true){
                     return dp[idx]=true;
@@ -30,14 +30,14 @@ class Solution {
 
         if(idx+2<nums.length){
             if(nums[idx]+1==nums[idx+1] && nums[idx+1]+1==nums[idx+2]){
-                ans=partition(nums,idx+3,len-3,dp);
+                ans=partition(nums,idx+3,dp);
                 if(ans==true){
                     return dp[idx]=true;
                 }
             }
 
             if(nums[idx]==nums[idx+1] && nums[idx+1]==nums[idx+2]){
-                ans=partition(nums,idx+3,len-3,dp);
+                ans=partition(nums,idx+3,dp);
                 if(ans==true){
                     return dp[idx]=true;
                 }
