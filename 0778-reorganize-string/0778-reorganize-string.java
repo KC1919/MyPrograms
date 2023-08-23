@@ -12,8 +12,6 @@ class Solution {
     }
 
     public String reorganizeString(String s) {
-        
-        // StringBuilder sb=new StringBuilder();
 
         PriorityQueue<Pair>pq=new PriorityQueue<>((a,b)->{
             return b.count-a.count;
@@ -49,10 +47,6 @@ class Solution {
             i+=2;
             count--;
         }
-
-        // if(i<s.length()){
-        //     i++;
-        // }
 
         while(pq.size()>0){
 
