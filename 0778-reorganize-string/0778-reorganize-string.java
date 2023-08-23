@@ -13,7 +13,7 @@ class Solution {
 
     public String reorganizeString(String s) {
         
-        StringBuilder sb=new StringBuilder();
+        // StringBuilder sb=new StringBuilder();
 
         PriorityQueue<Pair>pq=new PriorityQueue<>((a,b)->{
             return b.count-a.count;
@@ -37,29 +37,41 @@ class Solution {
             pq.add(new Pair(key,hm.get(key)));
         }
 
-        while(pq.size()>=2){
-            Pair p1=pq.remove();
-            Pair p2=pq.remove();
+        char a[]=new char[s.length()];
 
-            sb.append(p1.ch);
-            sb.append(p2.ch);
+        int i=0;
 
-            p1.count=p1.count-1;
-            p2.count=p2.count-1;
+        Pair p=pq.remove();
+        int count=p.count;
 
-            if(p1.count>0){
-                pq.add(p1);
-            }
-
-            if(p2.count>0){
-                pq.add(p2);
-            }
+        while(count>0){
+            a[i]=p.ch;
+            i+=2;
+            count--;
         }
 
-        if(!pq.isEmpty()){
-            sb.append(pq.peek().ch);
-        }
+        // if(i<s.length()){
+        //     i++;
+        // }
 
-        return sb.toString();
+        while(pq.size()>0){
+
+            if(i>=s.length()){
+                i=1;
+            }
+            
+            Pair rem=pq.remove();
+            int rc=rem.count;
+            while(i<s.length() && rc>0){
+                a[i]=rem.ch;
+                i+=2;
+                rc--;
+
+                if(i>=s.length()){
+                    i=1;
+                }
+            }
+        }
+        return new String(a);
     }
 }
