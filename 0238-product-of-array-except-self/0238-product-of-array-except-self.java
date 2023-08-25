@@ -11,9 +11,9 @@ class Solution {
             ans[i]=nums[i-1]*ans[i-1];
         }
 
-        int rprod=nums[n-1];
+        int rprod=1;
 
-        for(int i=n-2;i>=0;i--){
+        for(int i=n-1;i>=0;i--){
             ans[i]=ans[i]*rprod;
             rprod*=nums[i];
         }
