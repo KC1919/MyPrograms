@@ -4,7 +4,7 @@ class Solution {
         Set<Integer>hm=new HashSet<>();
 
         for(int num:nums){
-            if(hm.contains(num)){
+            if(!hm.add(num)){
                 return true;
             }
             hm.add(num);
