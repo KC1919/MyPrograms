@@ -15,10 +15,6 @@ class Solution {
             return true;
         }
 
-        // if(i>=s1.length() || j>=s2.length()){
-        //     return false;
-        // }
-
         if(dp[i][j]!=null){
             return dp[i][j];
         }
