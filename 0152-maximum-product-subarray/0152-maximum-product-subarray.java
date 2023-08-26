@@ -1,22 +1,55 @@
 class Solution {
-    public int maxProduct(int[] nums) {
+    
+    public int maxProduct(int[] a) {
         
-        int n=nums.length;
-        int prefix=1;
-        int suffix=1;
-        int max=Integer.MIN_VALUE;
-
-        for(int i=0;i<n;i++){
+        int max=0;
+        
+        max=a[0];
+        int oldPrev=0, oldCurr=a[0];
+        
+        for(int i=1;i<a.length;i++)
+        {
+            int newPrev=0, newCurr=0;
             
-            if(prefix==0) prefix=1;
-
-            if(suffix==0) suffix=1;
-
-            prefix=prefix*nums[i];
-            suffix=suffix*nums[n-i-1];
-            max=Math.max(Math.max(prefix,suffix),max);
+            if(oldPrev<0 && oldCurr<0)
+            {
+                newPrev=Math.min(oldPrev,oldCurr)*a[i];
+                newCurr=a[i];
+            }
+            
+            else if((oldPrev<0 && oldCurr>0) || (oldPrev>0 && oldCurr<0))
+            {
+                newPrev=oldPrev*a[i];
+                newCurr=oldCurr*a[i];
+            }
+            
+            else if(oldPrev==0 || oldCurr==0)
+            {
+                if(oldPrev==0 && oldCurr==0){
+                    newPrev=a[i];
+                    newCurr=a[i];
+                }
+                    
+                else if(oldPrev==0){
+                    newPrev=oldCurr*a[i];
+                    newCurr=a[i];
+                }
+                
+                else if(oldCurr==0){
+                    newPrev=oldPrev*a[i];
+                    newCurr=a[i];
+                }
+            }
+            else
+            {
+                newPrev=oldPrev*a[i];
+                newCurr=oldCurr*a[i];
+            }
+            
+            oldPrev=newPrev;
+            oldCurr=newCurr;
+            max=Math.max(max,Math.max(newCurr,newPrev));
         }
-        
         return max;
     }
 }
