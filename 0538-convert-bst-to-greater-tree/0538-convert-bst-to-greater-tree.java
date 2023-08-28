@@ -14,37 +14,38 @@
  * }
  */
 class Solution {
-
-    int sum=0;
-    public TreeNode convertBST(TreeNode root) {
-        if(root==null) return root;
-
-        greaterTree(root);
-        return root;
-    }
-
-    public void greaterTree(TreeNode node){
-
-        if(node==null){
-            return;
+    int count=0;
+    public TreeNode convertBST(TreeNode node) {
+        List<Integer>list=new ArrayList<>();
+        inorder(node,list);
+        
+        for(int i=list.size()-2;i>=0;i--)
+        {
+            list.set(i,list.get(i+1)+list.get(i));
         }
-
-        int mySum=0;
-
-        greaterTree(node.right);
-
-        // mySum+=rsum;
-        mySum+=node.val;
-        sum+=mySum;
-
-        node.val=sum;
-
-        // System.out.println("Before left call: "+node.val+"-"+mySum);
-
-        greaterTree(node.left);
-
-        // System.out.println(node.val+"-"+mySum);
-
-        // return node.val=sum;
+        
+        count=0;
+        rightSum(node,list);
+        
+        return node;
+    }
+    
+    public void inorder(TreeNode node, List<Integer>list)
+    {
+        if(node==null)return;
+        
+        inorder(node.left,list);
+        list.add(node.val);
+        inorder(node.right,list);
+    }
+    
+    public void rightSum(TreeNode node, List<Integer>list)
+    {
+        if(node==null)return;
+        
+        rightSum(node.left,list);
+        node.val=list.get(count);
+        count++;
+        rightSum(node.right,list);
     }
 }
