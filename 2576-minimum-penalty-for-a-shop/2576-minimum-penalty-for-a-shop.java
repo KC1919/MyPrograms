@@ -23,12 +23,12 @@ class Solution {
 
         int ocount=0;
 
-        if(customers.charAt(n-1)=='Y'){
-            ocount++;
-            pair[n-1][1]=ocount;
-        } 
+        // if(customers.charAt(n-1)=='Y'){
+        //     ocount++;
+        //     pair[n-1][1]=ocount;
+        // } 
 
-        for(int i=n-2;i>=0;i--){
+        for(int i=n-1;i>=0;i--){
             if(customers.charAt(i)=='Y'){
                 ocount++;
                 pair[i][1]=ocount;
