@@ -28,8 +28,6 @@ class Solution {
             pair[n-1][1]=ocount;
         } 
 
-        // System.out.println(ocount);
-
         for(int i=n-2;i>=0;i--){
             if(customers.charAt(i)=='Y'){
                 ocount++;
@@ -39,8 +37,6 @@ class Solution {
                 pair[i][1]=pair[i+1][1];
             }
         }
-        
-        // System.out.println(ocount+"-"+pair[0][1]+"-"+pair[n-1][1]);
         
         int ans[]=new int[n];
 
@@ -60,10 +56,6 @@ class Solution {
         if((pair[n][0]+pair[n][1])<min){
             return n;
         }
-
-        // System.out.println(pair[n-1][0]+"-"+pair[n-1][1]+"-"+idx+"-"+(n-1));
-
-        // if(idx==n-1 && pair[n-1][1]==1) return idx+1;
 
         return idx;
     }
