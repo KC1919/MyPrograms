@@ -7,9 +7,9 @@ class Solution {
 
         int zcount=0;
 
-        if(customers.charAt(0)=='N') zcount++;
+        // if(customers.charAt(0)=='N') zcount++;
 
-        for(int i=1;i<n;i++){
+        for(int i=0;i<n;i++){
             if(customers.charAt(i)=='N'){
                 pair[i][0]=zcount;
                 zcount++;
@@ -23,11 +23,6 @@ class Solution {
 
         int ocount=0;
 
-        // if(customers.charAt(n-1)=='Y'){
-        //     ocount++;
-        //     pair[n-1][1]=ocount;
-        // } 
-
         for(int i=n-1;i>=0;i--){
             if(customers.charAt(i)=='Y'){
                 ocount++;
@@ -38,24 +33,19 @@ class Solution {
             }
         }
         
-        int ans[]=new int[n];
-
         int min=Integer.MAX_VALUE;
         int idx=-1;
 
         for(int i=0;i<n;i++){
-            ans[i]=pair[i][0]+pair[i][1];
+            int penality=pair[i][0]+pair[i][1];
 
-            System.out.println(ans[i]+"-"+i);
-            if(ans[i]<min){
-                min=ans[i];
+            if(penality<min){
+                min=penality;
                 idx=i;
             }
         }
 
-        if((pair[n][0]+pair[n][1])<min){
-            return n;
-        }
+        if((pair[n][0]+pair[n][1])<min) return n;
 
         return idx;
     }
