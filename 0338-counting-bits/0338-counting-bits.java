@@ -1,33 +1,35 @@
 class Solution {
-    public int[] countBits(int n) {
-        
+    public int[] countBits(int n) 
+    {
         int dp[]=new int[n+1];
-
-        for(int i=1;i<=n;i++){
-
-            if(dp[i]!=0){
-                continue;
-            }
-            dp[i]=calculateBit(i,dp);
+        // Arrays.fill(dp,-1);
+        
+        dp[0]=0;
+        
+        for(int i=1;i<=n;i++)
+        {
+            binary(i,dp);
         }
         return dp;
     }
-
-    public int calculateBit(int n, int dp[]){
-
-        int rem=0;
-        int count=0;
+    
+    public int binary(int n, int dp[])
+    {
+        int rem=0, num=n, count=0;
         
-        while(n>1){
-
-            if(dp[n]!=0){
-                return dp[n]+count;
+        while(num>0)
+        {
+            if(dp[num]>0){
+                count+=dp[num];
+                break;
             }
-
-            rem=n%2;
-            count+=rem==1?1:0;
-            n=n/2;
+            rem=num%2;
+            if(rem==1)
+                count++;
+            
+            num=num/2;
         }
-        return count+1;
+        dp[n]=count;
+        return count;
     }
 }
