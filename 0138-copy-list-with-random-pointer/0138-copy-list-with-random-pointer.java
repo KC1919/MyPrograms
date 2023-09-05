@@ -16,59 +16,38 @@ class Node {
 class Solution {
     public Node copyRandomList(Node head) {
         
-        HashMap<Node, Integer> hm = new HashMap<>();
-
+        HashMap<Node, Node>hm=new HashMap<>();
+        
         Node n=head;
-        int idx=0;
-
+        
+        Node nhead=null, prev=null;
+        
         while(n!=null){
-            hm.put(n,idx++);
-            n=n.next;    
-        }
-
-        HashMap<Integer, Node> nhm = new HashMap<>();
-
-        n=head;
-        idx=0;
-        Node prev=null;
-
-        while(n!=null){
-
-            Node nn;
-
-            if(!nhm.containsKey(idx)){
-                nn=new Node(n.val);
-                nhm.put(idx,nn);
-            }
-
-            else{
-                nn=nhm.get(idx);
-            }
-
-            if(idx>0){
-                prev.next=nn;
-            }
-
-            if(n.random !=null){
-
-                int ridx=hm.get(n.random);
-                Node nrand=null;
-
-                if(!nhm.containsKey(ridx)){
-                    nrand=new Node(n.random.val);
-                    nn.random=nrand;
-                    nhm.put(ridx,nrand);
-                }
-                else{
-                    nn.random=nhm.get(ridx);
-                }
-            }
+            Node nn=new Node(n.val);
             
-            idx++;
+            if(nhead==null)
+                nhead=nn;
+            
+            if(prev!=null)
+                prev.next=nn;
+            
             prev=nn;
+            hm.put(n,nn);
             n=n.next;
         }
-
-        return nhm.get(0);
+        
+        n=head;
+        Node cn=nhead;
+        
+        while(n!=null){
+            
+            Node curr=n;
+            
+            cn.random=curr.random==null?null:hm.get(curr.random);
+            
+            n=n.next;
+            cn=cn.next;
+        }
+        return nhead;
     }
 }
