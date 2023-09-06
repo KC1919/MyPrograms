@@ -6,9 +6,9 @@ class Solution {
 
         for(int i=1;i<nums.length;i++){
 
-            if(nums[i]==cand){
+            if(nums[i]==cand)
                 count++;
-            }
+                
             else{
                 count--;
                 if(count==0){
