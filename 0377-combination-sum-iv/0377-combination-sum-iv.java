@@ -1,11 +1,11 @@
 class Solution {
     public int combinationSum4(int[] nums, int target) {
         // Arrays.sort(nums);
-        Integer dp[][]=new Integer[nums.length][target+1];
+        Integer dp[]=new Integer[target+1];
         return combinations(nums,0,0,target,dp);
     }
 
-    public int combinations(int nums[], int idx, int sum, int target, Integer dp[][]){
+    public int combinations(int nums[], int idx, int sum, int target, Integer dp[]){
         
         if(sum==target)
             return 1;
@@ -13,8 +13,8 @@ class Solution {
         if(idx==nums.length) 
             return 0;
 
-        if(dp[idx][sum]!=null)
-            return dp[idx][sum];
+        if(dp[sum]!=null)
+            return dp[sum];
 
         int res=0;
 
@@ -23,6 +23,6 @@ class Solution {
                 res+=combinations(nums,i,sum+nums[i],target,dp);
             }
         }
-        return dp[idx][sum]=res;
+        return dp[sum]=res;
     }
 }
