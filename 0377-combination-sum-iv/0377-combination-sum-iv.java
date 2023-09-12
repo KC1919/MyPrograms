@@ -10,9 +10,6 @@ class Solution {
         if(sum==target)
             return 1;
 
-        if(idx==nums.length) 
-            return 0;
-
         if(dp[sum]!=null)
             return dp[sum];
 
