@@ -6,13 +6,11 @@ class Solution {
 
         prod[0]=1;
 
-        int prevProd=nums[0];
         for(int i=1;i<n;i++){
-            prod[i]=prevProd;
-            prevProd*=nums[i];
+            prod[i]=prod[i-1]*nums[i-1];
         }
 
-        prevProd=1;
+        int prevProd=1;
 
         for(int i=n-1;i>=0;i--){
             prod[i]=prod[i]*prevProd;
