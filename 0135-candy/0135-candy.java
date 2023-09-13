@@ -10,11 +10,6 @@ class Solution {
             if(rate[i]>rate[i-1]){
                 cand[i]=cand[i-1]+1;
             }
-            // else if(rate[i]<rate[i-1]){
-            //     if(cand[i-1]<=cand[i]){
-            //         cand[i-1]++;
-            //     }
-            // }
         }
 
         int totalCandies=cand[n-1];
