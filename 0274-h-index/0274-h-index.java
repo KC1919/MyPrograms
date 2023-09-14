@@ -12,12 +12,12 @@ class Solution {
 
         for(int i=0;i<n;i++){
             int val=i+a[i]-1;
-            if(val<n && val>=0){
+
+            if(val<n && val>=0)
                 hIndex=a[i];
-            }
-            else{
+            
+            else
                 hIndex=Math.max(hIndex,n-i);
-            }
         }
         return hIndex;
     }
