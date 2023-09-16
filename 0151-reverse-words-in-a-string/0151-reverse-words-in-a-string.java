@@ -11,17 +11,4 @@ class Solution {
 
         return sb.toString().substring(0, sb.length()-1);
     }
-
-    // private void reverse(String a[]){
-
-    //     int start=0, end=a.length-1;
-
-    //     while(start<=end){
-    //         String t=a[start];
-    //         a[start]=a[end];
-    //         a[end]=t;
-    //         start++;
-    //         end--;
-    //     }
-    // }
 }
