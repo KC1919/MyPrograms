@@ -1,39 +1,45 @@
 class Solution {
-
-    class Pair{
-        int sum;
-        int idx;
-
-        Pair(int sum, int idx){
-            this.sum=sum;
-            this.idx=idx;
-        }
-    }
     public int[] kWeakestRows(int[][] mat, int k) {
-        
-        PriorityQueue<Pair>pq=new PriorityQueue<>((a,b)->{
-            if(a.sum==b.sum) return b.idx-a.idx;
-            else return b.sum-a.sum;
-        });
+        int[] soldiers = new int[mat.length];
 
-        for(int i=0;i<mat.length;i++){
-            int sum=0;
-            for(int j=0;j<mat[0].length;j++){
-                sum+=mat[i][j];
+        for (int i = 0; i < mat.length; i++) {
+            soldiers[i] = ceil(mat[i]);
+        }
+
+        int[] weakOrder = new int[k];
+        for (int i = 0; i < k; i++) {
+            int min = find(soldiers);
+            soldiers[min] = -1;
+            weakOrder[i] = min;
+        }
+        return weakOrder;
+
+    }
+    static int ceil(int[] row){
+        int start = 0;
+        int end = row.length-1;
+
+        while (start <= end){
+            int mid = start + (end - start)/2;
+
+            if(row[mid] < 1){
+                end = mid - 1;
+            } else {
+                start = mid +1;
             }
-            Pair p=new Pair(sum,i);
-
-            pq.add(p);
-            if(pq.size()>k) pq.remove();
         }
 
-        int ans[]=new int[k];
-        int idx=k-1;
-
-        while(pq.size()>0){
-            ans[idx--]=pq.remove().idx;
+        return start;
+    }
+    static int find(int[] arr) {
+        int least = Integer.MAX_VALUE;
+        int index = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] >= 0 && arr[i] < least) {
+                least = arr[i];
+                index = i;
+            }
         }
-
-        return ans;
+        return index;
     }
 }
