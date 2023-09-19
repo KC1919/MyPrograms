@@ -2,16 +2,14 @@ class Solution {
     public int findDuplicate(int[] nums) {
         int idx=0;
 
-        while(idx<nums.length){
-            int placeToGo=nums[idx];
-
-            if(nums[placeToGo]==nums[idx]) 
-                return nums[idx];
+        for(int i=0;i<nums.length;i++){
+            int elem=nums[i];
+            if(nums[Math.abs(elem)-1]<0)
+                return Math.abs(nums[i]);
             
-            int temp=nums[idx];
-            nums[idx]=nums[placeToGo];
-            nums[placeToGo]=temp;
+            nums[Math.abs(elem)-1]*=-1;
         }
+
         return -1;
     }
 }
