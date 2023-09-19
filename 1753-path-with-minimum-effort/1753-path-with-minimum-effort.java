@@ -21,7 +21,7 @@ class Solution {
         });
 
         int dir[][]={{0,1},{0,-1},{-1,0},{1,0}};
-        boolean vis[][]=new boolean[n][m];
+        // boolean vis[][]=new boolean[n][m];
 
         int dp[][]=new int[n][m];
 
@@ -35,10 +35,10 @@ class Solution {
         while(pq.size()>0){
             Pair rem=pq.remove();
 
-            if(vis[rem.row][rem.col]==true)
-                continue;
+            // if(vis[rem.row][rem.col]==true)
+            //     continue;
 
-            vis[rem.row][rem.col]=true;
+            // vis[rem.row][rem.col]=true;
 
             if(rem.row==n-1 && rem.col==m-1)
                 return rem.weight;
@@ -47,7 +47,7 @@ class Solution {
                 int row=dir[k][0]+rem.row;
                 int col=dir[k][1]+rem.col;
 
-                if(row>=0 && col>=0 && row<n && col<m && vis[row][col]==false){
+                if(row>=0 && col>=0 && row<n && col<m){
                     int effort=Math.abs(height[row][col]-height[rem.row][rem.col]);
                     int maxEffort=Math.max(effort,rem.weight);
                     if(maxEffort<dp[row][col]){
