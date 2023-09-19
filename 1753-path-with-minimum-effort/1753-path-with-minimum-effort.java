@@ -50,10 +50,7 @@ class Solution {
                 if(row>=0 && col>=0 && row<n && col<m && vis[row][col]==false){
                     int diff=Math.abs(height[row][col]-height[rem.row][rem.col]);
                     int maxDiff=Math.max(diff,rem.weight);
-                    if(dp[row][col]!=Integer.MAX_VALUE && dp[row][col]<maxDiff){
-                        dp[row][col]=maxDiff;
-                    }
-                    else{
+                    if(maxDiff<dp[row][col]){
                         pq.add(new Pair(row,col,Math.max(diff,rem.weight)));
                         dp[row][col]=maxDiff;
                     }
