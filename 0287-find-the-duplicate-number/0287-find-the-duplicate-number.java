@@ -1,15 +1,19 @@
 class Solution {
-    public int findDuplicate(int[] nums) {
-        int idx=0;
-
-        for(int i=0;i<nums.length;i++){
-            int elem=nums[i];
-            if(nums[Math.abs(elem)-1]<0)
-                return Math.abs(nums[i]);
+    public int findDuplicate(int[] a) 
+    {
+        int dup=0;
+        for(int i=0;i<a.length;i++)
+        {
+            int abs=Math.abs(a[i]);
             
-            nums[Math.abs(elem)-1]*=-1;
+            if(a[abs-1]>0)
+            {
+                a[abs-1]=-a[abs-1];
+            }
+            else
+                dup=abs;
         }
-
-        return -1;
+        return dup;
+        
     }
 }
