@@ -48,11 +48,11 @@ class Solution {
                 int col=dir[k][1]+rem.col;
 
                 if(row>=0 && col>=0 && row<n && col<m && vis[row][col]==false){
-                    int diff=Math.abs(height[row][col]-height[rem.row][rem.col]);
-                    int maxDiff=Math.max(diff,rem.weight);
-                    if(maxDiff<dp[row][col]){
-                        pq.add(new Pair(row,col,Math.max(diff,rem.weight)));
-                        dp[row][col]=maxDiff;
+                    int effort=Math.abs(height[row][col]-height[rem.row][rem.col]);
+                    int maxEffort=Math.max(effort,rem.weight);
+                    if(maxEffort<dp[row][col]){
+                        pq.add(new Pair(row,col,Math.max(effort,rem.weight)));
+                        dp[row][col]=maxEffort;
                     }
                 }
             }
