@@ -23,7 +23,14 @@ class Solution {
         int dir[][]={{0,1},{0,-1},{-1,0},{1,0}};
         boolean vis[][]=new boolean[n][m];
 
+        int dp[][]=new int[n][m];
+
+        for(int i=0;i<n;i++){
+            Arrays.fill(dp[i],Integer.MAX_VALUE);
+        }
+
         pq.add(new Pair(0,0,0));
+        dp[0][0]=0;
 
         while(pq.size()>0){
             Pair rem=pq.remove();
@@ -42,8 +49,14 @@ class Solution {
 
                 if(row>=0 && col>=0 && row<n && col<m && vis[row][col]==false){
                     int diff=Math.abs(height[row][col]-height[rem.row][rem.col]);
-
-                    pq.add(new Pair(row,col,Math.max(diff,rem.weight)));
+                    int maxDiff=Math.max(diff,rem.weight);
+                    if(dp[row][col]!=Integer.MAX_VALUE && dp[row][col]<maxDiff){
+                        dp[row][col]=maxDiff;
+                    }
+                    else{
+                        pq.add(new Pair(row,col,Math.max(diff,rem.weight)));
+                        dp[row][col]=maxDiff;
+                    }
                 }
             }
         }
