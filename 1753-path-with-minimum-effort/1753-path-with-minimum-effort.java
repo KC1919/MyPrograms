@@ -25,8 +25,6 @@ class Solution {
 
         pq.add(new Pair(0,0,0));
 
-        // vis[0][0]=true;
-
         while(pq.size()>0){
             Pair rem=pq.remove();
 
