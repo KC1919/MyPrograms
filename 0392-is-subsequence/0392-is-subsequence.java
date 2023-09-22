@@ -1,15 +1,12 @@
 class Solution {
     public boolean isSubsequence(String s, String t) {
         
-        if(s.length()==0)
-            return true;
-
-        if(s.length()>t.length())
-            return false;
+        int m=s.length();
+        int n=t.length();
 
         HashMap<Character, TreeSet<Integer>>hm=new HashMap<>();
 
-        for(int i=0;i<t.length();i++){
+        for(int i=0;i<n;i++){
             char ch=t.charAt(i);
 
             if(!hm.containsKey(ch)){
@@ -20,9 +17,7 @@ class Solution {
 
         int prev=-1, j=0, idx=0;
 
-        System.out.println(hm);
-
-        while(idx<s.length() && j<t.length()){
+        while(idx<m && j<n){
             char ch=s.charAt(idx);
 
             if(!hm.containsKey(ch))
@@ -38,8 +33,11 @@ class Solution {
                 idx++;
             }
             j++;
+
+            if(idx==m)
+                return true;
         }
         
-        return idx==s.length()?true:false;
+        return idx==m?true:false;
     }
 }
