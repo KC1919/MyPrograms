@@ -13,7 +13,6 @@ class Solution {
                 int temp=nums[k];
                 nums[k]=nums[i];
                 nums[i]=temp;
-                // i++;
                 k--;
             }
         }
