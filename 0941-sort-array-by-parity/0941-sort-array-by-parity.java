@@ -16,7 +16,6 @@ class Solution {
                 k--;
             }
         }
-
         return nums;
     }
 }
