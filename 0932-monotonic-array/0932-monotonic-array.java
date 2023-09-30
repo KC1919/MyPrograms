@@ -15,9 +15,6 @@ class Solution {
                 if(incFlag==true) return false;
                 decFlag=true;
             }
-            else if(nums[i]==nums[i-1]){
-                continue;
-            }
         }
         return true;
     }
