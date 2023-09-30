@@ -19,6 +19,8 @@ class Solution {
     {
         if(node==null)
             return;
+
+        //reverse post order
         
         flatten(node.right);
         flatten(node.left);
