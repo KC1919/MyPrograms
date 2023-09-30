@@ -24,6 +24,9 @@ class Node {
 class Solution {
     public Node connect(Node root) {
         
+        if(root==null)
+            return root;
+
         Queue<Node>que=new LinkedList<>();
 
         que.add(root);
@@ -38,11 +41,11 @@ class Solution {
                     rem.next=que.peek();
                 }
 
-                if(rem!=null && rem.left!=null){
+                if(rem.left!=null){
                     que.add(rem.left);
                 }
 
-                if(rem!=null && rem.right!=null){
+                if(rem.right!=null){
                     que.add(rem.right);
                 }
             }
