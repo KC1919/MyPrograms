@@ -1,34 +1,25 @@
 class Solution {
     public String reverseWords(String s) {
-        
-        StringBuilder sb=new StringBuilder();
-        StringBuilder temp=new StringBuilder();
+        char c []=s.toCharArray();
+        int start=0;
+        int end=0;
 
-        for(int i=0;i<s.length();i++){
-
-            char ch=s.charAt(i);
-
-            if(ch!=' '){
-                temp.append(ch);
+        while(start<c.length){
+            while(end<c.length && c[end]!=' '){
+                end++;
             }
-            else{
-                if(temp.length()>0){
-                    String revWord=reverse(temp.toString());
-                    sb.append(revWord);
-                    temp.setLength(0);
-                }
-                sb.append(ch);
-            }
+
+            reverse(start, end-1, c);
+            start=end+1;
+            end=start;
         }
-
-        sb.append(reverse(temp.toString()));
-        return sb.toString();
+        return new String(c);
     }
-
-    private String reverse(String s){
-
-        StringBuilder sb=new StringBuilder(s);
-
-        return sb.reverse().toString();
+    public void reverse(int l , int r, char c[]){
+        while(l<r){
+            char temp=c[l];
+            c[l++]=c[r];
+            c[r--]=temp;
+        }
     }
 }
