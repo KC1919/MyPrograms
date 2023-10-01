@@ -28,14 +28,14 @@ class Solution {
         int lres=maxPath(node.left);
         int rres=maxPath(node.right);
 
+        mySum=Math.max(lres,rres);
+
         if(lres!=Integer.MIN_VALUE){
-            mySum=lres;
             maxSum=Math.max(maxSum,lres);
             maxSum=Math.max(maxSum,lres+node.val);
         }
 
         if(rres!=Integer.MIN_VALUE){
-            mySum=Math.max(mySum,rres);
             maxSum=Math.max(maxSum,rres);
             maxSum=Math.max(maxSum,rres+node.val);
         }
@@ -46,6 +46,6 @@ class Solution {
 
         maxSum=Math.max(maxSum,node.val);
         
-        return Math.max(mySum+node.val,node.val);
+        return (mySum==Integer.MIN_VALUE)?node.val:Math.max(mySum+node.val,node.val);
     }
 }
