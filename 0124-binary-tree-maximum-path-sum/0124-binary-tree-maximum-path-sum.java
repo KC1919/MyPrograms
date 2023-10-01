@@ -31,12 +31,12 @@ class Solution {
         mySum=Math.max(lres,rres);
 
         if(lres!=Integer.MIN_VALUE){
-            maxSum=Math.max(maxSum,lres);
+            // maxSum=Math.max(maxSum,lres);
             maxSum=Math.max(maxSum,lres+node.val);
         }
 
         if(rres!=Integer.MIN_VALUE){
-            maxSum=Math.max(maxSum,rres);
+            // maxSum=Math.max(maxSum,rres);
             maxSum=Math.max(maxSum,rres+node.val);
         }
 
