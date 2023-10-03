@@ -40,11 +40,11 @@ class Solution {
     }
 }
 
-// 1 denotes the node is covered by a camera
-// 0 denotes the node has a camera
-// -1 denotes the node requires coverage
-
 /*
+
+1 denotes the node is covered by a camera
+0 denotes the node has a camera
+-1 denotes the node requires coverage
 
 - if a node is covered by any of its child, it does not need a camera, so it returns 1, stating its covered
 
