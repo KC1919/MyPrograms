@@ -1,63 +1,33 @@
+import java.util.*;
 class Solution {
-    public List<List<Integer>> threeSum(int[] a) {
-        
-        Arrays.sort(a);
-        
-        List<List<Integer>>res=new ArrayList<>();
-        
-        for(int i=0;i<a.length;i++){
-            
-            // to remove duplicate pairing
-            if(i>0 && a[i]==a[i-1]) continue;
-            
-            int comp=0-a[i];
-            
-            List<List<Integer>>result=twoSum(a,i+1,comp);
-            
-            if(result.size()>0){
-                for(List<Integer>list:result){
-                    list.add(a[i]);
-                    res.add(list);
+    private List<List<Integer>> res;
+    public List<List<Integer>> threeSum(int[] nums) {
+        return new AbstractList<List<Integer>>() {
+            public List<Integer> get(int index) {
+                init();
+                return res.get(index);
+            }
+            public int size() {
+                init();
+                return res.size();
+            }
+            private void init() {
+                if (res != null) return;
+                Arrays.sort(nums);
+                int l, r, sum;
+                Set<List<Integer>> tempRes = new HashSet<>();
+                for(int i = 0; i < nums.length - 2; ++i) {
+                    l = i + 1;
+                    r = nums.length - 1;
+                    while(l < r) {
+                        sum = nums[i] + nums[l] + nums[r];
+                        if (sum == 0) tempRes.add(Arrays.asList(nums[i], nums[l], nums[r]));
+                        if (sum < 0) ++l; else --r;
+                    }
                 }
-            }
-        }
-        
-        return res;
-    }
-    
-    private List<List<Integer>> twoSum(int a[], int start, int target){
-        
-        List<List<Integer>>res=new ArrayList<>();
-        
-        int left=start, right=a.length-1;
-        
-        while(left<right){
-            
-            if(a[left]+a[right]==target){
-                
-                List<Integer>list=new ArrayList<>();
-                
-                list.add(a[left]);
-                list.add(a[right]);
-                res.add(list);
-                
-                left++;
-                right--;
-                
-                // to remove duplicate pairing
-                while(left<right && a[left]==a[left-1]) left++;
-                while(right>left && a[right]==a[right+1]) right--;
+                res = new ArrayList<List<Integer>>(tempRes);
             }
             
-            else if(a[left]+a[right]<target){
-                left++;
-            }
-            
-            else if(a[left]+a[right]>target){
-                right--;
-            }
-        }
-        
-        return res;
+        };
     }
 }
