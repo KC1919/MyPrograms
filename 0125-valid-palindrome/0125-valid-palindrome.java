@@ -10,8 +10,6 @@ class Solution {
                 sb.append(Character.toLowerCase(ch));
             }
         }
-
-        // String str=sb.toString().toLowerCase();
         
         int start=0, end=sb.length()-1;
 
