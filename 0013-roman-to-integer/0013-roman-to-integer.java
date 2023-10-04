@@ -1,6 +1,7 @@
 class Solution {
     public int romanToInt(String s) {
         
+        int n=s.length();
         HashMap<Character,Integer>hm=new HashMap<>();
 
         hm.put('I',1);
@@ -17,55 +18,41 @@ class Solution {
             char ch=s.charAt(i);
 
             if(ch=='I'){
-                if(i+1<s.length()){
+                if(i+1<n){
                     char nch=s.charAt(i+1);
                     if(nch=='V' || nch=='X'){
                         sum=sum+hm.get(nch)-hm.get(ch);
                         i=i+2;
-                    }
-                    else{
-                        sum+=hm.get(ch);
-                        i++;
+                        continue;
                     }
                 }
-                else{
-                    sum+=hm.get(ch);
-                    i++;
-                }
+                sum+=hm.get(ch);
+                i++;
             }
             else if(ch=='X'){
-                if(i+1<s.length()){
+                if(i+1<n){
                     char nch=s.charAt(i+1);
                     if(nch=='L' || nch=='C'){
                         sum=sum+hm.get(nch)-hm.get(ch);
                         i=i+2;
-                    }
-                    else{
-                        sum+=hm.get(ch);
-                        i++;
+                        continue;
                     }
                 }
-                else{
-                    sum+=hm.get(ch);
-                    i++;
-                }
+                sum+=hm.get(ch);
+                i++;
             }
             else if(ch=='C'){
-                if(i+1<s.length()){
+                if(i+1<n){
                     char nch=s.charAt(i+1);
                     if(nch=='D' || nch=='M'){
                         sum=sum+hm.get(nch)-hm.get(ch);
                         i=i+2;
-                    }
-                    else{
-                        sum+=hm.get(ch);
-                        i++;
+                        continue;
                     }
                 }
-                else{
-                    sum+=hm.get(ch);
-                    i++;
-                }
+                sum+=hm.get(ch);
+                i++;
+                
             }
             else{
                 sum+=hm.get(ch);
