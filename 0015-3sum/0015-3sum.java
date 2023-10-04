@@ -7,6 +7,7 @@ class Solution {
         
         for(int i=0;i<a.length;i++){
             
+            // to remove duplicate pairing
             if(i>0 && a[i]==a[i-1]) continue;
             
             int comp=0-a[i];
@@ -14,9 +15,8 @@ class Solution {
             List<List<Integer>>result=twoSum(a,i+1,comp);
             
             if(result.size()>0){
-                
                 for(List<Integer>list:result){
-                    list.add(0,a[i]);
+                    list.add(a[i]);
                     res.add(list);
                 }
             }
@@ -44,6 +44,7 @@ class Solution {
                 left++;
                 right--;
                 
+                // to remove duplicate pairing
                 while(left<right && a[left]==a[left-1]) left++;
                 while(right>left && a[right]==a[right+1]) right--;
             }
