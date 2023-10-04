@@ -10,6 +10,7 @@ class Solution {
 
             int sum=nums[li]+nums[ri];
             if(sum==target){
+                //garbage collector, to optimize memory
                 System.gc();
                 return new int[]{li+1,ri+1};
             }
