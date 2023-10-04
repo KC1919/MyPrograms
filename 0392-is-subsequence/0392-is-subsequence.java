@@ -1,60 +1,20 @@
 class Solution {
     public boolean isSubsequence(String s, String t) {
         
-        int m=s.length();
-        int n=t.length();
+        int i=0;
+        int j=0;
+        int prev=-1;
 
-        if(m==0) return true;
-            
-        if(m>n) return false;
-
-        int idx=0;
-        for(int i=0;i<n;i++){
-            if(s.charAt(idx)==t.charAt(i)){
-                idx++;
+        while(i<s.length() && j<t.length()){
+            if(s.charAt(i)==t.charAt(j) && j>prev){
+                prev=j;
+                i++;
             }
-
-            if(idx==m)
-                return true;
+            j++;
         }
+
+        if(i==s.length()) return true;
+
         return false;
     }
 }
-
-// -----Follow Up Code-------
-
-// HashMap<Character, TreeSet<Integer>>hm=new HashMap<>();
-
-//         for(int i=0;i<n;i++){
-//             char ch=t.charAt(i);
-
-//             if(!hm.containsKey(ch)){
-//                 hm.put(ch,new TreeSet<>());
-//             }
-//             hm.get(ch).add(i);
-//         }
-
-//         int prev=-1, j=0, idx=0;
-
-//         while(idx<m && j<n){
-//             char ch=s.charAt(idx);
-
-//             if(!hm.containsKey(ch))
-//                 return false;
-
-//             int ind=hm.get(ch).pollFirst();
-
-//             if(hm.get(ch).size()==0)
-//                 hm.remove(ch);
-
-//             if(ind>prev){
-//                 prev=ind;
-//                 idx++;
-//             }
-//             j++;
-
-//             if(idx==m)
-//                 return true;
-//         }
-        
-//         return idx==m?true:false;
