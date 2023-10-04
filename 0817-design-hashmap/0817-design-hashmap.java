@@ -8,10 +8,10 @@ class MyHashMap {
         }
     }
 
-    Node[] nodes = new Node[10006];
+    Node[] nodes;
 
     public MyHashMap() {
-        
+        nodes = new Node[10006];
     }
     
     public void put(int key, int value) {
