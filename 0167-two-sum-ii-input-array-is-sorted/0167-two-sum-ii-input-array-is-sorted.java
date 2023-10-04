@@ -10,6 +10,7 @@ class Solution {
 
             int sum=nums[li]+nums[ri];
             if(sum==target){
+                System.gc();
                 return new int[]{li+1,ri+1};
             }
             else if(sum<target) li++;
