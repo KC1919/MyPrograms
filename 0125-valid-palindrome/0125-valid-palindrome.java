@@ -13,8 +13,8 @@ class Solution {
         
         int start=0, end=sb.length()-1;
 
-        while(start<=end){
-            if(sb.charAt(start)!=sb.charAt(end)) return false;
+        while(start<sb.length()/2){
+            if(sb.charAt(start)!=sb.charAt(sb.length()-1-start)) return false;
 
             start++;
             end--;
