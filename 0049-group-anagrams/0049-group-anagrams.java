@@ -7,6 +7,8 @@ class Solution {
             String word=strs[i];
             char arr[]=word.toCharArray();
             char strArr[]=new char[26];
+
+            // can also do using sorting
             // Arrays.sort(arr);
             // String sortWord=new String(arr);
 
