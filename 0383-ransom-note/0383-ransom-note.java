@@ -10,8 +10,9 @@ class Solution {
 
         for(int i=0;i<ransomNote.length();i++){
             char ch=ransomNote.charAt(i);
-            if(a[ch-'a']>0){
-                a[ch-'a']--;
+            int idx=ch-'a';
+            if(a[idx]>0){
+                a[idx]--;
             }
             else return false;
         }
