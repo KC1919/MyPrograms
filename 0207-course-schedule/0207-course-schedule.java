@@ -1,5 +1,4 @@
 class Solution {
-    static Stack<Integer>st;
     public boolean canFinish(int numCourses, int[][] preq) {
 
         int edges=preq.length;
