@@ -6,8 +6,15 @@ class Solution {
         for(int i=0;i<strs.length;i++){
             String word=strs[i];
             char arr[]=word.toCharArray();
-            Arrays.sort(arr);
-            String sortWord=new String(arr);
+            char strArr[]=new char[26];
+            // Arrays.sort(arr);
+            // String sortWord=new String(arr);
+
+            for(int j=0;j<arr.length;j++){
+                strArr[arr[j]-'a']++;
+            }
+
+            String sortWord=String.valueOf(strArr);
             
             if(hm.containsKey(sortWord)){
                 hm.get(sortWord).add(word);
