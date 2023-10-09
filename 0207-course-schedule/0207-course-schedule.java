@@ -1,6 +1,6 @@
 class Solution {
     public boolean canFinish(int numCourses, int[][] preq) {
-
+    
         int edges=preq.length;
 
         if(edges==0) return true;
@@ -10,40 +10,43 @@ class Solution {
         for(int i=0;i<numCourses;i++){
             graph.add(new ArrayList<>());
         }
+        
+        HashMap<Integer,Integer>hm=new HashMap<>();
     
         for(int i=0;i<edges;i++){
             int src=preq[i][0];
             int nbr=preq[i][1];
             graph.get(src).add(nbr);
+            if(!hm.containsKey(src)) hm.put(src,0);
+            hm.put(nbr,hm.getOrDefault(nbr,0)+1);
         }
 
-        boolean visited[]=new boolean[numCourses];
-        boolean pathVisited[]=new boolean[numCourses];
+        Queue<Integer>que=new LinkedList<>();
 
-        for(int i=0;i<edges;i++){
-            boolean result=detectCycle(graph,preq[i][0],visited,pathVisited);
-            if(!result) return false;
-        }
-        return true;
-    }
-
-    private boolean detectCycle(List<List<Integer>>graph, int src, boolean visited[], boolean pathVisited[]){
-        
-        visited[src]=true;
-
-        pathVisited[src]=true;
-
-        for(int nbr:graph.get(src)){
-            if(visited[nbr]==false){
-                boolean res=detectCycle(graph,nbr,visited,pathVisited);
-                if(res==false) return false;
+        for(int key:hm.keySet()){
+            if(hm.get(key)==0) {
+                que.add(key);
             }
-            else if(visited[nbr]==true && pathVisited[nbr]==true){
+        }
+
+        while(que.size()>0){
+            int rem=que.remove();
+
+            for(int nbr:graph.get(rem)){
+                hm.put(nbr,hm.get(nbr)-1);
+                if(hm.get(nbr)==0){
+                    que.add(nbr);
+                    hm.remove(nbr);  
+                } 
+            }
+        }
+
+        for(int key:hm.keySet()){
+            if(hm.get(key)!=0) {
                 return false;
             }
         }
-        
-        pathVisited[src]=false;
+
         return true;
     }
 }
