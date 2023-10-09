@@ -15,10 +15,10 @@ class Solution {
 
         int max=0;
 
-        for(int i=0;i<nums.length;i++){
-            if(validStart.get(nums[i])==true){
+        for(int key:validStart.keySet()){
+            if(validStart.get(key)==true){
                 int count=1;
-                int num=nums[i];
+                int num=key;
                 while(validStart.containsKey(num+1)){
                     num=num+1;
                     count++;
