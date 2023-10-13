@@ -4,9 +4,7 @@ class Solution {
         int n=intervals.length;
         if(n==1) return intervals;
         
-        Arrays.sort(intervals,(a,b)->{
-            return a[0]-b[0];
-        });
+        Arrays.sort(intervals,(a,b)->a[0]-b[0]);
 
         List<int[]>list=new ArrayList<>();
 
@@ -18,26 +16,14 @@ class Solution {
                 end=Math.max(intervals[i][1],end);
             }
             else{
-                int merge[]=new int[2];
-                merge[0]=start;
-                merge[1]=end;
-                list.add(merge);
+                list.add(new int[]{start,end});
                 start=intervals[i][0];
                 end=intervals[i][1];
             }
         }
 
-        int merge[]=new int[2];
-        merge[0]=start;
-        merge[1]=end;
-        list.add(merge);
+        list.add(new int[]{start,end});
 
-        int res[][]=new int[list.size()][2];
-
-        for(int i=0;i<list.size();i++){
-            res[i][0]=list.get(i)[0];
-            res[i][1]=list.get(i)[1];
-        }
-        return res;
+        return list.toArray(new int[0][]);
     }
 }
